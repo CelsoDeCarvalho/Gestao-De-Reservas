@@ -1,4 +1,4 @@
-package mz.com.sidratech.model;
+package mz.com.sidratech.model.bean;
 /**
  *
  * @author celso

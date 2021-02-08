@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mz.com.sidratech.model;
+package mz.com.sidratech.model.bean;
+
+import java.util.List;
 
 /**
  *
@@ -23,5 +25,7 @@ public abstract class Entidade {
     private int homens;
     private int mulheres;
     private String documentacao;
+    private String estadoLogin;
+    private List<Usuario> usuario;
 
 }

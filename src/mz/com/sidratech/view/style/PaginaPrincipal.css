@@ -1,9 +1,9 @@
 #painelSuperior{
-    -fx-border-color: #4c66e5;
+    -fx-border-color: #395c00;
     -fx-border-width: 1;
     -fx-border-radius: 15;
     -fx-background-radius: 15px;
-    -fx-background-color: #4c66e5;
+    -fx-background-color: #395c00;
 }
 
 #entrar:hover{
@@ -35,12 +35,16 @@
 }
 
 #button{
-    -fx-border-color: #4c66e5;
+    -fx-border-color: #395c00;
     -fx-border-width: 1;
     -fx-border-radius: 16;
     -fx-background-radius: 15px;
-    -fx-background-color: #4c66e5; 
+    -fx-background-color: #395c00; 
     -fx-text-fill: #ffffff;
+}
+
+#button:hover{
+    -fx-background-color: #223f10;
 }
 
 #recuperarSenha:hover{
@@ -49,7 +53,7 @@
 }
 
 #painelEsquerdo{
-    -fx-border-color: #4c66e5;
+    -fx-border-color: #395c00;
     -fx-border-width: 1;
     -fx-border-radius: 15;
     -fx-background-radius: 15px;

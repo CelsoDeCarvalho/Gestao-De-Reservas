@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mz.com.sidratech.model;
+package mz.com.sidratech.model.bean;
+
+import java.util.List;
 
 /**
  *
  * @author celso
  */
-public class Restauracao extends Entidade{
-    
-    private int numeroMesas;
-    private int numeroCadeiras;
+public class Alojamento extends Entidade {
+
+    private List<Quarto> quartos;
+
 }

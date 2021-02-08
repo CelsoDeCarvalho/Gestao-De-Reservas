@@ -10,7 +10,8 @@ package services;
  * @author celso
  */
 public interface Caminhos {
-    
-    public static final String PAGINA_INICIAL="/mz/com/sidratech/view/fxml/PaginaPrincipal.fxml";
-    
+
+    public static final String PAGINA_INICIAL = "/mz/com/sidratech/view/fxml/PaginaPrincipal.fxml";
+    public static final String REGISTAR_ENTIDADE = "/mz/com/sidratech/view/fxml/RegistarEntidade.fxml";
+
 }

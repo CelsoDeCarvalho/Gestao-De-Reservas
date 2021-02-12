@@ -1,0 +1,7 @@
+#janelaPrincipal{
+    -fx-background-image:url("/imagens/textura.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover,auto,stretch;
+    -fx-background-position: center center;
+
+}

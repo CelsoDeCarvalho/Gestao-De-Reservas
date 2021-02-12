@@ -26,6 +26,7 @@ import services.Caminhos;
 public class PaginaPrincipalController implements Initializable {
 
 
+
     private void chamarTela(String caminho, String titulo, ActionEvent event) throws IOException {
         ((Node) event.getSource()).getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource(caminho));
@@ -68,6 +69,11 @@ public class PaginaPrincipalController implements Initializable {
     @FXML
     private void accaoRegistarEntidade(ActionEvent event) throws IOException {
         chamarTela(Caminhos.REGISTAR_ENTIDADE,"Registar Entidade", event);
+    }
+
+    @FXML
+    private void accaoLoginCentral(ActionEvent event) throws IOException {
+        chamarTela(Caminhos.LOGIN_CENTRAL,"Login Central", event);
     }
 
 }

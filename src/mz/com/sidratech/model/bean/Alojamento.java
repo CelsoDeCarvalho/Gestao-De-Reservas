@@ -61,4 +61,12 @@ public class Alojamento implements Serializable {
     private List<Contato> contactos;
     @OneToMany(mappedBy = "idAlojamento")
     private List<FuncionarioUser> users;
+    
+    public Alojamento(String designacao, String tipo,String classificacao, String enFisico,int totalJobantes){
+        this.designacao=designacao;
+        this.tipo=tipo;
+        this.classificacao=classificacao;
+        this.enderecoFisico=enFisico;
+        this.totalTrabalhadores=totalJobantes;
+    }
 }

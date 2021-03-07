@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence         http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-    <!-- Unidade de persistencia -->
-    <persistence-unit name="MyUnit">
-        <!-- Implementação do JPA -->
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <!-- Lista de entidades -->
-        <class>mz.com.sidratech.model.bean.FuncionarioAdmin</class>
-        <class>mz.com.sidratech.model.bean.FuncionarioUser</class>
-        <class>mz.com.sidratech.model.bean.Central</class>
-        <class>mz.com.sidratech.model.bean.Restauracao</class>
-        <class>mz.com.sidratech.model.bean.Alojamento</class>
-        <class>mz.com.sidratech.model.bean.Cliente</class>
-        <class>mz.com.sidratech.model.bean.Quarto</class>
-        <class>mz.com.sidratech.model.bean.Funcionario</class>
-        <class>mz.com.sidratech.model.bean.Relatorio</class>
-        <class>mz.com.sidratech.model.bean.Contato</class>
-        <properties>
-            <!-- Propriedades JDBC -->
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/OctoDB"/>
-            <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="celso1999celso"/>
-            <!-- Configurações específicas do Hibernate -->
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-        </properties>
-    </persistence-unit>
+  <!-- Unidade de persistencia -->
+  <persistence-unit name="OctoBDPU">
+    <!-- Implementação do JPA -->
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <!-- Lista de entidades -->
+    <class>mz.com.sidratech.model.bean.Entidade</class>
+    <class>mz.com.sidratech.model.bean.Contato</class>
+    <class>mz.com.sidratech.model.bean.Funcionario</class>
+    <class>mz.com.sidratech.model.bean.Alojamento</class>
+    <class>mz.com.sidratech.model.bean.Cliente</class>
+    <class>mz.com.sidratech.model.bean.Quarto</class>
+    <properties>
+      <!-- Propriedades JDBC -->
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/OctoDB"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.password" value="celso1999celso"/>
+      <!-- Configurações específicas do Hibernate -->
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+    </properties>
+  </persistence-unit>
 </persistence>

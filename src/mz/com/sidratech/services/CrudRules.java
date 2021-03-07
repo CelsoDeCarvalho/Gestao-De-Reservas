@@ -8,13 +8,13 @@ import java.util.List;
  */
 public interface CrudRules {
 
-    abstract String create(Object object);
+    public abstract String create(Object object);
 
-    abstract List<Object> readAll();
+    public abstract List<Object> readAll();
     
-    abstract Object readById(int id);
+    public abstract Object readById(int id);
 
-    abstract String update(Object object);
+    public abstract String update(Object object);
 
-    abstract String delete(Object object);
+    public abstract String delete(Object object);
 }

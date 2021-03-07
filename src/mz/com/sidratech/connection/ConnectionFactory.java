@@ -9,10 +9,14 @@ import javax.persistence.Persistence;
  */
 public class ConnectionFactory{
     
-    private static final EntityManagerFactory emf=Persistence.createEntityManagerFactory("MyUnit");
+    private static final EntityManagerFactory emf=Persistence.createEntityManagerFactory("OctoBDPU");
     
     public static EntityManager getConnection(){
         return emf.createEntityManager();
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(getConnection());
     }
     
 }

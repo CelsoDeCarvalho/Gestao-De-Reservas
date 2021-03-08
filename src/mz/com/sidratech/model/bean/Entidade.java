@@ -39,5 +39,13 @@ public abstract class Entidade implements Serializable{
     private Contato contacto;
     @OneToMany(mappedBy = "idEntidade")
     private List<Funcionario> funcionarios;
+
+    public Entidade(String nome, String tipo, String enderecoFisico, String username, String password) {
+        this.nome = nome;
+        this.tipo = tipo;
+        this.enderecoFisico = enderecoFisico;
+        this.username = username;
+        this.password = password;
+    }
     
 }

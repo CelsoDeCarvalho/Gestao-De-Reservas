@@ -25,4 +25,22 @@ public class Alojamento extends Entidade implements Serializable {
     private List<Cliente> clientes;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "idAlojamento")
     private List<Quarto> quartos;
+
+    public Alojamento(String classificacao, String nome, String tipo, String enderecoFisico, String username, String password) {
+        super(nome, tipo, enderecoFisico, username, password);
+        this.classificacao = classificacao;
+    }
+
+    @Override
+    public String toString() {
+        return "\nTIPO: "+getTipo()+"\nNOME: "+getNome()+"\n"
+                + "LOCALIZACAo: "+getEnderecoFisico()+"\nID: "+getIdEntidade()+"\n"
+                + "CLASSIFICACAO: "+classificacao;
+                
+                
+    }
+    
+    
+    
+    
 }

@@ -11,6 +11,12 @@
     <class>mz.com.sidratech.model.bean.Alojamento</class>
     <class>mz.com.sidratech.model.bean.Cliente</class>
     <class>mz.com.sidratech.model.bean.Quarto</class>
+    <class>mz.com.sidratech.model.bean.Administrador</class>
+    <class>mz.com.sidratech.model.bean.Central</class>
+    <class>mz.com.sidratech.model.bean.Faxineiro</class>
+    <class>mz.com.sidratech.model.bean.Relatorio</class>
+    <class>mz.com.sidratech.model.bean.Restauracao</class>
+    <class>mz.com.sidratech.model.bean.Usuario</class>
     <properties>
       <!-- Propriedades JDBC -->
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
@@ -20,7 +26,7 @@
       <!-- Configurações específicas do Hibernate -->
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
       <property name="hibernate.hbm2ddl.auto" value="update"/>
-      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.show_sql" value="false"/>
       <property name="hibernate.format_sql" value="true"/>
     </properties>
   </persistence-unit>

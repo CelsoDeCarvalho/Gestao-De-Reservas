@@ -1,6 +1,7 @@
 package mz.com.sidratech.services;
 
 import java.util.List;
+import mz.com.sidratech.model.bean.Alojamento;
 
 /**
  *
@@ -8,13 +9,13 @@ import java.util.List;
  */
 public interface CrudRules {
 
-    public abstract String create(Object object);
+    public abstract void create(Object object);
 
-    public abstract List<Object> readAll();
+    public abstract List<Alojamento> readAll();
     
-    public abstract Object readById(int id);
+    public abstract Object readById(int id,Object object);
 
-    public abstract String update(Object object);
+    public abstract void update(Object object);
 
-    public abstract String delete(Object object);
+    public abstract void delete(int id,Object object);
 }

@@ -31,7 +31,6 @@ public abstract class Entidade implements Serializable{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int idEntidade;
     private String nome;
-    private String tipo;
     private String enderecoFisico;
     private String username;
     private String password;
@@ -40,9 +39,8 @@ public abstract class Entidade implements Serializable{
     @OneToMany(mappedBy = "idEntidade")
     private List<Funcionario> funcionarios;
 
-    public Entidade(String nome, String tipo, String enderecoFisico, String username, String password) {
+    public Entidade(String nome, String enderecoFisico, String username, String password) {
         this.nome = nome;
-        this.tipo = tipo;
         this.enderecoFisico = enderecoFisico;
         this.username = username;
         this.password = password;

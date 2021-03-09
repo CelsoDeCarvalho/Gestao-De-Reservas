@@ -3,14 +3,14 @@ package mz.com.sidratech.model.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import mz.com.sidratech.connection.ConnectionFactory;
-import mz.com.sidratech.model.bean.Alojamento;
 import mz.com.sidratech.services.CrudRules;
 /**
  *
  * @author celso
  */
 public class DaoGenerico implements CrudRules{
-
+    
+    //METODO PARA GRAVAR NO BANCO DE DADOS======================================
     public void create(Object object) {
         EntityManager entityManager = ConnectionFactory.getConnection();
         try {
@@ -23,22 +23,24 @@ public class DaoGenerico implements CrudRules{
             entityManager.close();
         }
     }
-
+    
+    //METODO PARA LER TODOS SO DADOS DO BANCO===================================
     @Override
-    public List<Alojamento> readAll() {
+    public List<Object> readAll(String tipoObjeto) {
         EntityManager entityManager= ConnectionFactory.getConnection();
-        List<Alojamento> alojamentos=null;
+        List<Object> objects=null;
         
         try{
-            alojamentos=entityManager.createQuery("from Alojamento").getResultList();
+            objects=entityManager.createQuery("FROM "+tipoObjeto).getResultList();
         }catch(Exception ex){
             throw new RuntimeException(ex);
         }finally{
             entityManager.close();
         }
-        return alojamentos;
+        return objects;
     }
 
+    //METODO PARA PROCURAR DADO POR ID==========================================
     @Override
     public Object readById(int id,Object object) {
                
@@ -55,6 +57,7 @@ public class DaoGenerico implements CrudRules{
        return object;
     }
 
+    //METODO PARA ACTUALIZAR DADOS NO BANCO=====================================
      @Override
     public  void update(Object object) {
         
@@ -62,8 +65,7 @@ public class DaoGenerico implements CrudRules{
         
         try{
            entityManager.getTransaction().begin();
-           entityManager.merge(object);
-           
+           entityManager.merge(object);          
            entityManager.getTransaction().commit();
         }catch(Exception ex){
             entityManager.getTransaction().rollback();
@@ -72,6 +74,7 @@ public class DaoGenerico implements CrudRules{
         }
     }
 
+    //METODO PARA APAGAR DADOS DO BANCO=========================================
     @Override
     public void delete(int id,Object object) {
                        

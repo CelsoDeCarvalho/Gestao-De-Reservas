@@ -17,5 +17,16 @@ import lombok.Setter;
 @Table(name = "central")
 public class Central extends Entidade implements Serializable {
 
+    public Central(String nome, String enderecoFisico, String username, String password) {
+        super(nome, enderecoFisico, username, password);
+    }
 
+    @Override
+    public String toString() {
+        return "NOME: "+getNome()+"\nENDERECO FISICO: "+getEnderecoFisico()+"\n"
+                + "USERNAME: "+getUsername()+"\nPASSWORD: "+getPassword()+"\n"
+                + "ID: "+getIdEntidade();
+    }
+    
+    
 }

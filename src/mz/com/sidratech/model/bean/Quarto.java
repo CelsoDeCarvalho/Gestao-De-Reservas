@@ -27,6 +27,7 @@ public class Quarto implements Serializable {
     private int idQuarto;
     private int numero;
     private int quantidadeCamas;
+    private boolean ocupado;
     @JoinColumn(name = "idAlojamento", referencedColumnName = "idEntidade")
     @ManyToOne
     private Alojamento idAlojamento;

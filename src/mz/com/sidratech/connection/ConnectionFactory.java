@@ -14,9 +14,4 @@ public class ConnectionFactory{
     public static EntityManager getConnection(){
         return emf.createEntityManager();
     }
-    
-    public static void main(String[] args) {
-        System.out.println(getConnection());
-    }
-    
 }

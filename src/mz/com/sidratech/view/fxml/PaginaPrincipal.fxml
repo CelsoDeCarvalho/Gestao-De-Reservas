@@ -47,10 +47,10 @@
             </Button>
             <ChoiceBox fx:id="choiceBox" nodeOrientation="LEFT_TO_RIGHT" prefHeight="26.0" prefWidth="50.0" style="-fx-background-color: white;" HBox.hgrow="ALWAYS">
                <HBox.margin>
-                  <Insets left="200.0" right="20.0" />
+                  <Insets left="150.0" right="20.0" />
                </HBox.margin>
             </ChoiceBox>
-            <Button fx:id="loginBtn" alignment="CENTER" maxWidth="130.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="100.0" text="Log In" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+            <Button fx:id="loginBtn" alignment="CENTER" maxWidth="130.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="130.0" text="Log In" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -58,7 +58,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
             </Button>
-            <Button fx:id="signupBtn" alignment="CENTER" maxWidth="130.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="100.0" text="Sign Up" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+            <Button fx:id="signupBtn" alignment="CENTER" maxWidth="130.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="130.0" text="Sign Up" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="20.0" right="20.0" />
                </HBox.margin>
@@ -107,7 +107,7 @@
    <left>
       <VBox prefHeight="510.0" prefWidth="377.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Digital Agency" VBox.vgrow="ALWAYS">
+            <Label fx:id="label1" text="Digital Agency" VBox.vgrow="ALWAYS">
                <font>
                   <Font size="35.0" />
                </font>
@@ -115,7 +115,7 @@
                   <Insets left="60.0" top="100.0" />
                </VBox.margin>
             </Label>
-            <Label text="with Excellence " VBox.vgrow="ALWAYS">
+            <Label fx:id="label2" text="with Excellent " VBox.vgrow="ALWAYS">
                <font>
                   <Font size="35.0" />
                </font>
@@ -123,7 +123,7 @@
                   <Insets left="60.0" />
                </VBox.margin>
             </Label>
-            <Label text="Service." VBox.vgrow="ALWAYS">
+            <Label fx:id="label3" text="Service." VBox.vgrow="ALWAYS">
                <font>
                   <Font size="35.0" />
                </font>
@@ -131,26 +131,29 @@
                   <Insets left="60.0" />
                </VBox.margin>
             </Label>
-            <Label text="Give life and automation to your  ">
+            <Label fx:id="label4" text="Give life and automation to your  ">
                <VBox.margin>
                   <Insets left="60.0" top="40.0" />
                </VBox.margin>
                <font>
-                  <Font size="15.0" />
+                  <Font size="11.0" />
                </font>
             </Label>
-            <Label text="business  with sidratech software.">
+            <Label fx:id="label5" text="business  with sidratech software.">
                <font>
-                  <Font size="15.0" />
+                  <Font size="11.0" />
                </font>
                <VBox.margin>
                   <Insets left="60.0" />
                </VBox.margin>
             </Label>
-            <Label text="SIDRATECH inovating your life">
+            <Label fx:id="label6" text="SIDRATECH inovating your life">
                <VBox.margin>
                   <Insets left="60.0" top="30.0" />
                </VBox.margin>
+               <font>
+                  <Font size="11.0" />
+               </font>
             </Label>
             <Button fx:id="aboutUsBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="More About Us ">
                <VBox.margin>

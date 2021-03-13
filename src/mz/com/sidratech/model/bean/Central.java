@@ -2,9 +2,6 @@ package mz.com.sidratech.model.bean;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,15 +18,15 @@ import lombok.Setter;
 @Table(name = "central")
 public class Central extends Entidade implements Serializable {
 
-    public Central(String nome, String enderecoFisico, String username, String password) {
-        super(nome, enderecoFisico, username, password);
+    public Central(String nome, String enderecoFisico, String username, String password,String email,String tipo) {
+        super(nome, enderecoFisico, username, password,email,tipo);
     }
 
     @Override
     public String toString() {
         return "NOME: " + getNome() + "\nENDERECO FISICO: " + getEnderecoFisico() + "\n"
                 + "USERNAME: " + getUsername() + "\nPASSWORD: " + getPassword() + "\n"
-                + "ID: " + getIdEntidade();
+                + "ID: " + getIdEntidade()+"\nEMAIL: "+getEmail()+"\nTIPO: "+getTipo();
     }
 
 }

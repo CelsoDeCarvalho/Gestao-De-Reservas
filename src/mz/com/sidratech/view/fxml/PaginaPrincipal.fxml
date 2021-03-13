@@ -50,7 +50,7 @@
                   <Insets left="150.0" right="20.0" />
                </HBox.margin>
             </ChoiceBox>
-            <Button fx:id="loginBtn" alignment="CENTER" maxWidth="130.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="130.0" text="Log In" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+            <Button fx:id="loginBtn" alignment="CENTER" maxWidth="130.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#loginAction" prefHeight="40.0" prefWidth="130.0" text="Log In" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -58,7 +58,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
             </Button>
-            <Button fx:id="signupBtn" alignment="CENTER" maxWidth="130.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="130.0" text="Sign Up" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+            <Button fx:id="signupBtn" alignment="CENTER" maxWidth="130.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#signupAction" prefHeight="40.0" prefWidth="130.0" text="Sign Up" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="20.0" right="20.0" />
                </HBox.margin>

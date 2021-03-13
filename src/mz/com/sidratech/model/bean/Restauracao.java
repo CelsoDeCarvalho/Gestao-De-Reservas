@@ -21,22 +21,21 @@ public class Restauracao extends Entidade implements Serializable {
     private int totalMesas;
     private int totalCadeiras;
     private String pratoDoDia;
-    private String tipo;
 
-    public Restauracao(int totalMesas, int totalCadeiras, String tipo, String nome, String enderecoFisico, String username, String password) {
-        super(nome, enderecoFisico, username, password);
+    public Restauracao(int totalMesas, int totalCadeiras, String tipo, String nome, String enderecoFisico, String username, String password,String email) {
+        super(nome, enderecoFisico, username, password,email,tipo);
         this.totalMesas = totalMesas;
         this.totalCadeiras = totalCadeiras;
-        this.tipo = tipo;
     }
     
     
 
        @Override
     public String toString() {
-        return "\nTIPO: "+tipo+"\nNOME: "+getNome()+"\n"
+        return "\nTIPO: "+getTipo()+"\nNOME: "+getNome()+"\n"
                 + "LOCALIZACAo: "+getEnderecoFisico()+"\nID: "+getIdEntidade()+"\n"
-                + "NUMERO DE CADEIRAS: "+totalCadeiras+"\nNUMERO MESAS: "+totalMesas;
+                + "NUMERO DE CADEIRAS: "+totalCadeiras+"\nNUMERO MESAS: "+totalMesas+""
+                + "\nEMAIL: "+getEmail();
                 
                 
     }

@@ -5,6 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import mz.com.sidratech.model.bean.Central;
+import mz.com.sidratech.model.dao.DaoGenerico;
+import mz.com.sidratech.repository.Repository;
 import mz.com.sidratech.services.Path;
 
 /**
@@ -19,13 +22,16 @@ public class OctoDBApplication extends Application {
         Parent root = FXMLLoader.load(getClass().getResource(Path.PAGINA_INICIAL));
         Scene scene = new Scene(root);
         stage.setMaximized(true);
-        stage.setTitle("Pagina Principal");
+        stage.setTitle("");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
 
     public static void main(String[] args) {
+        Repository repository=new Repository();
+        repository.getEntidades();
         launch(args);
     }
     

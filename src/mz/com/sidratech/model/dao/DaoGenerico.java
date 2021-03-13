@@ -1,5 +1,6 @@
 package mz.com.sidratech.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import mz.com.sidratech.connection.ConnectionFactory;
@@ -28,7 +29,7 @@ public class DaoGenerico implements CrudRules{
     @Override
     public List<Object> readAll(String tipoObjeto) {
         EntityManager entityManager= ConnectionFactory.getConnection();
-        List<Object> objects=null;
+        List<Object> objects=new ArrayList();
         
         try{
             objects=entityManager.createQuery("FROM "+tipoObjeto).getResultList();

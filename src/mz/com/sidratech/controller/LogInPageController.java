@@ -1,5 +1,6 @@
 package mz.com.sidratech.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
@@ -7,15 +8,25 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import mz.com.sidratech.model.bean.Alojamento;
+import mz.com.sidratech.model.bean.Central;
+import mz.com.sidratech.octodb.OctoDBApplication;
 import mz.com.sidratech.repository.Repository;
+import mz.com.sidratech.services.Path;
 /**
  * FXML Controller class
  *
@@ -81,10 +92,22 @@ public class LogInPageController implements Initializable {
             password.setPromptText("Senha");
         }
     }
+    
+        private void mostrarJanela(String caminho, String title, ActionEvent event) throws IOException {
+            ((Node) event.getSource()).getScene().getWindow().hide();
+            OctoDBApplication.getStage().hide();
+            Parent root = FXMLLoader.load(getClass().getResource(caminho));
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setMaximized(true);
+            stage.setTitle(title);
+            stage.show();
+    }
 
    //LOGIN================================================ 
     @FXML
-    void loginEnter(ActionEvent event) {
+    void loginEnter(ActionEvent event) throws IOException {
         if(username.getText().isEmpty())
             thread(loginPainelUser,userLabel);
         else
@@ -94,8 +117,15 @@ public class LogInPageController implements Initializable {
                 for(int i=0;i<Repository.entidades.size();i++){
                     if((username.getText().equals(Repository.entidades.get(i).getUsername())||
                         username.getText().equals(Repository.entidades.get(i).getEmail()))&&
-                       password.getText().equals(Repository.entidades.get(i).getPassword())){
-                        System.out.println("Ola mundo!");
+                        password.getText().equals(Repository.entidades.get(i).getPassword())){
+                        
+                        if(Repository.entidades.get(i).getClass().equals(Central.class))
+                            mostrarJanela(Path.PAGINA_CENTRAL,"", event);
+                        else
+                            if(Repository.entidades.get(i).getClass().equals(Alojamento.class))
+                                mostrarJanela(Path.PAGINA_ALOJAMENTO,"", event);
+                        else
+                                mostrarJanela(Path.PAGINA_RESTAURACAO,"", event);
                     }
                 }
     }

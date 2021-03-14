@@ -75,3 +75,8 @@
     -fx-text-fill: #ffffff;
     -fx-font-size: 12pt
 }
+
+#sidatechLabel:hover{
+    -fx-cursor: hand;
+    -fx-underline:true;
+}

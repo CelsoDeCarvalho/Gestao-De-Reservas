@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="420.0" prefWidth="500.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="65.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0">
+         <image>
+            <Image url="@../../image/gnu.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="56.0" layoutY="158.0" text="This program is free software: you can redistribute it and/or modify" AnchorPane.leftAnchor="10.0">
+         <font>
+            <Font name="SansSerif Regular" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="174.0" text="it under the terms of the GNU General Public License as published by" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="174.0">
+         <font>
+            <Font name="SansSerif Regular" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="192.0" text="the Free Software Foundation, either version 3 of the License, or" AnchorPane.leftAnchor="10.0">
+         <font>
+            <Font name="SansSerif Regular" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="208.0" text="(at your option) any later version." AnchorPane.leftAnchor="10.0">
+         <font>
+            <Font name="SansSerif Regular" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="7.0" layoutY="250.0" text="This program is distributed in the hope that it will be useful," AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="250.0">
+         <font>
+            <Font name="SansSerif Regular" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="7.0" layoutY="266.0" text="but WITHOUT ANY WARRANTY; without even the implied warranty of" AnchorPane.leftAnchor="10.0">
+         <font>
+            <Font name="SansSerif Regular" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="9.0" layoutY="282.0" text="MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the" AnchorPane.leftAnchor="10.0">
+         <font>
+            <Font name="SansSerif Regular" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="298.0" text="GNU General Public License for more details." AnchorPane.leftAnchor="10.0">
+         <font>
+            <Font name="SansSerif Regular" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="18.0" layoutY="332.0" text="You should have received a copy of the GNU General Public License" AnchorPane.leftAnchor="10.0">
+         <font>
+            <Font name="SansSerif Regular" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="348.0" text="along with this program.  If not, see https://www.gnu.org/licenses/." AnchorPane.leftAnchor="10.0">
+         <font>
+            <Font name="SansSerif Regular" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="94.0" layoutY="45.0" text="The GNU Operating System">
+         <font>
+            <Font name="SansSerif Regular" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="390.0" text="Copyright© 2021 Celso Momade" AnchorPane.leftAnchor="10.0">
+         <font>
+            <Font name="SansSerif Regular" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

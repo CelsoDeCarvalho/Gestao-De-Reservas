@@ -32,12 +32,12 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="licenseBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="License">
+            <Button fx:id="licenseBtn" mnemonicParsing="false" onAction="#liceceBtnAction" prefHeight="40.0" prefWidth="100.0" text="License">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="aboutMeBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="About Me." textAlignment="CENTER" HBox.hgrow="ALWAYS">
+            <Button fx:id="aboutMeBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#meBtnAction" prefHeight="40.0" prefWidth="120.0" text="About Me." textAlignment="CENTER" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
@@ -66,7 +66,7 @@
                   <Font name="System Bold Italic" size="11.0" />
                </font>
             </Button>
-            <Button fx:id="contactBtn" maxWidth="150.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="130.0" text="Contact Us →" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+            <Button fx:id="contactBtn" maxWidth="150.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#contactUsBtnAction" prefHeight="40.0" prefWidth="130.0" text="Contact Us →" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
@@ -84,7 +84,7 @@
    <bottom>
       <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1000.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Label text="© 2021-2025 OctoBD | Desenvolvido por">
+            <Label text="© 2021 OctoBD | Desenvolvido por">
                <HBox.margin>
                   <Insets left="30.0" />
                </HBox.margin>
@@ -92,7 +92,7 @@
                   <Font size="11.0" />
                </font>
             </Label>
-            <Label text=" SIDRATECH" textFill="#1e2ed1">
+            <Label fx:id="sidatechLabel" onMouseClicked="#sidratechLabeAction" text=" SIDRATECH" textFill="#1e2ed1">
                <font>
                   <Font size="11.0" />
                </font>
@@ -155,7 +155,7 @@
                   <Font size="11.0" />
                </font>
             </Label>
-            <Button fx:id="aboutUsBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="More About Us ">
+            <Button fx:id="aboutUsBtn" mnemonicParsing="false" onAction="#aboutUsBtnAction" prefHeight="40.0" prefWidth="150.0" text="More About Us ">
                <VBox.margin>
                   <Insets left="60.0" top="70.0" />
                </VBox.margin>

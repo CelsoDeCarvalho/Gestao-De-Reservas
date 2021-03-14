@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import mz.com.sidratech.model.bean.Central;
 import mz.com.sidratech.model.dao.DaoGenerico;
 import mz.com.sidratech.repository.Repository;
 import mz.com.sidratech.services.Path;
@@ -16,6 +15,7 @@ import mz.com.sidratech.services.Path;
  */
 public class OctoDBApplication extends Application {
     
+    private static Stage stage;
             
     @Override
     public void start(Stage stage) throws Exception {
@@ -25,14 +25,21 @@ public class OctoDBApplication extends Application {
         stage.setTitle("");
         stage.setScene(scene);
         stage.centerOnScreen();
+        this.stage=stage;
         stage.show();
     }
 
 
     public static void main(String[] args) {
+        
+        DaoGenerico daoGenerico=new DaoGenerico();        
         Repository repository=new Repository();
         repository.getEntidades();
         launch(args);
+    }
+    
+    public static Stage getStage(){
+        return stage;
     }
     
 }

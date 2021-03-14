@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -74,12 +75,6 @@ public class PaginaPrincipalController implements Initializable {
     @FXML
     private Button aboutUsBtn;
 
-    /**
-     * Initializes the controller class.
-     *
-     * @param url
-     * @param rb
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         choiceBox.setItems(FXCollections.observableArrayList("EN", "PT"));
@@ -124,7 +119,7 @@ public class PaginaPrincipalController implements Initializable {
         });
     }
 
-    private void mostrarJanela(String caminho, String title) throws IOException {
+    private  void mostrarJanela(String caminho, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(caminho));
         Parent parent = loader.load();
         Stage stage = new Stage();
@@ -145,6 +140,31 @@ public class PaginaPrincipalController implements Initializable {
     @FXML
     void signupAction(ActionEvent event) throws IOException {
         mostrarJanela(Path.PAGINA_SIGNUP,"CADASTRO");
+    }
+    
+    @FXML
+    void aboutUsBtnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void contactUsBtnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void liceceBtnAction(ActionEvent event) throws IOException {
+        mostrarJanela(Path.PAGINA_LICENCE,"GNU LICENCE");
+    }
+    
+    @FXML
+    void meBtnAction(ActionEvent event) throws IOException {
+        mostrarJanela(Path.PAGINA_CONTACTME,"");
+    }
+
+    @FXML
+    void sidratechLabeAction(MouseEvent event) {      
+        
     }
 
 }

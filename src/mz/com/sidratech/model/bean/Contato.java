@@ -28,23 +28,21 @@ public class Contato implements Serializable {
     private int telefone;
     private String url;
     private String email;
-    private int telemovel;
     @JoinColumn(name = "idEntidade", referencedColumnName = "idEntidade")
     @OneToOne
     private Entidade idEntidade;    
 
-    public Contato(int telefone, String url, String email, int telemovel, Entidade idEntidade) {
+    public Contato(int telefone, String url, String email, Entidade idEntidade) {
         this.telefone = telefone;
         this.url = url;
         this.email = email;
-        this.telemovel = telemovel;
         this.idEntidade = idEntidade;
     }
 
     @Override
     public String toString() {
         return "ID DO CONTATO: " + idContato + "\nTELEFONE: " + telefone + "\nURL" + url + "\n"
-                + "EMAIL: =" + email + "\nTELEMOVEL: " + telemovel + "\nID ENTIDADE" + idEntidade;
+                + "EMAIL: =" + email + "\nID ENTIDADE" + idEntidade;
     }
     
     

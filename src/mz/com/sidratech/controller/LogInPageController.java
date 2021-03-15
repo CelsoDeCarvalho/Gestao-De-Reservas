@@ -115,8 +115,7 @@ public class LogInPageController implements Initializable {
                 thread(loginPainelPass,passLabel);
         else
                 for(int i=0;i<Repository.entidades.size();i++){
-                    if((username.getText().equals(Repository.entidades.get(i).getUsername())||
-                        username.getText().equals(Repository.entidades.get(i).getEmail()))&&
+                    if(username.getText().equals(Repository.entidades.get(i).getUsername())&&
                         password.getText().equals(Repository.entidades.get(i).getPassword())){
                         
                         if(Repository.entidades.get(i).getClass().equals(Central.class))
@@ -131,7 +130,7 @@ public class LogInPageController implements Initializable {
     }
     
     
-        public void thread(HBox box, Label label) {
+    public void thread(HBox box, Label label) {
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {

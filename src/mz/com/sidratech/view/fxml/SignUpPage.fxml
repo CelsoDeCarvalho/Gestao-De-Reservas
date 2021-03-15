@@ -1,18 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" stylesheets="@../css/SignUpPage.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <HBox fx:id="painelCima" prefHeight="80.0" prefWidth="700.0" BorderPane.alignment="CENTER" />
-   </top>
+<BorderPane fx:id="regPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.com.sidratech.controller.SignUpPageController">
+   <stylesheets>
+      <URL value="@../css/SignUpPage.css" />
+      <URL value="@../css/BackgroundImage.css" />
+   </stylesheets>
+   <center>
+      <TabPane fx:id="tabPane" prefHeight="390.0" prefWidth="673.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab fx:id="tab1" text="Entity Data">
+            <content>
+              <AnchorPane fx:id="dataPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+                     <children>
+                        <ComboBox fx:id="comboBox" layoutX="14.0" layoutY="14.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#comboAction" prefHeight="26.0" prefWidth="200.0" promptText="Choose Your Business" AnchorPane.leftAnchor="30.0" />
+                        <TextField fx:id="nameField" alignment="CENTER" disable="true" layoutX="30.0" layoutY="95.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="250.0" promptText="name" AnchorPane.leftAnchor="30.0">
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding></TextField>
+                        <TextField fx:id="localField" alignment="CENTER" disable="true" layoutX="30.0" layoutY="166.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="250.0" promptText="Localization" AnchorPane.leftAnchor="30.0">
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </TextField>
+                        <TextField fx:id="userField" alignment="CENTER" disable="true" layoutX="30.0" layoutY="243.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="250.0" promptText="username" AnchorPane.leftAnchor="30.0">
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </TextField>
+                        <Label fx:id="nameLabel" alignment="CENTER" layoutX="14.0" layoutY="68.0" nodeOrientation="LEFT_TO_RIGHT" text="Entity Name" AnchorPane.leftAnchor="30.0">
+                           <graphic>
+                              <FontAwesomeIcon iconName="UNIVERSITY" />
+                           </graphic></Label>
+                        <Label layoutX="30.0" layoutY="137.0" text="Entity Localization">
+                           <graphic>
+                              <FontAwesomeIcon iconName="MAP_MARKER" />
+                           </graphic></Label>
+                        <Label layoutX="30.0" layoutY="216.0" text="Entity Username">
+                           <graphic>
+                              <FontAwesomeIcon iconName="USER" />
+                           </graphic></Label>
+                        <Label layoutX="30.0" layoutY="283.0" text="Entity Password">
+                           <graphic>
+                              <FontAwesomeIcon iconName="LOCK" />
+                           </graphic></Label>
+                        <Label layoutX="334.0" layoutY="68.0" text="Acommodation Classification">
+                           <graphic>
+                              <FontAwesomeIcon iconName="STAR" />
+                           </graphic></Label>
+                        <ComboBox fx:id="classificationField" disable="true" layoutX="334.0" layoutY="91.0" onAction="#classificationAction" prefHeight="30.0" prefWidth="250.0" />
+                        <PasswordField fx:id="passField" alignment="CENTER" disable="true" layoutX="30.0" layoutY="308.0" prefHeight="30.0" prefWidth="250.0" promptText="Password" />
+                        <TextField fx:id="typeField" alignment="CENTER" disable="true" layoutX="334.0" layoutY="168.0" prefHeight="30.0" prefWidth="250.0" promptText="type" />
+                        <Label layoutX="334.0" layoutY="138.0" text="Entity Type" />
+                     </children></AnchorPane>
+            </content>
+               <graphic>
+                  <FontAwesomeIcon fill="#4373e5" iconName="INSTITUTION" />
+               </graphic>
+          </Tab>
+          <Tab fx:id="tab2" disable="true" text="Contacts">
+            <content>
+              <AnchorPane fx:id="contactsPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+                     <children>
+                        <TextField fx:id="phoneField" alignment="CENTER" disable="true" layoutX="14.0" layoutY="69.0" promptText="phone" />
+                        <TextField fx:id="emailField" alignment="CENTER" disable="true" layoutX="14.0" layoutY="179.0" promptText="email" />
+                        <TextField fx:id="urlField" alignment="CENTER" disable="true" layoutX="14.0" layoutY="287.0" promptText="url" />
+                        <Label layoutX="14.0" layoutY="42.0" text="Phone">
+                           <graphic>
+                              <FontAwesomeIcon iconName="PHONE" />
+                           </graphic>
+                        </Label>
+                        <Label layoutX="15.0" layoutY="145.0" text="Email">
+                           <graphic>
+                              <FontAwesomeIcon iconName="AT" />
+                           </graphic>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="257.0" text="Url">
+                           <graphic>
+                              <FontAwesomeIcon iconName="MAGNET" />
+                           </graphic>
+                        </Label>
+                     </children></AnchorPane>
+            </content>
+               <graphic>
+                  <FontAwesomeIcon fill="#4373e5" iconName="PHONE" />
+               </graphic>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
    <bottom>
-      <HBox fx:id="painelBaixo" prefHeight="80.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="850.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="back" mnemonicParsing="false" onAction="#backAction" prefHeight="30.0" prefWidth="80.0" text="Cancel">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Button>
+            <Button fx:id="next" mnemonicParsing="false" onAction="#nextAction" prefHeight="30.0" prefWidth="80.0" text="Next">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Button>
+         </children></HBox>
    </bottom>
-   <left>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
-   </left>
 </BorderPane>

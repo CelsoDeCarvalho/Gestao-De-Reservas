@@ -24,7 +24,7 @@
                   <Image url="@../../image/logo.png" />
                </image>
             </ImageView>
-            <Button fx:id="homeBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="100.0" text="Home." textAlignment="CENTER" HBox.hgrow="ALWAYS">
+            <Button fx:id="homeBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="113.0" text="Home." textAlignment="CENTER" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="30.0" />
                </HBox.margin>
@@ -32,12 +32,12 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="licenseBtn" mnemonicParsing="false" onAction="#liceceBtnAction" prefHeight="40.0" prefWidth="100.0" text="License">
+            <Button fx:id="licenseBtn" mnemonicParsing="false" onAction="#liceceBtnAction" prefHeight="40.0" prefWidth="132.0" text="License.">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="aboutMeBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#meBtnAction" prefHeight="40.0" prefWidth="120.0" text="About Me." textAlignment="CENTER" HBox.hgrow="ALWAYS">
+            <Button fx:id="aboutMeBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#meBtnAction" prefHeight="40.0" prefWidth="153.0" text="About Me." textAlignment="CENTER" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
@@ -47,7 +47,7 @@
             </Button>
             <ChoiceBox fx:id="choiceBox" nodeOrientation="LEFT_TO_RIGHT" prefHeight="26.0" prefWidth="50.0" style="-fx-background-color: white;" HBox.hgrow="ALWAYS">
                <HBox.margin>
-                  <Insets left="150.0" right="20.0" />
+                  <Insets left="100.0" right="20.0" />
                </HBox.margin>
             </ChoiceBox>
             <Button fx:id="loginBtn" alignment="CENTER" maxWidth="130.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#loginAction" prefHeight="40.0" prefWidth="130.0" text="Log In" textAlignment="CENTER" HBox.hgrow="ALWAYS">
@@ -58,7 +58,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
             </Button>
-            <Button fx:id="signupBtn" alignment="CENTER" maxWidth="130.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#signupAction" prefHeight="40.0" prefWidth="130.0" text="Sign Up" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+            <Button fx:id="signupBtn" alignment="CENTER" maxWidth="140.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#signupAction" prefHeight="40.0" prefWidth="140.0" text="Sign Up" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="20.0" right="20.0" />
                </HBox.margin>
@@ -66,7 +66,7 @@
                   <Font name="System Bold Italic" size="11.0" />
                </font>
             </Button>
-            <Button fx:id="contactBtn" maxWidth="150.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#contactUsBtnAction" prefHeight="40.0" prefWidth="130.0" text="Contact Us →" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+            <Button fx:id="contactBtn" maxWidth="150.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#contactUsBtnAction" prefHeight="40.0" prefWidth="146.0" text="Contact Us" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>

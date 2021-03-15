@@ -22,8 +22,8 @@ public class Restauracao extends Entidade implements Serializable {
     private int totalCadeiras;
     private String pratoDoDia;
 
-    public Restauracao(int totalMesas, int totalCadeiras, String tipo, String nome, String enderecoFisico, String username, String password,String email) {
-        super(nome, enderecoFisico, username, password,email,tipo);
+    public Restauracao(String tipo, String nome, String enderecoFisico, String username, String password) {
+        super(nome, enderecoFisico, username, password,tipo);
         this.totalMesas = totalMesas;
         this.totalCadeiras = totalCadeiras;
     }
@@ -34,8 +34,7 @@ public class Restauracao extends Entidade implements Serializable {
     public String toString() {
         return "\nTIPO: "+getTipo()+"\nNOME: "+getNome()+"\n"
                 + "LOCALIZACAo: "+getEnderecoFisico()+"\nID: "+getIdEntidade()+"\n"
-                + "NUMERO DE CADEIRAS: "+totalCadeiras+"\nNUMERO MESAS: "+totalMesas+""
-                + "\nEMAIL: "+getEmail();
+                + "NUMERO DE CADEIRAS: "+totalCadeiras+"\nNUMERO MESAS: "+totalMesas;
                 
                 
     }

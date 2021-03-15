@@ -1,6 +1,7 @@
 package mz.com.sidratech.model.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,10 +25,12 @@ public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idClieante;
+    private int idCliente;
     private String nome;
     private String apelido;
     private double valorPago;
+    private Date dataEntrada;
+    private Date dataSaida;
     @JoinColumn(name = "idAlojamento", referencedColumnName = "idEntidade")
     @ManyToOne
     private Alojamento idAlojamento;

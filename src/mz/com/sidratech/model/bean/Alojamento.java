@@ -26,8 +26,8 @@ public class Alojamento extends Entidade implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "idAlojamento")
     private List<Quarto> quartos;
 
-    public Alojamento(String classificacao, String tipo, String nome, String enderecoFisico, String username, String password,String email) {
-        super(nome, enderecoFisico, username, password,email,tipo);
+    public Alojamento(String classificacao, String tipo, String nome, String enderecoFisico, String username, String password) {
+        super(nome, enderecoFisico, username, password,tipo);
         this.classificacao = classificacao;
     }
 
@@ -36,7 +36,7 @@ public class Alojamento extends Entidade implements Serializable {
     public String toString() {
         return "\nTIPO: "+getTipo()+"\nNOME: "+getNome()+"\n"
                 + "LOCALIZACAo: "+getEnderecoFisico()+"\nID: "+getIdEntidade()+"\n"
-                + "CLASSIFICACAO: "+classificacao+"\nEMAIL: "+getEmail();
+                + "CLASSIFICACAO: "+classificacao;
                 
                 
     }

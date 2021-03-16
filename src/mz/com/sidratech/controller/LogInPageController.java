@@ -19,7 +19,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import mz.com.sidratech.model.bean.Alojamento;
@@ -69,9 +68,15 @@ public class LogInPageController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        username.setFocusTraversable(false);
+        password.setFocusTraversable(false);
+        
         if(PaginaPrincipalController.lingua.equals("EN")){
             userLabel.setText("Username");
             passLabel.setText("Password");
@@ -79,7 +84,7 @@ public class LogInPageController implements Initializable {
             forgotPassword.setText("Forgot Password?");
             welcome.setText("Welcome!");
             signInTo.setText("Sign in to your account");
-            username.setPromptText("entity username or email");
+            username.setPromptText("entity username");
             password.setPromptText("Password");
        }else{  
             userLabel.setText("Usuario");
@@ -88,7 +93,7 @@ public class LogInPageController implements Initializable {
             forgotPassword.setText("Esqueci a Senha?");
             welcome.setText("Bem Vindo!");
             signInTo.setText("Faça login em sua conta");
-            username.setPromptText("Usuario/email da entidade");
+            username.setPromptText("Usuarioda entidade");
             password.setPromptText("Senha");
         }
     }

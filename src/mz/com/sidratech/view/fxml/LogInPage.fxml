@@ -44,7 +44,7 @@
                         <Insets left="5.0" />
                      </HBox.margin>
                   </FontAwesomeIcon>
-                  <TextField fx:id="username" alignment="CENTER" prefHeight="29.0" promptText="entity username or email" HBox.hgrow="ALWAYS">
+                  <TextField fx:id="username" alignment="CENTER" prefHeight="29.0" promptText="entity username " HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
@@ -61,7 +61,7 @@
                   <Insets bottom="10.0" left="40.0" right="40.0" />
                </VBox.margin>
                <children>
-                  <FontAwesomeIcon fill="WHITE" iconName="EYE">
+                  <FontAwesomeIcon fill="WHITE" iconName="KEY">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>

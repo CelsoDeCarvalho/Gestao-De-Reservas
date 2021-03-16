@@ -63,7 +63,11 @@
                               <FontAwesomeIcon iconName="STAR" />
                            </graphic></Label>
                         <ComboBox fx:id="classificationField" disable="true" layoutX="334.0" layoutY="91.0" onAction="#classificationAction" prefHeight="30.0" prefWidth="250.0" />
-                        <PasswordField fx:id="passField" alignment="CENTER" disable="true" layoutX="30.0" layoutY="308.0" prefHeight="30.0" prefWidth="250.0" promptText="Password" />
+                        <HBox alignment="CENTER" layoutX="30.0" layoutY="308.0">
+                           <children>
+                              <PasswordField fx:id="passField" alignment="CENTER" disable="true" prefHeight="30.0" prefWidth="250.0" promptText="Password" />
+                           </children>
+                        </HBox>
                         <TextField fx:id="typeField" alignment="CENTER" disable="true" layoutX="334.0" layoutY="168.0" prefHeight="30.0" prefWidth="250.0" promptText="type" />
                         <Label fx:id="typeLabel" layoutX="334.0" layoutY="138.0" text="Entity Type" />
                      </children></AnchorPane>

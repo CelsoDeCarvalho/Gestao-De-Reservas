@@ -1,5 +1,6 @@
 package mz.com.sidratech.controller;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
@@ -17,8 +18,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import mz.com.sidratech.model.bean.Alojamento;
 import mz.com.sidratech.model.bean.Central;
@@ -34,7 +34,8 @@ import mz.com.sidratech.repository.Repository;
  */
 public class SignUpPageController implements Initializable {
     
-
+    @FXML
+    private FontAwesomeIcon eye;
     @FXML
     private TabPane tabPane;
     @FXML

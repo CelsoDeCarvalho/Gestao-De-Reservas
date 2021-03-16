@@ -19,7 +19,6 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 import mz.com.sidratech.model.bean.Alojamento;
 import mz.com.sidratech.model.bean.Central;
@@ -38,8 +37,6 @@ public class SignUpPageController implements Initializable {
     @FXML
     private Tab tab1;
     @FXML
-    private AnchorPane dataPane;
-    @FXML
     private ComboBox<String> comboBox;
     @FXML
     private TextField nameField;
@@ -55,8 +52,6 @@ public class SignUpPageController implements Initializable {
     private PasswordField passField;
     @FXML
     private Tab tab2;
-    @FXML
-    private AnchorPane contactsPane;
     @FXML
     private TextField phoneField;
     @FXML
@@ -139,7 +134,7 @@ public class SignUpPageController implements Initializable {
     }
     
     DaoGenerico daoGenerico=new DaoGenerico();
-
+    
     @FXML
     void nextAction(ActionEvent event) {
         if(tab1.isSelected()){
@@ -156,14 +151,12 @@ public class SignUpPageController implements Initializable {
                         if(passField.getText().isEmpty())
                             thread(passField,nameLabel);
             else
-            if(escolha.equals("Alojamento")){
-                if(classificationField.getSelectionModel().isEmpty())
-                    thread1(classificationField,nameLabel);
-            }else
-                if(escolha.equals("Alojamento")||escolha.equals("Restauracao")){
-                    if(typeField.getText().isEmpty())
-                        thread(typeField,nameLabel);
-            }else{
+                            if(!classificationField.isDisabled()&&classificacao==null)
+                                thread1(classificationField, nameLabel);
+            else
+                                if(!typeField.isDisabled()&&typeField.getText().isEmpty())
+                                    thread(typeField, nameLabel);
+            else{
                 tab1.setDisable(true);
                 tab2.setDisable(false);
                 tabPane.getSelectionModel().select(tab2);
@@ -210,14 +203,14 @@ public class SignUpPageController implements Initializable {
                 transition.setToValue(1.0);
                 transition.play();
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     System.out.println(e.getMessage());
                 }
 
                 Platform.runLater(() -> {
                     field.setStyle("-fx-border-color: #0061d2;");
-                    label.setStyle("-fx-text-fill: #E4EFF1;");
+                    label.setStyle("-fx-text-fill: #000000;");
                     transition.pause();
 
                 });
@@ -241,14 +234,14 @@ public class SignUpPageController implements Initializable {
                 transition.setToValue(1.0);
                 transition.play();
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     System.out.println(e.getMessage());
                 }
 
                 Platform.runLater(() -> {
                     box.setStyle("-fx-border-color: #0061d2;");
-                    label.setStyle("-fx-text-fill: #E4EFF1;");
+                    label.setStyle("-fx-text-fill: #000000;");
                     transition.pause();
 
                 });

@@ -137,19 +137,19 @@ public class LogInPageController implements Initializable {
 
                 box.setStyle("-fx-border-color: red;");
                 label.setStyle("-fx-text-fill: red;");
-                FadeTransition transition = new FadeTransition(Duration.millis(1000), label);
+                FadeTransition transition = new FadeTransition(Duration.millis(2000), label);
                 transition.setFromValue(0.0);
                 transition.setToValue(1.0);
                 transition.play();
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     System.out.println(e.getMessage());
                 }
 
                 Platform.runLater(() -> {
                     box.setStyle("-fx-border-color: #0061d2;");
-                    label.setStyle("-fx-text-fill: #E4EFF1;");
+                    label.setStyle("-fx-text-fill: #ffffff;");
                     transition.pause();
 
                 });

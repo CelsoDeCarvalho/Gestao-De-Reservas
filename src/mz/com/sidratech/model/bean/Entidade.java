@@ -2,6 +2,7 @@ package mz.com.sidratech.model.bean;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,7 +36,7 @@ public abstract class Entidade implements Serializable{
     private String enderecoFisico;
     private String username;
     private String password;
-    @OneToOne(mappedBy = "idEntidade")
+    @OneToOne(mappedBy = "idEntidade", cascade = CascadeType.PERSIST)
     private Contato contacto;
     @OneToMany(mappedBy = "idEntidade")
     private List<Funcionario> funcionarios;

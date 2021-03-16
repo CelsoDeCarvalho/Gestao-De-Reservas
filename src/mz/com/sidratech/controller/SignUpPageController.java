@@ -22,8 +22,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
 import mz.com.sidratech.model.bean.Alojamento;
 import mz.com.sidratech.model.bean.Central;
+import mz.com.sidratech.model.bean.Contato;
 import mz.com.sidratech.model.bean.Restauracao;
 import mz.com.sidratech.model.dao.DaoGenerico;
+import mz.com.sidratech.repository.Repository;
 
 /**
  * FXML Controller class
@@ -32,8 +34,9 @@ import mz.com.sidratech.model.dao.DaoGenerico;
  */
 public class SignUpPageController implements Initializable {
     
+
     @FXML
-    private BorderPane regPane;
+    private TabPane tabPane;
     @FXML
     private Tab tab1;
     @FXML
@@ -47,9 +50,21 @@ public class SignUpPageController implements Initializable {
     @FXML
     private Label nameLabel;
     @FXML
+    private Label localLabel;
+    @FXML
+    private Label userLabel;
+    @FXML
+    private Label passLabel;
+    @FXML
+    private Label classificationLabel;
+    @FXML
     private ComboBox<String> classificationField;
     @FXML
     private PasswordField passField;
+    @FXML
+    private TextField typeField;
+    @FXML
+    private Label typeLabel;
     @FXML
     private Tab tab2;
     @FXML
@@ -59,13 +74,13 @@ public class SignUpPageController implements Initializable {
     @FXML
     private TextField urlField;
     @FXML
+    private Label phoneLabel;
+    @FXML
+    private Label emailLabel;
+    @FXML
     private Button back;
     @FXML
-    private Button next;  
-    @FXML
-    private TabPane tabPane;
-    @FXML
-    private TextField typeField;
+    private Button next;
     
     String escolha;
     String classificacao;
@@ -143,19 +158,19 @@ public class SignUpPageController implements Initializable {
                 thread(nameField, nameLabel);
             else
                 if(localField.getText().isEmpty())
-                    thread(localField,nameLabel);
+                    thread(localField,localLabel);
             else
                     if(userField.getText().isEmpty())
-                        thread(userField,nameLabel);
+                        thread(userField,userLabel);
             else
                         if(passField.getText().isEmpty())
-                            thread(passField,nameLabel);
+                            thread(passField,passLabel);
             else
                             if(!classificationField.isDisabled()&&classificacao==null)
-                                thread1(classificationField, nameLabel);
+                                thread1(classificationField, classificationLabel);
             else
                                 if(!typeField.isDisabled()&&typeField.getText().isEmpty())
-                                    thread(typeField, nameLabel);
+                                    thread(typeField, typeLabel);
             else{
                 tab1.setDisable(true);
                 tab2.setDisable(false);
@@ -168,26 +183,34 @@ public class SignUpPageController implements Initializable {
             if(tab2.isSelected()){
                                 
                 if(phoneField.getText().isEmpty())
-                    thread(phoneField, nameLabel);
+                    thread(phoneField, phoneLabel);
                 else
                 if(emailField.getText().isEmpty())
-                    thread(emailField,nameLabel);
+                    thread(emailField,emailLabel);
                 else
                     if(escolha.equals("Alojamento")){
                         Alojamento alojamento=new Alojamento(classificacao,typeField.getText(),nameField.getText(),localField.getText(),userField.getText(),passField.getText());
+                        Contato contato=new Contato(Integer.parseInt(phoneField.getText()),urlField.getText(),emailField.getText(),alojamento);
+                        alojamento.setContacto(contato);
                         daoGenerico.create(alojamento);
                         ((Node) event.getSource()).getScene().getWindow().hide();
                     }else
                     if(escolha.equals("Restauracao")){
                         Restauracao restauracao=new Restauracao(typeField.getText(),nameField.getText(),localField.getText(),userField.getText(),passField.getText());
+                        Contato contato=new Contato(Integer.parseInt(phoneField.getText()),urlField.getText(),emailField.getText(),restauracao);
+                        restauracao.setContacto(contato);
                         daoGenerico.create(restauracao);
                         ((Node) event.getSource()).getScene().getWindow().hide();
                     }else{
                         Central central=new Central(nameField.getText(),localField.getText(),userField.getText(),passField.getText(),typeField.getText());
+                        Contato contato=new Contato(Integer.parseInt(phoneField.getText()),urlField.getText(),emailField.getText(),central);
+                        central.setContacto(contato);
                         daoGenerico.create(central);
                         ((Node) event.getSource()).getScene().getWindow().hide();
                     }
             }
+        Repository repository=new Repository();
+        repository.getEntidades();
     }
     
     

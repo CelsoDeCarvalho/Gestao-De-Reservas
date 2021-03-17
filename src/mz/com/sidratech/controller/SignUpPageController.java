@@ -12,13 +12,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import mz.com.sidratech.model.bean.Alojamento;
 import mz.com.sidratech.model.bean.Central;
@@ -34,6 +34,8 @@ import mz.com.sidratech.repository.Repository;
  */
 public class SignUpPageController implements Initializable {
     
+    @FXML
+    private CheckBox seePass;
     @FXML
     private FontAwesomeIcon eye;
     @FXML

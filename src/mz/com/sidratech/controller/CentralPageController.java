@@ -16,9 +16,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import mz.com.sidratech.model.bean.Alojamento;
 import mz.com.sidratech.model.bean.Entidade;
@@ -28,23 +27,12 @@ import mz.com.sidratech.repository.Repository;
 public class CentralPageController implements Initializable {
 
     @FXML
+    private TextField search;
+    @FXML
     private TableView<Entidade> table;
-    @FXML
-    private TableColumn<Entidade,String> tipoColumn;
-    @FXML
-    private TableColumn<Entidade,String> nomeColumn;
-    @FXML
-    private TableColumn<Entidade,String> localColumn;
-    @FXML
-    private TableColumn<Entidade,String> classificacaoColumn;
-    @FXML
-    private TableColumn<Entidade,Button> ver;
-    @FXML
-    private MenuBar menu;
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        menu.setFocusTraversable(false);
+        search.setFocusTraversable(false);
         listar();
     } 
     

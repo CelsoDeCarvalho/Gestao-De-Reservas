@@ -19,7 +19,7 @@ public class OctoDBApplication extends Application {
             
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource(Path.PAGINA_INICIAL));
+        Parent root = FXMLLoader.load(getClass().getResource(Path.PAGINA_CENTRAL));
         Scene scene = new Scene(root);
         stage.setMaximized(true);
         stage.setTitle("");

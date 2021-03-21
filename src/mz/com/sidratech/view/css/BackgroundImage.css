@@ -12,3 +12,10 @@
     -fx-background-size:400 500;
     -fx-background-position: center center;
 }
+
+#tablePane{
+    -fx-background-image: url("/mz/com/sidratech/image/2.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size:cover;
+    -fx-background-position: center center;
+}

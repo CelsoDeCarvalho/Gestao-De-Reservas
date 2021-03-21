@@ -1,0 +1,64 @@
+.table-view{
+    -fx-base: #2A2A2A;
+    -fx-control-inner-background: #2A2A2A;
+    -fx-padding: 1;
+    -fx-alignment: center ;
+    -fx-selection-bar-non-focused: #008287 ; 
+    -fx-background-radius:30;
+    -fx-border-radius:30px;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: #1d1d1d;
+    -fx-border-color: transparent transparent rgba(255,255,255,0.3) transparent;
+    -fx-border-width: 1;
+    -fx-background-insets: 0;
+    -fx-background-radius:30;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-size: 25;
+    -fx-border-width: 0 0 0 0;
+    -fx-text-fill: #d8d8d8;
+}
+.table-view .column-header .label {
+    -fx-font-size: 13px;
+    -fx-font-weight:bold;
+    -fx-font-family:"Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-text-fill: #d8d8d8;
+    -fx-alignment: center;
+    -fx-opacity: 1;
+}
+
+.table-cell {
+    -fx-font-size: 14px;
+    -fx-font-family:"Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-text-fill: #d8d8d8;
+    -fx-alignment: center;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: #008287;
+}
+
+#pesquisa{
+    -fx-text-fill: #d8d8d8;
+}
+
+#buttonSee{
+    -fx-background-color:#a0c542;
+}
+
+#buttonRemove{
+    -fx-background-color:#b00000;
+}
+
+#buttonSee:hover{
+    -fx-background-color:#495a23;
+}
+
+#buttonRemove:hover{
+    -fx-background-color:#b74237;
+}
+

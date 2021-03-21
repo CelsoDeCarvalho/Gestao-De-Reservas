@@ -2,6 +2,8 @@ package mz.com.sidratech.model.bean;
 
 import java.io.Serializable;
 import java.util.List;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,9 +14,11 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import mz.com.sidratech.repository.Repository;
 
 /**
  *
@@ -40,6 +44,8 @@ public abstract class Entidade implements Serializable{
     private Contato contacto;
     @OneToMany(mappedBy = "idEntidade")
     private List<Funcionario> funcionarios;
+    @Transient
+    private ButtonBar accoes;
 
     public Entidade(String nome, String enderecoFisico, String username, String password,String tipo) {
         this.nome = nome;
@@ -48,5 +54,14 @@ public abstract class Entidade implements Serializable{
         this.password = password;
         this.tipo=tipo;
     }
+
+    public Entidade(ButtonBar accoes) {
+        this.accoes = accoes;
+    }
+    
+    public static List<Entidade> all() {
+        return Repository.entidades;
+    }
+    
     
 }

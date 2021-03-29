@@ -14,5 +14,5 @@ public interface Path {
     public final String PAGINA_RESTAURACAO = "/mz/com/sidratech/view/fxml/RestauracaoPage.fxml";
     public final String PAGINA_CONTACTME = "/mz/com/sidratech/view/fxml/ContactMePage.fxml";
     public final String PAGINA_LICENCE = "/mz/com/sidratech/view/fxml/LicencePage.fxml";
-
+    public final String PAGINA_REGFUNC = "/mz/com/sidratech/view/fxml/SigUpFuncionarioPage.fxml";
 }

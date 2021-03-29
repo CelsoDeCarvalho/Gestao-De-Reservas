@@ -21,8 +21,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import mz.com.sidratech.controller.file.SalvarEstadoLogin;
 import mz.com.sidratech.model.bean.Alojamento;
 import mz.com.sidratech.model.bean.Central;
+import mz.com.sidratech.model.bean.EstadoLogin;
 import mz.com.sidratech.octodb.OctoDBApplication;
 import mz.com.sidratech.repository.Repository;
 import mz.com.sidratech.services.Path;
@@ -100,7 +102,7 @@ public class LogInPageController implements Initializable {
     
         private void mostrarJanela(String caminho, String title, ActionEvent event) throws IOException {
             ((Node) event.getSource()).getScene().getWindow().hide();
-            OctoDBApplication.getStage().hide();
+            OctoDBApplication.getStage().close();
             Parent root = FXMLLoader.load(getClass().getResource(caminho));
             Stage stage = new Stage();
             Scene scene = new Scene(root);
@@ -122,6 +124,10 @@ public class LogInPageController implements Initializable {
                 for(int i=0;i<Repository.entidades.size();i++){
                     if(username.getText().equals(Repository.entidades.get(i).getUsername())&&
                         password.getText().equals(Repository.entidades.get(i).getPassword())){
+                        
+                        EstadoLogin estadoLogin=new EstadoLogin();
+                        estadoLogin.setIdEntidade(Repository.entidades.get(i).getIdEntidade());
+                        SalvarEstadoLogin.guardarLogin(estadoLogin);
                         
                         if(Repository.entidades.get(i).getClass().equals(Central.class))
                             mostrarJanela(Path.PAGINA_CENTRAL,"", event);

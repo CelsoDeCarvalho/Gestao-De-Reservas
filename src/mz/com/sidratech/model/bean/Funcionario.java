@@ -32,10 +32,20 @@ public abstract class Funcionario implements Serializable {
     private String apelido;
     private int telefone;
     private String email;
+    private String tipo;
     private Character sexo;
     @JoinColumn(name = "idEntidade", referencedColumnName = "idEntidade")
     @ManyToOne
     private Entidade idEntidade;
 
-   
+    public Funcionario(String nome, String apelido, int telefone, String email, Character sexo,String tipo,Entidade idEntidade) {
+        this.nome = nome;
+        this.apelido = apelido;
+        this.telefone = telefone;
+        this.email = email;
+        this.sexo = sexo;
+        this.idEntidade = idEntidade;
+        this.tipo=tipo;
+    }
+ 
 }

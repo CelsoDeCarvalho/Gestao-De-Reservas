@@ -2,7 +2,6 @@ package mz.com.sidratech.model.bean;
 
 import java.io.Serializable;
 import java.util.List;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

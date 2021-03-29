@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.com.sidratech.controller.CentralPageController">
+<BorderPane fx:id="centralPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.com.sidratech.controller.CentralPageController">
    <center>
       <VBox alignment="TOP_RIGHT" prefHeight="411.0" prefWidth="740.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -56,7 +56,7 @@
       <URL value="@../css/BackgroundImage.css" />
    </stylesheets>
    <left>
-      <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="180.0" style="-fx-background-color: #3b59ac;" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="214.0" style="-fx-background-color: #3b59ac;" BorderPane.alignment="CENTER">
          <children>
             <GNAvatarView prefHeight="60.0" prefWidth="180.0" type="CIRCLE">
                <image>
@@ -74,16 +74,16 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Button fx:id="button" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Login" textFill="WHITE">
+            <Button fx:id="logIn" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Login" textFill="WHITE">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" iconName="SIGN_IN" size="1.5em" />
                </graphic></Button>
-            <Button fx:id="button" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Log Out" textFill="WHITE">
+            <Button fx:id="logOut" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Log Out" textFill="WHITE">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" iconName="SIGN_OUT" size="1.5em" />
                </graphic>
             </Button>
-            <Button fx:id="button" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Exit" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="exit" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#exitAction" prefHeight="30.0" prefWidth="180.0" text="Exit" textFill="WHITE" VBox.vgrow="ALWAYS">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" iconName="CLOSE" size="1.5em" />
                </graphic>
@@ -93,7 +93,7 @@
                   <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
             </Separator>
-            <Button fx:id="button" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Hire User" textFill="WHITE">
+            <Button fx:id="hire" alignment="CENTER" mnemonicParsing="false" onAction="#accaoHire" prefHeight="30.0" prefWidth="180.0" text="Hire User" textFill="WHITE">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" iconName="USER_PLUS" size="1.5em" />
                </graphic>
@@ -103,12 +103,17 @@
                   <FontAwesomeIcon fill="WHITE" iconName="DASHBOARD" size="1.5em" />
                </graphic>
             </Button>
+            <Button fx:id="button" alignment="CENTER" mnemonicParsing="false" onAction="#closeSessionAction" prefHeight="30.0" prefWidth="180.0" text="Close Session" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIcon fill="WHITE" iconName="POWER_OFF" size="1.5em" />
+               </graphic>
+            </Button>
             <Separator prefWidth="200.0">
                <VBox.margin>
                   <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
             </Separator>
-            <Label text="Filter By" textFill="WHITE">
+            <Label text="Contacts" textFill="WHITE">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
                </font>
@@ -116,6 +121,9 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Label>
+            <Label alignment="CENTER" text="844950492" textAlignment="CENTER" textFill="WHITE" />
+            <Label layoutX="82.0" layoutY="434.0" text="celsomomade361@gmail.com" textFill="WHITE" />
+            <Label alignment="CENTER" layoutX="82.0" layoutY="450.0" text="www.google.com" textAlignment="CENTER" textFill="WHITE" />
          </children>
       </VBox>
    </left>

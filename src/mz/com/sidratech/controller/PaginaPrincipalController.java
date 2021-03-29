@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,6 +20,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import mz.com.sidratech.controller.file.LerEstadoLogin;
+import mz.com.sidratech.model.bean.Alojamento;
+import mz.com.sidratech.model.bean.Central;
+import mz.com.sidratech.model.bean.EstadoLogin;
+import mz.com.sidratech.octodb.OctoDBApplication;
+import mz.com.sidratech.repository.Repository;
 import mz.com.sidratech.services.Path;
 
 /**
@@ -119,7 +126,7 @@ public class PaginaPrincipalController implements Initializable {
         });
     }
 
-    private  void mostrarJanela(String caminho, String title) throws IOException {
+    private   void mostrarJanela(String caminho, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(caminho));
         Parent parent = loader.load();
         Stage stage = new Stage();
@@ -134,6 +141,21 @@ public class PaginaPrincipalController implements Initializable {
 
     @FXML
     void loginAction(ActionEvent event) throws IOException {
+        EstadoLogin estadoLogin=new EstadoLogin();
+        estadoLogin=LerEstadoLogin.lerLogin();
+        if(estadoLogin.getIdEntidade()>0)
+            for(int i=0;i<Repository.entidades.size();i++){
+                if(Repository.entidades.get(i).getIdEntidade()==LerEstadoLogin.lerLogin().getIdEntidade()){
+                    if(Repository.entidades.get(i).getClass()==Central.class)
+                        mostrarJanela1(Path.PAGINA_CENTRAL,"",event);
+                    else
+                        if(Repository.entidades.get(i).getClass()==Alojamento.class)
+                            mostrarJanela1(Path.PAGINA_ALOJAMENTO,"",event);
+                    else
+                            mostrarJanela1(Path.PAGINA_RESTAURACAO,"",event);
+                }
+            }
+        else
         mostrarJanela(Path.PAGINA_LOGIN, "LOGIN");
     }
 
@@ -167,4 +189,15 @@ public class PaginaPrincipalController implements Initializable {
         
     }
 
+        private   void mostrarJanela1(String caminho, String title, ActionEvent event) throws IOException {
+            ((Node) event.getSource()).getScene().getWindow().hide();
+            OctoDBApplication.getStage().close();
+            Parent root = FXMLLoader.load(getClass().getResource(caminho));
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setMaximized(true);
+            stage.setTitle(title);
+            stage.show();
+    }
 }

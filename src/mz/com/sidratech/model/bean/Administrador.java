@@ -21,5 +21,12 @@ public class Administrador extends Funcionario implements Serializable {
     private String username;
     private String password;
 
+    public Administrador(String username, String password, String nome, String apelido, int telefone, String email, Character sexo,String tipo,Entidade idEntidade) {
+        super(nome, apelido, telefone, email, sexo,tipo,idEntidade);
+        this.username = username;
+        this.password = password;
+    }
+
+    
 }
 

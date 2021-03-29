@@ -60,11 +60,11 @@
     -fx-background-color:#b74237;
 }
 
-#button{
+.button{
     -fx-background-color: #3b59ac;
 }
 
-#button:hover{
+.button:hover{
     -fx-background-color: #294079;
 }
 

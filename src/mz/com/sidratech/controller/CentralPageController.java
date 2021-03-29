@@ -1,39 +1,60 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mz.com.sidratech.controller;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import mz.com.sidratech.controller.file.SalvarEstadoLogin;
 import mz.com.sidratech.model.bean.Alojamento;
 import mz.com.sidratech.model.bean.Entidade;
 import mz.com.sidratech.model.bean.Restauracao;
+import mz.com.sidratech.octodb.OctoDBApplication;
 import mz.com.sidratech.repository.Repository;
+import mz.com.sidratech.services.Path;
 
 public class CentralPageController implements Initializable {
 
     @FXML
+    private BorderPane centralPane;
+    @FXML
+    private Button logIn;
+    @FXML
+    private Button logOut;
+    @FXML
+    private Button hire;
+    @FXML
     private TextField search;
     @FXML
     private TableView<Entidade> table;
+    Button ver ;
+    Button excluir;
+    boolean logOutState;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        logOutState=true;
         search.setFocusTraversable(false);
         listar();
+        logOut();
     } 
     
     public ArrayList trocarArray(){
@@ -62,24 +83,63 @@ public class CentralPageController implements Initializable {
             fVer.setIconName("EYE");
             fDel.setIconName("TRASH");
             ButtonBar acao = new ButtonBar();
-            acao.setMaxWidth(235);
-
-            Button ver = new Button();
+            ver=new Button();
             ver.setGraphic(fVer);
             ver.getStylesheets().add("/css/CentralPage.css");
             ver.setId("buttonSee");
-
-            Button excluir = new Button();
+            excluir=new Button();
             excluir.setGraphic(fDel);
             excluir.getStylesheets().add("/css/CentralPage.css");
             excluir.setId("buttonRemove");
 
             acao.getButtons().addAll(ver, excluir);
             entidade.setAccoes(acao);
-            
+            if(logOutState){
+                excluir.setDisable(true);
+                ver.setDisable(true);
+            }
         });
             
             return entidades;
     }
+    
+    public void logOut(){
+        logOut.setDisable(true);
+        //hire.setDisable(true);
+    }
+    
+        @FXML
+    void accaoHire(ActionEvent event) throws IOException {
+            mostrarJanela(Path.PAGINA_REGFUNC,"",true);
+    }
+    
+    
+        private  void mostrarJanela(String caminho, String title, boolean resizable) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(caminho));
+        Parent parent = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        stage.setTitle(title);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(centralPane.getScene().getWindow());
+        stage.show();
+    }
+        
+     private void mostrarJanela1(String caminho, String title, ActionEvent event) throws IOException {
+            ((Node) event.getSource()).getScene().getWindow().hide();
+            OctoDBApplication.getStage().show();
+    }
 
+     @FXML
+    void closeSessionAction(ActionEvent event) throws IOException {
+         SalvarEstadoLogin.apagarFicheiro();
+         mostrarJanela1(Path.PAGINA_INICIAL,"", event);
+         
+    }
+    
+    @FXML
+    void exitAction(ActionEvent event) throws IOException {
+        mostrarJanela1(Path.PAGINA_INICIAL,"", event);
+    }
 }

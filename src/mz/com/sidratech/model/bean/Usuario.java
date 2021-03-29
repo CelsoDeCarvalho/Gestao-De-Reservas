@@ -28,4 +28,10 @@ public class Usuario extends Funcionario implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
     private List<Relatorio> relatorios;
 
+    public Usuario(String username, String password, String nome, String apelido, int telefone, String email, Character sexo,String tipo,Entidade idEntidade) {
+        super(nome, apelido, telefone, email, sexo,tipo,idEntidade);
+        this.username = username;
+        this.password = password;
+    }
+    
 }

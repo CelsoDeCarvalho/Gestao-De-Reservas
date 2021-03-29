@@ -23,6 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import mz.com.sidratech.controller.file.LerEstadoLogin;
 import mz.com.sidratech.controller.file.SalvarEstadoLogin;
 import mz.com.sidratech.model.bean.Alojamento;
 import mz.com.sidratech.model.bean.Entidade;
@@ -51,10 +52,9 @@ public class CentralPageController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        logOutState=true;
+        haFuncionarios();
         search.setFocusTraversable(false);
         listar();
-        logOut();
     } 
     
     public ArrayList trocarArray(){
@@ -103,10 +103,18 @@ public class CentralPageController implements Initializable {
             return entidades;
     }
     
-    public void logOut(){
+    
+    public void haFuncionarios(){
+        if(Repository.funcionarios!=null)
+        for(int i=0;i<Repository.funcionarios.size();i++){
+            if(Repository.funcionarios.get(i).getIdEntidade().getIdEntidade()==LerEstadoLogin.lerLogin().getIdEntidade())
+                System.out.println("Sim ha funcionarios");
+            return;
+        }
+        logOutState=true;
         logOut.setDisable(true);
-        //hire.setDisable(true);
     }
+    
     
         @FXML
     void accaoHire(ActionEvent event) throws IOException {

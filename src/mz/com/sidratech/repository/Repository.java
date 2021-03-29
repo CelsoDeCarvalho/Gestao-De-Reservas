@@ -3,6 +3,7 @@ package mz.com.sidratech.repository;
 import java.util.ArrayList;
 import java.util.List;
 import mz.com.sidratech.model.bean.Entidade;
+import mz.com.sidratech.model.bean.Funcionario;
 import mz.com.sidratech.model.dao.DaoGenerico;
 
 /**
@@ -12,11 +13,20 @@ import mz.com.sidratech.model.dao.DaoGenerico;
 public class Repository {
     
     public static ArrayList<Entidade> entidades=null;
-            
+    public static ArrayList<Funcionario> funcionarios=null;
+    
+    DaoGenerico daoGenerico;
+    
     public  void getEntidades(){
-        DaoGenerico daoGenerico=new DaoGenerico();
+        daoGenerico=new DaoGenerico();
         List<Object> objects= daoGenerico.readAll("Entidade");
         entidades=(ArrayList<Entidade>)(Object)objects;
+    }
+    
+    public  void getFuncionarios(){
+        daoGenerico=new DaoGenerico();
+        List<Object> objects= daoGenerico.readAll("Funcionario");
+        funcionarios=(ArrayList<Funcionario>)(Object)objects;
     }
     
 }

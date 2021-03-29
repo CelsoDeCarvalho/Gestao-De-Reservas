@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.com.sidratech.controller.SigUpFuncionarioController">
+<BorderPane prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: white;" stylesheets="@../css/RegFuncPage.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.com.sidratech.controller.SigUpFuncionarioController">
    <top>
       <VBox alignment="TOP_CENTER" prefHeight="132.0" prefWidth="700.0" BorderPane.alignment="TOP_CENTER">
          <children>
@@ -58,87 +58,63 @@
                   <Insets bottom="80.0" />
                </VBox.margin>
             </VBox>
-            <GridPane alignment="CENTER" hgap="10.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="500.0" style="-fx-background-color: white;" vgap="5.0">
+            <GridPane alignment="CENTER" hgap="20.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="500.0" style="-fx-background-color: white;" vgap="7.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="ALWAYS" maxWidth="264.0" minWidth="10.0" />
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="341.0" minWidth="10.0" />
                 <ColumnConstraints hgrow="ALWAYS" maxWidth="341.0" minWidth="10.0" />
                   <ColumnConstraints hgrow="ALWAYS" maxWidth="341.0" minWidth="10.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="4.0" prefHeight="40.0" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="40.0" vgrow="ALWAYS" />
                 <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="40.0" vgrow="ALWAYS" />
                   <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="40.0" vgrow="ALWAYS" />
                   <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Employee Type" />
-                  <HBox alignment="CENTER" style="-fx-background-color: #ebf2f4;" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
-                     <children>
-                        <ComboBox fx:id="funcTipo" prefHeight="40.0" prefWidth="200.0" promptText="Select Type" style="-fx-background-color: #ebf2f4;" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="40.0" style="-fx-background-color: #ebf2f4;" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
-                     <children>
-                        <TextField fx:id="nome" alignment="CENTER" prefHeight="40.0" promptText="First Name" style="-fx-background-color: #ebf2f4;" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
-                  <Label text="Name" GridPane.rowIndex="2" />
-                  <Label text="Apelido" GridPane.rowIndex="4" />
-                  <HBox alignment="CENTER" style="-fx-background-color: #ebf2f4;" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5">
-                     <children>
-                        <TextField fx:id="apelido" alignment="CENTER" prefHeight="40.0" promptText="Last Name" style="-fx-background-color: #ebf2f4;" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" style="-fx-background-color: #ebf2f4;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
-                     <children>
-                        <TextField fx:id="phone" alignment="CENTER" prefHeight="40.0" promptText="Phone" style="-fx-background-color: #ebf2f4;" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" style="-fx-background-color: #ebf2f4;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5">
-                     <children>
-                        <TextField fx:id="email" alignment="CENTER" prefHeight="40.0" promptText="Email" style="-fx-background-color: #ebf2f4;" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
-                  <Label text="Phone" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="Email" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label text="Genre" GridPane.columnIndex="2" />
-                  <HBox alignment="CENTER" style="-fx-background-color: #ebf2f4;" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
-                     <children>
-                        <ComboBox fx:id="genero" prefHeight="40.0" prefWidth="200.0" promptText="Select Genre" style="-fx-background-color: #ebf2f4;" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
-                  <Label text="Username" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Label text="Password" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                  <HBox alignment="CENTER" style="-fx-background-color: #ebf2f4;" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
-                     <children>
-                        <FontAwesomeIcon iconName="USER">
-                           <HBox.margin>
-                              <Insets left="2.0" />
-                           </HBox.margin>
-                        </FontAwesomeIcon>
-                        <TextField fx:id="user" alignment="CENTER" prefHeight="40.0" promptText="Username" style="-fx-background-color: #ebf2f4;" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" style="-fx-background-color: #ebf2f4;" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5">
-                     <children>
-                        <FontAwesomeIcon iconName="KEY">
-                           <HBox.margin>
-                              <Insets left="2.0" />
-                           </HBox.margin>
-                        </FontAwesomeIcon>
-                        <PasswordField fx:id="password" alignment="CENTER" prefHeight="40.0" promptText="Password" style="-fx-background-color: #ebf2f4;" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
+                  <Label fx:id="typeLab" text="Employee Type" />
+                  <Label fx:id="nameLab" text="Name" GridPane.rowIndex="2" />
+                  <Label fx:id="apelidoLab" text="Apelido" GridPane.rowIndex="4" />
+                  <Label fx:id="phoneLab" text="Phone" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="emailLab" text="Email" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="genreLab" text="Genre" GridPane.columnIndex="2" />
+                  <Label fx:id="userLab" text="Username" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label fx:id="passLab" text="Password" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                   <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.vgrow="ALWAYS">
                      <children>
-                        <Button fx:id="create" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #76ca65;" text="CREATE" />
+                        <Button fx:id="create" mnemonicParsing="false" onAction="#createAction" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #76ca65;" text="CREATE" />
                      </children>
                   </HBox>
+                  <ComboBox fx:id="type" onAction="#typeAction" prefHeight="30.0" prefWidth="161.0" promptText="select type" style="-fx-background-radius: 5; -fx-border-radius: 5;" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="genre" disable="true" onAction="#genreAction" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 5; -fx-border-radius: 5;" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+                  <TextField fx:id="apelido" disable="true" prefHeight="30.0" prefWidth="150.0" promptText="last name" style="-fx-background-radius: 5; -fx-border-radius: 5;" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" />
+                  <TextField fx:id="name" disable="true" prefHeight="30.0" prefWidth="150.0" promptText="first name" style="-fx-background-radius: 5; -fx-border-radius: 5;" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />
+                  <TextField fx:id="phone" disable="true" prefHeight="30.0" prefWidth="150.0" promptText="phone" style="-fx-background-radius: 5; -fx-border-radius: 5;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />
+                  <TextField fx:id="email" disable="true" prefHeight="30.0" prefWidth="150.0" promptText="email" style="-fx-background-radius: 5; -fx-border-radius: 5;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" />
+                  <TextField fx:id="user" disable="true" prefHeight="30.0" prefWidth="150.0" promptText="username" style="-fx-background-radius: 5; -fx-border-radius: 5;" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </TextField>
+                  <PasswordField fx:id="password" disable="true" prefHeight="30.0" prefWidth="150.0" promptText="password" style="-fx-background-radius: 5; -fx-border-radius: 5;" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </PasswordField>
+                  <FontAwesomeIcon iconName="USER" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets left="4.0" />
+                     </GridPane.margin>
+                  </FontAwesomeIcon>
+                  <FontAwesomeIcon iconName="KEY" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <GridPane.margin>
+                        <Insets left="4.0" />
+                     </GridPane.margin>
+                  </FontAwesomeIcon>
                </children>
                <VBox.margin>
                   <Insets bottom="100.0" />

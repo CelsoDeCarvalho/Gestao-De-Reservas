@@ -24,7 +24,9 @@ import javafx.util.Duration;
 import mz.com.sidratech.controller.file.SalvarEstadoLogin;
 import mz.com.sidratech.model.bean.Alojamento;
 import mz.com.sidratech.model.bean.Central;
+import mz.com.sidratech.model.bean.Entidade;
 import mz.com.sidratech.model.bean.EstadoLogin;
+import mz.com.sidratech.model.bean.Restauracao;
 import mz.com.sidratech.octodb.OctoDBApplication;
 import mz.com.sidratech.repository.Repository;
 import mz.com.sidratech.services.Path;
@@ -111,6 +113,8 @@ public class LogInPageController implements Initializable {
             stage.setTitle(title);
             stage.show();
     }
+        
+     static Entidade entidade;
 
    //LOGIN================================================ 
     @FXML
@@ -129,19 +133,26 @@ public class LogInPageController implements Initializable {
                         estadoLogin.setIdEntidade(Repository.entidades.get(i).getIdEntidade());
                         SalvarEstadoLogin.guardarLogin(estadoLogin);
                         
-                        if(Repository.entidades.get(i).getClass().equals(Central.class))
+                        if(Repository.entidades.get(i).getClass().equals(Central.class)){
+                            entidade=new Central();
+                            entidade=Repository.entidades.get(i);
                             mostrarJanela(Path.PAGINA_CENTRAL,"", event);
-                        else
-                            if(Repository.entidades.get(i).getClass().equals(Alojamento.class))
+                        }else
+                            if(Repository.entidades.get(i).getClass().equals(Alojamento.class)){
+                                entidade=new Alojamento();
+                                entidade=Repository.entidades.get(i);
                                 mostrarJanela(Path.PAGINA_ALOJAMENTO,"", event);
-                        else
+                            }else{
+                                entidade=new Restauracao();
+                                entidade=Repository.entidades.get(i);
                                 mostrarJanela(Path.PAGINA_RESTAURACAO,"", event);
+                            }
                     }
                 }
     }
     
     
-    public void thread(HBox box, Label label) {
+    public  void thread(HBox box, Label label) {
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {

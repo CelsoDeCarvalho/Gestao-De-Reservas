@@ -17,11 +17,9 @@ import lombok.Setter;
 @Table(name = "faxineiro")
 public class Faxineiro extends Funcionario implements Serializable {
 
-    private String tarefa;
 
-    public Faxineiro(String tarefa, String nome, String apelido, int telefone, String email, Character sexo,String tipo,Entidade idEntidade) {
+    public Faxineiro(String nome, String apelido, int telefone, String email, Character sexo,String tipo,Entidade idEntidade) {
         super(nome, apelido, telefone, email, sexo,tipo,idEntidade);
-        this.tarefa = tarefa;
     }
 
     

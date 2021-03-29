@@ -20,10 +20,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import static mz.com.sidratech.controller.LogInPageController.entidade;
 import mz.com.sidratech.controller.file.LerEstadoLogin;
 import mz.com.sidratech.model.bean.Alojamento;
 import mz.com.sidratech.model.bean.Central;
 import mz.com.sidratech.model.bean.EstadoLogin;
+import mz.com.sidratech.model.bean.Restauracao;
 import mz.com.sidratech.octodb.OctoDBApplication;
 import mz.com.sidratech.repository.Repository;
 import mz.com.sidratech.services.Path;
@@ -146,13 +148,20 @@ public class PaginaPrincipalController implements Initializable {
         if(estadoLogin.getIdEntidade()>0)
             for(int i=0;i<Repository.entidades.size();i++){
                 if(Repository.entidades.get(i).getIdEntidade()==LerEstadoLogin.lerLogin().getIdEntidade()){
-                    if(Repository.entidades.get(i).getClass()==Central.class)
+                    if(Repository.entidades.get(i).getClass()==Central.class){
+                        entidade=new Central();
+                         entidade=Repository.entidades.get(i);
                         mostrarJanela1(Path.PAGINA_CENTRAL,"",event);
-                    else
-                        if(Repository.entidades.get(i).getClass()==Alojamento.class)
+                    }else
+                        if(Repository.entidades.get(i).getClass()==Alojamento.class){
+                            entidade=new Alojamento();
+                            entidade=Repository.entidades.get(i);
                             mostrarJanela1(Path.PAGINA_ALOJAMENTO,"",event);
-                    else
+                        }else{
+                            entidade=new Restauracao();
+                            entidade=Repository.entidades.get(i);
                             mostrarJanela1(Path.PAGINA_RESTAURACAO,"",event);
+                        }
                 }
             }
         else

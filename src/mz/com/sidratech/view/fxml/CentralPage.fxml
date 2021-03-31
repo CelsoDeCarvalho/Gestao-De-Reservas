@@ -23,6 +23,15 @@
             <Insets bottom="60.0" left="60.0" right="60.0" top="10.0" />
          </BorderPane.margin>
          <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label fx:id="nomeLabel">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
             <HBox alignment="CENTER_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="280.0" style="-fx-background-color: white; -fx-border-color: #d9d9d9; -fx-background-radius: 30; -fx-border-radius: 30;">
                <VBox.margin>
                   <Insets bottom="80.0" left="550.0" />
@@ -66,19 +75,24 @@
                   <Insets bottom="10.0" left="40.0" right="40.0" top="20.0" />
                </VBox.margin>
             </GNAvatarView>
-            <Label text="Usename" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Label fx:id="username" text="Usename" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
                <VBox.margin>
-                  <Insets bottom="20.0" />
+                  <Insets bottom="4.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Button fx:id="logIn" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Login" textFill="WHITE">
+            <Label fx:id="tipo" textFill="WHITE">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
+            <Button fx:id="logIn" alignment="CENTER" mnemonicParsing="false" onAction="#loginAction" prefHeight="30.0" prefWidth="180.0" text="Login" textFill="WHITE">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" iconName="SIGN_IN" size="1.5em" />
                </graphic></Button>
-            <Button fx:id="logOut" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Log Out" textFill="WHITE">
+            <Button fx:id="logOut" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#logOutAction" prefHeight="30.0" prefWidth="180.0" text="Log Out" textFill="WHITE">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" iconName="SIGN_OUT" size="1.5em" />
                </graphic>
@@ -93,7 +107,7 @@
                   <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
             </Separator>
-            <Button fx:id="hire" alignment="CENTER" mnemonicParsing="false" onAction="#accaoHire" prefHeight="30.0" prefWidth="180.0" text="Hire User" textFill="WHITE">
+            <Button fx:id="hire" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#accaoHire" prefHeight="30.0" prefWidth="180.0" text="Hire User" textFill="WHITE">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" iconName="USER_PLUS" size="1.5em" />
                </graphic>
@@ -121,9 +135,9 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Label>
-            <Label alignment="CENTER" text="844950492" textAlignment="CENTER" textFill="WHITE" />
-            <Label layoutX="82.0" layoutY="434.0" text="celsomomade361@gmail.com" textFill="WHITE" />
-            <Label alignment="CENTER" layoutX="82.0" layoutY="450.0" text="www.google.com" textAlignment="CENTER" textFill="WHITE" />
+            <Label fx:id="phoneLbel" alignment="CENTER" text="844950492" textAlignment="CENTER" textFill="WHITE" />
+            <Label fx:id="emailLabel" layoutX="82.0" layoutY="434.0" text="celsomomade361@gmail.com" textFill="WHITE" />
+            <Label fx:id="urlLabel" alignment="CENTER" layoutX="82.0" layoutY="450.0" text="www.google.com" textAlignment="CENTER" textFill="WHITE" />
          </children>
       </VBox>
    </left>

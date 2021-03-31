@@ -21,6 +21,7 @@ import mz.com.sidratech.model.bean.Faxineiro;
 import mz.com.sidratech.model.bean.Funcionario;
 import mz.com.sidratech.model.bean.Usuario;
 import mz.com.sidratech.model.dao.DaoGenerico;
+import mz.com.sidratech.repository.Repository;
 
 public class SigUpFuncionarioController implements Initializable {
     
@@ -97,6 +98,8 @@ public class SigUpFuncionarioController implements Initializable {
             }
     }
     
+    Repository repository=new Repository();
+    
     @FXML
     void createAction(ActionEvent event) {
         if(tipo==null||tipo.isEmpty()) 
@@ -125,18 +128,19 @@ public class SigUpFuncionarioController implements Initializable {
         else
                                         if(tipo.equals("Administrador")){
                                             DaoGenerico generico=new DaoGenerico();
-                                            Funcionario funcionario=new Administrador(user.getText(),password.getText(),name.getText(),apelido.getText(),Integer.parseInt(phone.getText()),email.getText(),sexo,tipo,LogInPageController.entidade);
+                                            Funcionario funcionario=new Administrador(name.getText(),apelido.getText(),user.getText(),password.getText(),Integer.parseInt(phone.getText()),email.getText(),tipo,sexo,LogInPageController.entidade);
                                             generico.create(funcionario);
                                         }else
                                             if(tipo.equals("Usuario")){
                                                  DaoGenerico generico=new DaoGenerico();
-                                                 Funcionario funcionario=new Usuario(user.getText(),password.getText(),name.getText(),apelido.getText(),Integer.parseInt(phone.getText()),email.getText(),sexo,tipo,LogInPageController.entidade);
+                                                 Funcionario funcionario=new Usuario(name.getText(),apelido.getText(),user.getText(),password.getText(),Integer.parseInt(phone.getText()),email.getText(),tipo,sexo,LogInPageController.entidade);
                                                  generico.create(funcionario);
                                             }else{
                                                 DaoGenerico generico=new DaoGenerico();
-                                                 Funcionario funcionario=new Faxineiro(name.getText(),apelido.getText(),Integer.parseInt(phone.getText()),email.getText(),sexo,tipo,LogInPageController.entidade);
+                                                 Funcionario funcionario=new Faxineiro(name.getText(),apelido.getText(),null,null,Integer.parseInt(phone.getText()),email.getText(),tipo,sexo,LogInPageController.entidade);
                                                  generico.create(funcionario);
                                             }
+        repository.getFuncionarios();
         ((Node) event.getSource()).getScene().getWindow().hide();
     }
     

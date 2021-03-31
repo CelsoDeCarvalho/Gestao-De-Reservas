@@ -17,14 +17,13 @@ import lombok.Setter;
 @Table(name = "administrador")
 public class Administrador extends Funcionario implements Serializable {
 
+    public Administrador(String nome, String apelido, String username, String password, int telefone, String email, String tipo, Character sexo, Entidade idEntidade) {
+        super(nome, apelido, username, password, telefone, email, tipo, sexo, idEntidade);
+    }
 
-    private String username;
-    private String password;
-
-    public Administrador(String username, String password, String nome, String apelido, int telefone, String email, Character sexo,String tipo,Entidade idEntidade) {
-        super(nome, apelido, telefone, email, sexo,tipo,idEntidade);
-        this.username = username;
-        this.password = password;
+    @Override
+    public String toString() {
+        return "Administrador{" + "username=" + getUsername() + ", password=" + getPassword()+" ID: "+getIdFuncionario()+"\nID ENTIDADE: "+ getIdEntidade().getIdEntidade();
     }
 
     

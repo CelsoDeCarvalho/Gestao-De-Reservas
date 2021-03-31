@@ -12,9 +12,10 @@ import mz.com.sidratech.model.bean.EstadoLogin;
  */
 public class LerEstadoLogin {
     
+    static File file=new File("login.dat");
+    
     public static EstadoLogin lerLogin(){
         EstadoLogin login=new EstadoLogin();
-        File file=new File("login.dat");
         try{
             ObjectInputStream leitor=new ObjectInputStream(new FileInputStream(file));
             login=(EstadoLogin)leitor.readObject();
@@ -23,6 +24,10 @@ public class LerEstadoLogin {
             System.out.println("Impossivel acessar o directorio");
         }
         return login;
+    }
+    
+    public  static boolean exist(){
+        return file.exists();
     }
     
 }

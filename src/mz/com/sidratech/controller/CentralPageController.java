@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,6 +31,7 @@ import mz.com.sidratech.controller.file.LerEstadoLogin;
 import mz.com.sidratech.controller.file.SalvarEstadoLogin;
 import mz.com.sidratech.model.bean.Alojamento;
 import mz.com.sidratech.model.bean.Entidade;
+import mz.com.sidratech.model.bean.EstadoLogin;
 import mz.com.sidratech.model.bean.Restauracao;
 import mz.com.sidratech.octodb.OctoDBApplication;
 import mz.com.sidratech.repository.Repository;
@@ -34,6 +39,10 @@ import mz.com.sidratech.services.Path;
 
 public class CentralPageController implements Initializable {
 
+    @FXML
+    private Label tipo;
+    @FXML
+    private Label nomeLabel;
     @FXML
     private BorderPane centralPane;
     @FXML
@@ -46,15 +55,26 @@ public class CentralPageController implements Initializable {
     private TextField search;
     @FXML
     private TableView<Entidade> table;
+    @FXML
+    private Label phoneLbel;
+    @FXML
+    private Label emailLabel;
+    @FXML
+    private Label urlLabel;
+    @FXML
+    private  Label username;
     Button ver ;
     Button excluir;
     boolean logOutState;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        listar();
+        ver.setDisable(true);
+        excluir.setDisable(true);
+        mapearDados();
         haFuncionarios();
         search.setFocusTraversable(false);
-        listar();
     } 
     
     public ArrayList trocarArray(){
@@ -107,12 +127,11 @@ public class CentralPageController implements Initializable {
     public void haFuncionarios(){
         if(Repository.funcionarios!=null)
         for(int i=0;i<Repository.funcionarios.size();i++){
-            if(Repository.funcionarios.get(i).getIdEntidade().getIdEntidade()==LerEstadoLogin.lerLogin().getIdEntidade())
-                System.out.println("Sim ha funcionarios");
-            return;
+            if(Repository.funcionarios.get(i).getIdEntidade().getIdEntidade()==LogInPageController.entidade.getIdEntidade()&&LerEstadoLogin.lerLogin().getIdUsuario()<1){
+                    logOutState=true;
+            }
         }
         logOutState=true;
-        logOut.setDisable(true);
     }
     
     
@@ -121,8 +140,7 @@ public class CentralPageController implements Initializable {
             mostrarJanela(Path.PAGINA_REGFUNC,"",true);
     }
     
-    
-        private  void mostrarJanela(String caminho, String title, boolean resizable) throws IOException {
+   private  void mostrarJanela(String caminho, String title, boolean resizable) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(caminho));
         Parent parent = loader.load();
         Stage stage = new Stage();
@@ -131,8 +149,9 @@ public class CentralPageController implements Initializable {
         stage.setTitle(title);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(centralPane.getScene().getWindow());
+        stage.setResizable(resizable);
         stage.show();
-    }
+   }
         
      private void mostrarJanela1(String caminho, String title, ActionEvent event) throws IOException {
             ((Node) event.getSource()).getScene().getWindow().hide();
@@ -150,4 +169,75 @@ public class CentralPageController implements Initializable {
     void exitAction(ActionEvent event) throws IOException {
         mostrarJanela1(Path.PAGINA_INICIAL,"", event);
     }
+    
+    private void mapearDados(){
+        for(int i=0;i<Repository.contatos.size();i++){
+            if(Repository.contatos.get(i).getIdEntidade().getIdEntidade()==LogInPageController.entidade.getIdEntidade()){
+                phoneLbel.setText(""+Repository.contatos.get(i).getTelefone());
+                emailLabel.setText(Repository.contatos.get(i).getEmail());
+                urlLabel.setText(Repository.contatos.get(i).getUrl());
+                nomeLabel.setText(LogInPageController.entidade.getNome());
+            }
+        }
+        
+        if(LerEstadoLogin.lerLogin().getIdUsuario()>0){
+            for(int i=0;i<Repository.funcionarios.size();i++){
+                if(LerEstadoLogin.lerLogin().getIdUsuario()==Repository.funcionarios.get(i).getIdFuncionario()){
+                    username.setText(Repository.funcionarios.get(i).getUsername());
+                    tipo.setText("("+Repository.funcionarios.get(i).getTipo()+")");
+                    if(Repository.funcionarios.get(i).getTipo().equals("Administrador")){
+                        logOut.setDisable(false);
+                        logIn.setDisable(true);
+                        hire.setDisable(false);
+                        ver.setDisable(false);
+                        excluir.setDisable(false);
+                    }else
+                    if(Repository.funcionarios.get(i).getTipo().equals("Usuario")){
+                        logOut.setDisable(false);
+                        logIn.setDisable(true);
+                        hire.setDisable(true);
+                        ver.setDisable(false);
+                        excluir.setDisable(true);
+                    }
+                }
+            }
+        }
+    }
+    
+    @FXML
+    void loginAction(ActionEvent event) throws IOException {
+        mostrarJanela(Path.PAGINA_LOGFUNC,"", false);
+    }
+    
+        @FXML
+    void logOutAction(ActionEvent event) {
+            EstadoLogin estadoLogin=new EstadoLogin();
+            estadoLogin=LerEstadoLogin.lerLogin();
+            estadoLogin.setIdUsuario(0);
+            SalvarEstadoLogin.guardarLogin(estadoLogin);
+            threadLogout();
+    }
+
+    public void threadLogout(){
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                while (true) {
+                    Thread.sleep(30);
+                    Platform.runLater(() -> {
+                        ver.setDisable(true);
+                        excluir.setDisable(true);
+                        username.setText("Username");
+                        tipo.setText("");
+                        logOut.setDisable(true);
+                        hire.setDisable(true);
+                        logIn.setDisable(false);
+                    });
+                }
+            }
+        };
+        new Thread(task).start();
+    }
 }
+
+

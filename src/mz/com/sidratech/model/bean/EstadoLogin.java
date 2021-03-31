@@ -31,4 +31,11 @@ public class EstadoLogin implements Serializable{
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
+
+    @Override
+    public String toString() {
+        return "EstadoLogin{" + "idEntidade=" + idEntidade + ", idUsuario=" + idUsuario + '}';
+    }
+    
+    
 }

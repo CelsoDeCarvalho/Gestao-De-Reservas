@@ -145,7 +145,7 @@ public class PaginaPrincipalController implements Initializable {
     void loginAction(ActionEvent event) throws IOException {
         EstadoLogin estadoLogin=new EstadoLogin();
         estadoLogin=LerEstadoLogin.lerLogin();
-        if(estadoLogin.getIdEntidade()>0)
+        if(LerEstadoLogin.exist() && estadoLogin.getIdEntidade()>0)
             for(int i=0;i<Repository.entidades.size();i++){
                 if(Repository.entidades.get(i).getIdEntidade()==LerEstadoLogin.lerLogin().getIdEntidade()){
                     if(Repository.entidades.get(i).getClass()==Central.class){
@@ -198,6 +198,7 @@ public class PaginaPrincipalController implements Initializable {
         
     }
 
+    private Stage stage;
         private   void mostrarJanela1(String caminho, String title, ActionEvent event) throws IOException {
             ((Node) event.getSource()).getScene().getWindow().hide();
             OctoDBApplication.getStage().close();
@@ -208,5 +209,12 @@ public class PaginaPrincipalController implements Initializable {
             stage.setMaximized(true);
             stage.setTitle(title);
             stage.show();
+            this.stage=new Stage();
+            this.stage=stage;
     }
+
+    public Stage getStage() {
+        return stage;
+    }
+        
 }

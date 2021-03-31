@@ -30,6 +30,8 @@ public abstract class Funcionario implements Serializable {
     private int idFuncionario;
     private String nome;
     private String apelido;
+    private String username;
+    private String password;
     private int telefone;
     private String email;
     private String tipo;
@@ -38,14 +40,18 @@ public abstract class Funcionario implements Serializable {
     @ManyToOne
     private Entidade idEntidade;
 
-    public Funcionario(String nome, String apelido, int telefone, String email, Character sexo,String tipo,Entidade idEntidade) {
+    public Funcionario(String nome, String apelido, String username, String password, int telefone, String email, String tipo, Character sexo, Entidade idEntidade) {
         this.nome = nome;
         this.apelido = apelido;
+        this.username = username;
+        this.password = password;
         this.telefone = telefone;
         this.email = email;
+        this.tipo = tipo;
         this.sexo = sexo;
         this.idEntidade = idEntidade;
-        this.tipo=tipo;
     }
+
+
  
 }

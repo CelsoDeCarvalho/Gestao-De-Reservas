@@ -22,16 +22,11 @@ import lombok.Setter;
 public class Usuario extends Funcionario implements Serializable {
 
 
-    private String username;
-    private String password;
-    @Basic(optional = false)
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
     private List<Relatorio> relatorios;
 
-    public Usuario(String username, String password, String nome, String apelido, int telefone, String email, Character sexo,String tipo,Entidade idEntidade) {
-        super(nome, apelido, telefone, email, sexo,tipo,idEntidade);
-        this.username = username;
-        this.password = password;
+    public Usuario(String nome, String apelido, String username, String password, int telefone, String email, String tipo, Character sexo, Entidade idEntidade) {
+        super(nome, apelido, username, password, telefone, email, tipo, sexo, idEntidade);
     }
-    
 }

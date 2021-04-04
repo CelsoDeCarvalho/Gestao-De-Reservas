@@ -198,7 +198,6 @@ public class PaginaPrincipalController implements Initializable {
         
     }
 
-    private Stage stage;
         private   void mostrarJanela1(String caminho, String title, ActionEvent event) throws IOException {
             ((Node) event.getSource()).getScene().getWindow().hide();
             OctoDBApplication.getStage().close();
@@ -209,12 +208,6 @@ public class PaginaPrincipalController implements Initializable {
             stage.setMaximized(true);
             stage.setTitle(title);
             stage.show();
-            this.stage=new Stage();
-            this.stage=stage;
-    }
-
-    public Stage getStage() {
-        return stage;
     }
         
 }

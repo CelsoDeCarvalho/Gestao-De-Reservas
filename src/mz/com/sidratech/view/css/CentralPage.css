@@ -14,6 +14,7 @@
     -fx-background-insets: 0;
 }
 
+
 .table-view .column-header, .table-view .filler {
     -fx-background-color: transparent;
     -fx-size: 25;

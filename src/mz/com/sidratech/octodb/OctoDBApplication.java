@@ -34,6 +34,8 @@ public class OctoDBApplication extends Application {
         repository.getEntidades();
         repository.getFuncionarios();
         repository.getContactos();
+        repository.getQuartos();
+        repository.getClientes();
         
         launch(args);
     }

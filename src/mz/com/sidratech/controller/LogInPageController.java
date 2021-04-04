@@ -69,7 +69,6 @@ public class LogInPageController implements Initializable {
     
     @FXML
     private Label signInTo;
-    private Stage stage;
 
     /**
      * Initializes the controller class.
@@ -113,12 +112,6 @@ public class LogInPageController implements Initializable {
             stage.setMaximized(true);
             stage.setTitle(title);
             stage.show();
-            this.stage=new Stage();
-            this.stage=stage;
-    }
-
-    public  Stage getStage() {
-        return stage;
     }
 
      static Entidade entidade;

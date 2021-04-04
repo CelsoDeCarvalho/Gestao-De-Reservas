@@ -23,7 +23,7 @@ import mz.com.sidratech.model.bean.Usuario;
 import mz.com.sidratech.model.dao.DaoGenerico;
 import mz.com.sidratech.repository.Repository;
 
-public class SigUpFuncionarioController implements Initializable {
+public class SigUpFuncionarioControllerAloja implements Initializable {
     
         @FXML
     private Label typeLab;
@@ -62,7 +62,7 @@ public class SigUpFuncionarioController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        type.setItems(FXCollections.observableArrayList("Administrador", "Usuario"));
+        type.setItems(FXCollections.observableArrayList("Administrador", "Usuario","Funcionario"));
          genre.setItems(FXCollections.observableArrayList('M','F'));
     }  
     

@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -69,11 +68,11 @@ public class CentralPageController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        haFuncionarios();
         listar();
         ver.setDisable(true);
         excluir.setDisable(true);
         mapearDados();
-        haFuncionarios();
         search.setFocusTraversable(false);
     } 
     
@@ -125,13 +124,17 @@ public class CentralPageController implements Initializable {
     
     
     public void haFuncionarios(){
-        if(Repository.funcionarios!=null)
+        if(Repository.funcionarios!=null){
         for(int i=0;i<Repository.funcionarios.size();i++){
-            if(Repository.funcionarios.get(i).getIdEntidade().getIdEntidade()==LogInPageController.entidade.getIdEntidade()&&LerEstadoLogin.lerLogin().getIdUsuario()<1){
-                    logOutState=true;
+            if(Repository.funcionarios.get(i).getIdEntidade().getIdEntidade()==LogInPageController.entidade.getIdEntidade()){
+                    hire.setDisable(true);
+                    return;
             }
         }
-        logOutState=true;
+        hire.setDisable(false);
+        }else{
+                hire.setDisable(false);
+        }
     }
     
     
@@ -171,12 +174,17 @@ public class CentralPageController implements Initializable {
     }
     
     private void mapearDados(){
+        Repository repository=new Repository();
+        repository.getContactos();
         for(int i=0;i<Repository.contatos.size();i++){
-            if(Repository.contatos.get(i).getIdEntidade().getIdEntidade()==LogInPageController.entidade.getIdEntidade()){
+            if(Repository.contatos.get(i).getIdEntidade().getIdEntidade()==LerEstadoLogin.lerLogin().getIdEntidade()){
                 phoneLbel.setText(""+Repository.contatos.get(i).getTelefone());
                 emailLabel.setText(Repository.contatos.get(i).getEmail());
                 urlLabel.setText(Repository.contatos.get(i).getUrl());
-                nomeLabel.setText(LogInPageController.entidade.getNome());
+                if(LoginFuncionarioController.funcionario!=null){
+                    System.out.println(LoginFuncionarioController.funcionario.getUsername());
+                nomeLabel.setText(LoginFuncionarioController.funcionario.getUsername());       
+                }
             }
         }
         
@@ -206,6 +214,7 @@ public class CentralPageController implements Initializable {
     
     @FXML
     void loginAction(ActionEvent event) throws IOException {
+        ((Node) event.getSource()).getScene().getWindow().hide();
         mostrarJanela(Path.PAGINA_LOGFUNC,"", false);
     }
     

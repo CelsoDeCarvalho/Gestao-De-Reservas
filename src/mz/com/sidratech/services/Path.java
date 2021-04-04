@@ -16,4 +16,7 @@ public interface Path {
     public final String PAGINA_LICENCE = "/mz/com/sidratech/view/fxml/LicencePage.fxml";
     public final String PAGINA_REGFUNC = "/mz/com/sidratech/view/fxml/SigUpFuncionarioPage.fxml";
     public final String PAGINA_LOGFUNC= "/mz/com/sidratech/view/fxml/LoginFuncionarioPage.fxml";
+    public final String PAGINA_LOGFUNCALOJA= "/mz/com/sidratech/view/fxml/LoginFuncionarioPageAloja.fxml";
+    public final String PAGINA_REGFUNCALOJA= "/mz/com/sidratech/view/fxml/SigUpFuncionarioPageAloja.fxml";
+    public final String PAGINA_CENTRALCREATOR= "/mz/com/sidratech/view/fxml/CentralCreator.fxml";
 }

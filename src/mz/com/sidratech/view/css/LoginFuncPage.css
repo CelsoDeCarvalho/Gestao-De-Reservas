@@ -5,3 +5,7 @@
 #login:hover{
     -fx-background-color:#6eac59;
 }
+
+#icon:hover{
+    -fx-cursor: hand;
+}

@@ -3,9 +3,12 @@ package mz.com.sidratech.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormatSymbols;
+import java.time.LocalDate;
+import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,8 +31,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import mz.com.sidratech.controller.file.LerEstadoLogin;
 import mz.com.sidratech.controller.file.SalvarEstadoLogin;
 import mz.com.sidratech.model.bean.Alojamento;
@@ -49,6 +55,10 @@ import mz.com.sidratech.services.Path;
 public class AlojamentoController implements Initializable {
 
     @FXML
+    private Label enterLabel;
+    @FXML
+    private Label leftLabel;
+    @FXML
     private TableView<Quarto> tabelaQuartos;
     @FXML
     private BorderPane pane;
@@ -64,6 +74,10 @@ public class AlojamentoController implements Initializable {
     private Button button;
     @FXML
     private Button hire;
+    @FXML
+    private Label nameLabel;
+    @FXML
+    private Label roomLabel;
     @FXML
     private Label phone;
     @FXML
@@ -97,6 +111,10 @@ public class AlojamentoController implements Initializable {
     private BarChart<String, Integer> barChart;
     @FXML
     private Label totalLabel;
+    @FXML
+    private VBox vbox1;
+    @FXML
+    private VBox vbox2;
     @FXML
     private Label disponivelLabel;
     @FXML
@@ -199,6 +217,8 @@ public class AlojamentoController implements Initializable {
                         logout.setDisable(true);
                         hire.setDisable(true);
                         login.setDisable(false);
+                        vbox1.setDisable(true);
+                        vbox2.setDisable(true);
                     });
                 }
             }
@@ -221,6 +241,9 @@ public class AlojamentoController implements Initializable {
         }
 
         if (LerEstadoLogin.lerLogin().getIdUsuario() > 0) {
+            System.out.println("Logado");
+            vbox1.setDisable(false);
+            vbox2.setDisable(false);
             for (int i = 0; i < Repository.funcionarios.size(); i++) {
                 if (LerEstadoLogin.lerLogin().getIdUsuario() == Repository.funcionarios.get(i).getIdFuncionario()) {
                     username.setText(Repository.funcionarios.get(i).getUsername());
@@ -236,6 +259,9 @@ public class AlojamentoController implements Initializable {
                     }
                 }
             }
+        } else {
+            vbox1.setDisable(true);
+            vbox2.setDisable(true);
         }
     }
 
@@ -244,9 +270,9 @@ public class AlojamentoController implements Initializable {
     @FXML
     void addRoom(ActionEvent event) {
         if (roomNuField.getText().isEmpty()) {
-            System.out.println("Vazio");
+            thread(roomNuField, roomNuLab);
         } else if (bedNuField.getText().isEmpty()) {
-            System.out.println("vazio");
+            thread(bedNuField, bedNuLab);
         } else {
             combo.getItems().clear();
             tabelaQuartos.getItems().clear();
@@ -276,7 +302,16 @@ public class AlojamentoController implements Initializable {
 
     @FXML
     void refreshAction(ActionEvent event) {
-        roomNuField.setText("" + (int) (1000 + Math.random() * (10000 - 1000 + 1)));
+        int nuQuarto=(int) (1000 + Math.random() * (10000 - 1000 + 1));
+        
+        for(int i=0;i<Repository.quartos.size();i++){
+            if(Repository.quartos.get(i).getIdAlojamento().getIdEntidade()==LerEstadoLogin.lerLogin().getIdEntidade()){
+                if(Repository.quartos.get(i).getNumero()==nuQuarto)
+                    nuQuarto=(int) (1000 + Math.random() * (10000 - 1000 + 1));
+            }
+        }
+        
+        roomNuField.setText(""+nuQuarto);
     }
 
     @FXML
@@ -291,7 +326,7 @@ public class AlojamentoController implements Initializable {
      * @param quartos
      */
     public void tableRoomPopulating() {
-        int total=0,ocupados=0,disponiveis=0;
+        int total = 0, ocupados = 0, disponiveis = 0;
         Repository repository = new Repository();
         repository.getQuartos();
         tabelaQuartos.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("numero"));
@@ -301,28 +336,29 @@ public class AlojamentoController implements Initializable {
             if (Repository.quartos.get(i).getIdAlojamento().getIdEntidade() == LerEstadoLogin.lerLogin().getIdEntidade()) {
                 room.add(Repository.quartos.get(i));
                 total++;
-                if(Repository.quartos.get(i).getOcupado().equals("Ocupado"))
+                if (Repository.quartos.get(i).getOcupado().equals("Ocupado")) {
                     ocupados++;
-                else
+                } else {
                     disponiveis++;
+                }
             }
         }
         tabelaQuartos.setItems(room);
-        totalLabel.setText(""+total);
-        ocupadoLabel.setText(""+ocupados);
-        disponivelLabel.setText(""+disponiveis);
+        totalLabel.setText("" + total);
+        ocupadoLabel.setText("" + ocupados);
+        disponivelLabel.setText("" + disponiveis);
     }
 
     @FXML
     void saveAction(ActionEvent event) {
         if (name.getText().isEmpty()) {
-            System.out.println("Nome Vazio");
+            thread(name, nameLabel);
         } else if (combo.getSelectionModel().getSelectedItem() == null) {
-            System.out.println("numero vazio");
+            thread1(combo, roomLabel);
         } else if (enterDa.getValue() == null) {
-            System.out.println("Data vazia");
+            thread(enterDa.getEditor(), enterLabel);
         } else if (leftDa.getValue() == null) {
-            System.out.println("outr data vazia");
+            thread(leftDa.getEditor(), leftLabel);
         } else {
             tabelaClientes.getItems().clear();
             Cliente cliente = new Cliente(name.getText(), Integer.parseInt(total.getText()), enterDa.getValue(), leftDa.getValue(), (int) combo.getSelectionModel().getSelectedItem(), (Alojamento) LogInPageController.entidade);
@@ -372,5 +408,75 @@ public class AlojamentoController implements Initializable {
     @FXML
     void comboAction(ActionEvent event) {
         numero = (int) combo.getSelectionModel().getSelectedItem();
+    }
+
+    @FXML
+    void leftDateActio(ActionEvent event) {
+        if (leftDa.getValue().isBefore(enterDa.getValue()) || leftDa.getValue().equals(enterDa.getValue())) {
+            leftDa.setValue(null);
+            thread(leftDa.getEditor(), leftLabel);
+        } else {
+            long totalDias = DAYS.between(enterDa.getValue(), leftDa.getValue());
+            total.setText("" + 3500 * totalDias);
+        }
+    }
+
+    public void thread(TextField field, Label label) {
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+
+                field.setStyle("-fx-border-color: red;");
+                label.setStyle("-fx-text-fill: red;");
+                FadeTransition transition = new FadeTransition(Duration.millis(2000), label);
+                transition.setFromValue(0.0);
+                transition.setToValue(1.0);
+                transition.play();
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
+                }
+
+                Platform.runLater(() -> {
+                    field.setStyle("-fx-border-color: #0061d2;");
+                    label.setStyle("-fx-text-fill: #000000;");
+                    transition.pause();
+
+                });
+                return null;
+            }
+        };
+        new Thread(task).start();
+
+    }
+
+    public void thread1(ComboBox box, Label label) {
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+
+                box.setStyle("-fx-border-color: red;");
+                label.setStyle("-fx-text-fill: red;");
+                FadeTransition transition = new FadeTransition(Duration.millis(2000), label);
+                transition.setFromValue(0.0);
+                transition.setToValue(1.0);
+                transition.play();
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
+                }
+
+                Platform.runLater(() -> {
+                    box.setStyle("-fx-border-color: #0061d2;");
+                    label.setStyle("-fx-text-fill: #000000;");
+                    transition.pause();
+
+                });
+                return null;
+            }
+        };
+        new Thread(task).start();
     }
 }

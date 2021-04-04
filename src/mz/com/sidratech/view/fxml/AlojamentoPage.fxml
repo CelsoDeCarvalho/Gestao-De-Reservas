@@ -154,7 +154,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                   </VBox>
-                  <VBox fx:id="vbox" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="361.0" prefWidth="370.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" VBox.vgrow="ALWAYS">
+                  <VBox fx:id="vbox1" alignment="TOP_CENTER" disable="true" layoutX="10.0" layoutY="10.0" prefHeight="361.0" prefWidth="370.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" VBox.vgrow="ALWAYS">
                      <children>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="415.0" style="-fx-background-color: #1b5f1d; -fx-background-radius: 5; -fx-border-radius: 5;">
                            <children>
@@ -181,14 +181,14 @@
                               <Insets bottom="7.0" left="40.0" right="40.0" />
                            </VBox.margin>
                            <children>
-                              <Label text="Guest Name">
+                              <Label fx:id="nameLabel" text="Guest Name">
                                  <font>
                                     <Font name="System Bold Italic" size="13.0" />
                                  </font>
                               </Label>
                            </children>
                         </HBox>
-                        <TextField fx:id="name" maxWidth="250.0" prefHeight="30.0" prefWidth="300.0" promptText="gues name" VBox.vgrow="ALWAYS">
+                        <TextField fx:id="name" maxWidth="250.0" prefHeight="30.0" prefWidth="300.0" promptText="guest name" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="10.0" left="40.0" right="40.0" />
                            </VBox.margin>
@@ -198,7 +198,7 @@
                               <Insets bottom="7.0" left="40.0" right="40.0" />
                            </VBox.margin>
                            <children>
-                              <Label text="Room Number">
+                              <Label fx:id="roomLabel" text="Room Number">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -215,7 +215,7 @@
                               <Insets bottom="7.0" left="40.0" right="40.0" />
                            </VBox.margin>
                            <children>
-                              <Label text="Enter  Date">
+                              <Label fx:id="enterLabel" text="Enter  Date">
                                  <font>
                                     <Font name="System Bold Italic" size="13.0" />
                                  </font>
@@ -232,14 +232,14 @@
                               <Insets bottom="7.0" left="40.0" right="40.0" />
                            </VBox.margin>
                            <children>
-                              <Label text="Left Date">
+                              <Label fx:id="leftLabel" text="Left Date">
                                  <font>
                                     <Font name="System Bold Italic" size="13.0" />
                                  </font>
                               </Label>
                            </children>
                         </HBox>
-                        <DatePicker fx:id="leftDa" editable="false" layoutX="10.0" layoutY="204.0" maxWidth="250.0" prefHeight="30.0" prefWidth="367.0" promptText="D/MM/AAAA" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+                        <DatePicker fx:id="leftDa" editable="false" layoutX="10.0" layoutY="204.0" maxWidth="250.0" onAction="#leftDateActio" prefHeight="30.0" prefWidth="367.0" promptText="D/MM/AAAA" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="10.0" left="40.0" right="40.0" />
                            </VBox.margin>
@@ -319,7 +319,7 @@
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <VBox fx:id="vbox" alignment="TOP_CENTER" maxWidth="200.0" prefHeight="225.0" prefWidth="300.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-radius: 8;" HBox.hgrow="ALWAYS">
+                              <VBox fx:id="vbox2" alignment="TOP_CENTER" disable="true" maxWidth="200.0" prefHeight="225.0" prefWidth="300.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-radius: 8;" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets bottom="20.0" left="5.0" right="2.0" top="20.0" />
                                  </HBox.margin>
@@ -363,7 +363,7 @@
                               </VBox>
                               <VBox fx:id="vbox" layoutX="10.0" layoutY="10.0" prefHeight="225.0" prefWidth="330.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <HBox prefHeight="30.0" prefWidth="279.0">
+                                    <HBox prefHeight="30.0" prefWidth="279.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;">
                                        <VBox.margin>
                                           <Insets bottom="4.0" />
                                        </VBox.margin>

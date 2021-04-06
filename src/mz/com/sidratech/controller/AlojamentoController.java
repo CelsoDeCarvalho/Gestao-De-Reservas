@@ -3,9 +3,14 @@ package mz.com.sidratech.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormatSymbols;
+import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import static java.time.temporal.ChronoUnit.DAYS;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
@@ -31,7 +36,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -45,6 +49,7 @@ import mz.com.sidratech.model.bean.Quarto;
 import mz.com.sidratech.model.dao.DaoGenerico;
 import mz.com.sidratech.octodb.OctoDBApplication;
 import mz.com.sidratech.repository.Repository;
+import mz.com.sidratech.services.Help;
 import mz.com.sidratech.services.Path;
 
 /**
@@ -115,6 +120,10 @@ public class AlojamentoController implements Initializable {
     private VBox vbox1;
     @FXML
     private VBox vbox2;
+    @FXML
+    private Label totalGues;
+    @FXML
+    private TextField fieldPesquisar;
     @FXML
     private Label disponivelLabel;
     @FXML
@@ -241,7 +250,6 @@ public class AlojamentoController implements Initializable {
         }
 
         if (LerEstadoLogin.lerLogin().getIdUsuario() > 0) {
-            System.out.println("Logado");
             vbox1.setDisable(false);
             vbox2.setDisable(false);
             for (int i = 0; i < Repository.funcionarios.size(); i++) {
@@ -302,16 +310,17 @@ public class AlojamentoController implements Initializable {
 
     @FXML
     void refreshAction(ActionEvent event) {
-        int nuQuarto=(int) (1000 + Math.random() * (10000 - 1000 + 1));
-        
-        for(int i=0;i<Repository.quartos.size();i++){
-            if(Repository.quartos.get(i).getIdAlojamento().getIdEntidade()==LerEstadoLogin.lerLogin().getIdEntidade()){
-                if(Repository.quartos.get(i).getNumero()==nuQuarto)
-                    nuQuarto=(int) (1000 + Math.random() * (10000 - 1000 + 1));
+        int nuQuarto = (int) (1000 + Math.random() * (10000 - 1000 + 1));
+
+        for (int i = 0; i < Repository.quartos.size(); i++) {
+            if (Repository.quartos.get(i).getIdAlojamento().getIdEntidade() == LerEstadoLogin.lerLogin().getIdEntidade()) {
+                if (Repository.quartos.get(i).getNumero() == nuQuarto) {
+                    nuQuarto = (int) (1000 + Math.random() * (10000 - 1000 + 1));
+                }
             }
         }
-        
-        roomNuField.setText(""+nuQuarto);
+
+        roomNuField.setText("" + nuQuarto);
     }
 
     @FXML
@@ -401,6 +410,7 @@ public class AlojamentoController implements Initializable {
             }
         }
         tabelaClientes.setItems(clientes);
+        totalGues.setText("" + clientes.size());
     }
 
     int numero;
@@ -411,13 +421,34 @@ public class AlojamentoController implements Initializable {
     }
 
     @FXML
-    void leftDateActio(ActionEvent event) {
-        if (leftDa.getValue().isBefore(enterDa.getValue()) || leftDa.getValue().equals(enterDa.getValue())) {
-            leftDa.setValue(null);
+    void leftDateActio(ActionEvent event) throws ParseException {
+
+
+        java.sql.Date date = Help.date_from_string(leftDa.getEditor().getText().replaceAll("/","-"));
+        java.sql.Date date1 = Help.date_from_string(enterDa.getEditor().getText().replaceAll("/","-"));
+
+        
+        if (leftDa.getValue().isBefore(enterDa.getValue())) {
+            leftDa.getEditor().setText("");
             thread(leftDa.getEditor(), leftLabel);
         } else {
             long totalDias = DAYS.between(enterDa.getValue(), leftDa.getValue());
             total.setText("" + 3500 * totalDias);
+        }
+
+    }
+
+    @FXML
+    void enterAction(ActionEvent event) {
+        try {
+            Date date = new Date(System.currentTimeMillis());
+            LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if (enterDa.getValue().isBefore(localDate)) {
+                enterDa.getEditor().setText("");
+                thread(enterDa.getEditor(), enterLabel);
+            }
+        } catch (NullPointerException e) {
+
         }
     }
 
@@ -478,5 +509,28 @@ public class AlojamentoController implements Initializable {
             }
         };
         new Thread(task).start();
+    }
+
+    private ObservableList<Cliente> clientesFiltrados = FXCollections.observableArrayList();
+
+    @FXML
+    void accaoPesquisar(ActionEvent event) {
+        if (fieldPesquisar.getText().isEmpty()) {
+            tabelaClientes.getItems().clear();
+            tableGuestPopulating();
+        } else {
+            tabelaClientes.getItems().clear();
+            DaoGenerico daoGenerico = new DaoGenerico();
+            List<Cliente> clientes = new ArrayList();
+            clientes = daoGenerico.searchGuest(fieldPesquisar.getText());
+
+            for (int i = 0; i < clientes.size(); i++) {
+                clientesFiltrados.add(clientes.get(i));
+            }
+
+            totalGues.setText("" + clientes.size());
+            tabelaClientes.setItems(clientesFiltrados);
+
+        }
     }
 }

@@ -44,4 +44,11 @@ public class Cliente implements Serializable {
         this.numeroQuarto = numeroQuarto;
         this.idAlojamento = idAlojamento;
     }  
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "idCliente=" + idCliente + ", nome=" + nome + ", valorPagar=" + valorPagar + ", dataEntrada=" + dataEntrada + ", dataSaida=" + dataSaida + ", numeroQuarto=" + numeroQuarto + ", idAlojamento=" + idAlojamento + '}';
+    }
+    
+    
 }

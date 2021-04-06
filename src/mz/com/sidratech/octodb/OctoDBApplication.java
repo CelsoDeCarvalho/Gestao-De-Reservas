@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import mz.com.sidratech.model.dao.DaoGenerico;
 import mz.com.sidratech.repository.Repository;
 import mz.com.sidratech.services.Path;
 
@@ -30,6 +31,7 @@ public class OctoDBApplication extends Application {
 
 
     public static void main(String[] args) {
+        
         Repository repository=new Repository();
         repository.getEntidades();
         repository.getFuncionarios();

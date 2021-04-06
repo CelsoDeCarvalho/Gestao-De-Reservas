@@ -31,6 +31,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -128,6 +129,21 @@ public class AlojamentoController implements Initializable {
     private Label disponivelLabel;
     @FXML
     private Label ocupadoLabel;
+
+    @FXML
+    private TableColumn<Cliente, String> columnName;
+
+    @FXML
+    private TableColumn<Cliente, Integer> columnRoom;
+
+    @FXML
+    private TableColumn<Cliente, Double> columnPrice;
+
+    @FXML
+    private TableColumn<Cliente, LocalDate> columnEnter;
+
+    @FXML
+    private TableColumn<Cliente, LocalDate> columnLeft;
     @FXML
     private CategoryAxis xAxis;
     private ObservableList<String> monthNames = FXCollections.observableArrayList();
@@ -360,6 +376,8 @@ public class AlojamentoController implements Initializable {
 
     @FXML
     void saveAction(ActionEvent event) {
+        Repository repository = new Repository();
+
         if (name.getText().isEmpty()) {
             thread(name, nameLabel);
         } else if (combo.getSelectionModel().getSelectedItem() == null) {
@@ -374,8 +392,8 @@ public class AlojamentoController implements Initializable {
             DaoGenerico daoGenerico = new DaoGenerico();
             name.setText("");
             combo.getSelectionModel().clearSelection();
-            enterDa.setValue(null);
-            leftDa.setValue(null);
+            enterDa.getEditor().setText("");
+            leftDa.getEditor().setText("");
             total.setText("0");
             daoGenerico.create(cliente);
             for (int i = 0; i < Repository.quartos.size(); i++) {
@@ -390,7 +408,6 @@ public class AlojamentoController implements Initializable {
                 }
             }
             roomDetail();
-            Repository repository = new Repository();
             repository.getClientes();
             tableGuestPopulating();
         }
@@ -399,11 +416,11 @@ public class AlojamentoController implements Initializable {
     private ObservableList<Cliente> clientes = FXCollections.observableArrayList();
 
     public void tableGuestPopulating() {
-        tabelaClientes.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("nome"));
-        tabelaClientes.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("numeroQuarto"));
-        tabelaClientes.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("valorPagar"));
-        tabelaClientes.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("dataEntrada"));
-        tabelaClientes.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("dataSaida"));
+        columnName.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        columnRoom.setCellValueFactory(new PropertyValueFactory<>("numeroQuarto"));
+        columnPrice.setCellValueFactory(new PropertyValueFactory<>("valorPagar"));
+        columnEnter.setCellValueFactory(new PropertyValueFactory<>("dataEntrada"));
+        columnLeft.setCellValueFactory(new PropertyValueFactory<>("dataSaida"));
         for (int i = 0; i < Repository.clientes.size(); i++) {
             if (Repository.clientes.get(i).getIdAlojamento().getIdEntidade() == LerEstadoLogin.lerLogin().getIdEntidade()) {
                 clientes.add(Repository.clientes.get(i));
@@ -417,18 +434,18 @@ public class AlojamentoController implements Initializable {
 
     @FXML
     void comboAction(ActionEvent event) {
-        numero = (int) combo.getSelectionModel().getSelectedItem();
+        if (combo.getSelectionModel().getSelectedItem()!=null) {
+            numero = (int) combo.getSelectionModel().getSelectedItem();
+        }
     }
 
     @FXML
     void leftDateActio(ActionEvent event) throws ParseException {
 
-
-        java.sql.Date date = Help.date_from_string(leftDa.getEditor().getText().replaceAll("/","-"));
-        java.sql.Date date1 = Help.date_from_string(enterDa.getEditor().getText().replaceAll("/","-"));
-
-        
-        if (leftDa.getValue().isBefore(enterDa.getValue())) {
+        if (enterDa.getEditor().getText().isEmpty()) {
+            thread(enterDa.getEditor(), enterLabel);
+            leftDa.getEditor().setText("");
+        } else if (leftDa.getValue().isBefore(enterDa.getValue()) || leftDa.getValue().isEqual(enterDa.getValue())) {
             leftDa.getEditor().setText("");
             thread(leftDa.getEditor(), leftLabel);
         } else {

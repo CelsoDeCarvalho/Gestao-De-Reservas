@@ -6,6 +6,7 @@ import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +32,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -426,6 +428,7 @@ public class AlojamentoController implements Initializable {
                 clientes.add(Repository.clientes.get(i));
             }
         }
+        deadline();
         tabelaClientes.setItems(clientes);
         totalGues.setText("" + clientes.size());
     }
@@ -434,7 +437,7 @@ public class AlojamentoController implements Initializable {
 
     @FXML
     void comboAction(ActionEvent event) {
-        if (combo.getSelectionModel().getSelectedItem()!=null) {
+        if (combo.getSelectionModel().getSelectedItem() != null) {
             numero = (int) combo.getSelectionModel().getSelectedItem();
         }
     }
@@ -549,5 +552,31 @@ public class AlojamentoController implements Initializable {
             tabelaClientes.setItems(clientesFiltrados);
 
         }
+    }
+
+    void deadline() {
+        Date data = new Date(System.currentTimeMillis());
+        LocalDate date=data.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        
+        columnLeft.setCellFactory(column -> {
+            return new TableCell<Cliente, LocalDate>() {
+                @Override
+                protected void updateItem(LocalDate item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (item == null || empty) {
+                        setText(null);
+                        setStyle("");
+                    } else {
+                        setText(item.toString());
+                        if (item.isEqual(date)||item.isBefore(date)) {
+                            setStyle("-fx-background-color: red");
+                        } else {
+                            setStyle("");
+                        }
+                    }
+                }
+            };
+        });
     }
 }

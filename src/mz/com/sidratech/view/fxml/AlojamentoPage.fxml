@@ -94,6 +94,11 @@
                   <FontAwesomeIcon fill="WHITE" iconName="USERS" />
                </graphic>
             </Button>
+            <Button fx:id="repoBtn" layoutX="20.0" layoutY="320.0" maxWidth="130.0" mnemonicParsing="false" onAction="#reportAction" prefHeight="30.0" text="Report" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIcon fill="WHITE" iconName="PRINT" />
+               </graphic>
+            </Button>
             <Button fx:id="button" layoutX="20.0" layoutY="300.0" maxWidth="130.0" mnemonicParsing="false" onAction="#sessionAction" prefHeight="30.0" text="Close Session" textFill="WHITE">
                <VBox.margin>
                   <Insets bottom="10.0" />
@@ -134,17 +139,20 @@
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
                               </Label>
                            </children>
                         </HBox>
                         <ScrollPane fitToHeight="true" VBox.vgrow="ALWAYS">
                            <content>
-                              <BarChart fx:id="barChart" prefHeight="247.0" prefWidth="900.0">
+                              <BarChart fx:id="barChart" prefHeight="148.0" prefWidth="900.0">
                                 <xAxis>
                                   <CategoryAxis label="Meses" side="BOTTOM" fx:id="xAxis" />
                                 </xAxis>
                                 <yAxis>
-                                  <NumberAxis label="Quant. Clientes" side="LEFT" />
+                                  <NumberAxis fx:id="yAxis" label="Quant. Clientes" side="LEFT" />
                                 </yAxis>
                               </BarChart>
                            </content>
@@ -154,7 +162,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                   </VBox>
-                  <VBox fx:id="vbox1" alignment="TOP_CENTER" disable="true" layoutX="10.0" layoutY="10.0" prefHeight="361.0" prefWidth="370.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" VBox.vgrow="ALWAYS">
+                  <VBox fx:id="vbox1" alignment="TOP_CENTER" disable="true" layoutX="10.0" layoutY="10.0" prefHeight="365.0" prefWidth="322.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" VBox.vgrow="ALWAYS">
                      <children>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="415.0" style="-fx-background-color: #1b5f1d; -fx-background-radius: 5; -fx-border-radius: 5;">
                            <children>
@@ -244,15 +252,38 @@
                               <Insets bottom="10.0" left="40.0" right="40.0" />
                            </VBox.margin>
                         </DatePicker>
-                        <TextField fx:id="total" alignment="CENTER" editable="false" maxWidth="100.0" promptText="total">
+                        <HBox alignment="CENTER">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
-                        </TextField>
-                        <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveAction" prefHeight="30.0" text="SAVE" textFill="WHITE">
+                           <children>
+                              <TextField fx:id="total" alignment="CENTER" editable="false" maxWidth="150.0" prefHeight="30.0" prefWidth="150.0" promptText="total" />
+                              <Label text="MTS" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER">
                            <VBox.margin>
                               <Insets bottom="4.0" />
-                           </VBox.margin></Button>
+                           </VBox.margin>
+                           <children>
+                              <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveAction" prefHeight="30.0" prefWidth="70.0" text="SAVE" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="delBtn" mnemonicParsing="false" onAction="#delAction" prefHeight="30.0" text="DELETE" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="upBtn" layoutX="80.0" layoutY="10.0" mnemonicParsing="false" onAction="#upAction" prefHeight="30.0" text="UPDATE" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cancelAction" prefHeight="30.0" text="CANCEL" textFill="WHITE" />
+                           </children>
+                        </HBox>
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" />
@@ -291,7 +322,7 @@
                                     <Label fx:id="totalGues" />
                                  </children>
                               </HBox>
-                              <TextField fx:id="fieldPesquisar" alignment="CENTER" maxHeight="30.0" onAction="#accaoPesquisar" prefHeight="30.0" promptText="search a guest" />
+                              <TextField fx:id="fieldPesquisar" alignment="CENTER" maxHeight="30.0" onKeyReleased="#accaoPesquisar" prefHeight="30.0" promptText="search a guest" />
                            </children>
                            <padding>
                               <Insets left="10.0" right="10.0" />
@@ -302,9 +333,9 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                            <content>
-                              <TableView fx:id="tabelaClientes" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
+                              <TableView fx:id="tabelaClientes" onMouseClicked="#tableAction" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
                                 <columns>
-                                  <TableColumn fx:id="columnName" prefWidth="75.0" text="Guest Name" />
+                                  <TableColumn fx:id="columnName" prefWidth="75.0" text="Name" />
                                   <TableColumn fx:id="columnRoom" prefWidth="75.0" text="Room " />
                                     <TableColumn fx:id="columnPrice" prefWidth="75.0" text="Price " />
                                     <TableColumn fx:id="columnEnter" prefWidth="75.0" text="Check-In" />

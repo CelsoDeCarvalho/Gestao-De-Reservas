@@ -1,6 +1,7 @@
 package mz.com.sidratech.model.bean;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,14 +30,26 @@ public class Relatorio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRelatorio;
-    @Lob
-    private String mensagem;
+    private String nome;
+    private double valorPagar;
+    private LocalDate dataEntrada;
+    private LocalDate dataSaida;
+    private int numeroQuarto;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataEmissao;
     @JoinColumn(name = "idEntidade", referencedColumnName = "idEntidade")
     @ManyToOne
     private Entidade idEntidade;
-    @JoinColumn(name = "idUser", referencedColumnName = "idFuncionario")
-    @ManyToOne(optional = false)
-    private Usuario idUser;   
+
+    public Relatorio(String nome, double valorPagar, LocalDate dataEntrada, LocalDate dataSaida, int numeroQuarto, Date dataEmissao, Entidade idEntidade) {
+        this.nome = nome;
+        this.valorPagar = valorPagar;
+        this.dataEntrada = dataEntrada;
+        this.dataSaida = dataSaida;
+        this.numeroQuarto = numeroQuarto;
+        this.dataEmissao = dataEmissao;
+        this.idEntidade = idEntidade;
+    }
+  
+    
 }

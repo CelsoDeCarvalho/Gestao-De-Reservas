@@ -24,8 +24,8 @@ import mz.com.sidratech.model.dao.DaoGenerico;
 import mz.com.sidratech.repository.Repository;
 
 public class SigUpFuncionarioControllerAloja implements Initializable {
-    
-        @FXML
+
+    @FXML
     private Label typeLab;
     @FXML
     private Label nameLab;
@@ -62,23 +62,25 @@ public class SigUpFuncionarioControllerAloja implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        type.setItems(FXCollections.observableArrayList("Administrador", "Usuario","Funcionario"));
-         genre.setItems(FXCollections.observableArrayList('M','F'));
-    }  
-    
+        Mascara mascara = new Mascara();
+        mascara.apenasNumero(phone);
+        type.setItems(FXCollections.observableArrayList("Administrador", "Usuario", "Funcionario"));
+        genre.setItems(FXCollections.observableArrayList('M', 'F'));
+    }
+
     String tipo;
-    char sexo='A';
-    
+    char sexo = 'A';
+
     @FXML
     void genreAction(ActionEvent event) {
-        sexo=genre.getSelectionModel().getSelectedItem();
+        sexo = genre.getSelectionModel().getSelectedItem();
     }
 
     @FXML
     void typeAction(ActionEvent event) {
-        tipo=type.getSelectionModel().getSelectedItem();
-        
-        if(tipo.equals("Administrador")||tipo.equals("Usuario")){
+        tipo = type.getSelectionModel().getSelectedItem();
+
+        if (tipo.equals("Administrador") || tipo.equals("Usuario")) {
             name.setDisable(false);
             apelido.setDisable(false);
             user.setDisable(false);
@@ -86,65 +88,60 @@ public class SigUpFuncionarioControllerAloja implements Initializable {
             email.setDisable(false);
             genre.setDisable(false);
             password.setDisable(false);
-        }else
-            if(tipo.equals("Funcionario")){
-               name.setDisable(false);
-                apelido.setDisable(false);
-                user.setDisable(true);
-                phone.setDisable(false);
-                email.setDisable(false);
-                genre.setDisable(false);
-                password.setDisable(true);
-            }
+        } else if (tipo.equals("Funcionario")) {
+            name.setDisable(false);
+            apelido.setDisable(false);
+            user.setDisable(true);
+            phone.setDisable(false);
+            email.setDisable(false);
+            genre.setDisable(false);
+            password.setDisable(true);
+        }
     }
-    
-    Repository repository=new Repository();
-    
+
+    Repository repository = new Repository();
+
     @FXML
     void createAction(ActionEvent event) {
-        if(tipo==null||tipo.isEmpty()) 
-            thread(type,typeLab);
-        else 
-            if(name.getText().isEmpty())
-                thread1(name, nameLab);
-        else
-                if(apelido.getText().isEmpty())
-                    thread1(apelido, apelidoLab);
-        else
-                    if(phone.getText().isEmpty())
-                        thread1(phone, phoneLab);
-        else
-                        if(email.getText().isEmpty())
-                            thread1(email, emailLab);
-        else
-                            if(sexo=='A')
-                                thread(genre,genreLab);
-        else
-                                if(user.getText().isEmpty()&&!user.isDisabled())
-                                    thread1(user, userLab);
-        else
-                                    if(password.getText().isEmpty()&&!password.isDisabled())
-                                        thread1(password,passLab);
-        else
-                                        if(tipo.equals("Administrador")){
-                                            DaoGenerico generico=new DaoGenerico();
-                                            Funcionario funcionario=new Administrador(name.getText(),apelido.getText(),user.getText(),password.getText(),Integer.parseInt(phone.getText()),email.getText(),tipo,sexo,LogInPageController.entidade);
-                                            generico.create(funcionario);
-                                        }else
-                                            if(tipo.equals("Usuario")){
-                                                 DaoGenerico generico=new DaoGenerico();
-                                                 Funcionario funcionario=new Usuario(name.getText(),apelido.getText(),user.getText(),password.getText(),Integer.parseInt(phone.getText()),email.getText(),tipo,sexo,LogInPageController.entidade);
-                                                 generico.create(funcionario);
-                                            }else{
-                                                DaoGenerico generico=new DaoGenerico();
-                                                 Funcionario funcionario=new Faxineiro(name.getText(),apelido.getText(),null,null,Integer.parseInt(phone.getText()),email.getText(),tipo,sexo,LogInPageController.entidade);
-                                                 generico.create(funcionario);
-                                            }
-        repository.getFuncionarios();
-        ((Node) event.getSource()).getScene().getWindow().hide();
+        if (tipo == null || tipo.isEmpty()) {
+            thread(type, typeLab);
+        } else if (name.getText().isEmpty()) {
+            thread1(name, nameLab);
+        } else if (apelido.getText().isEmpty()) {
+            thread1(apelido, apelidoLab);
+        } else if (phone.getText().isEmpty()) {
+            thread1(phone, phoneLab);
+        } else if (email.getText().isEmpty()) {
+            thread1(email, emailLab);
+        } else if (sexo == 'A') {
+            thread(genre, genreLab);
+        } else if (user.getText().isEmpty() && !user.isDisabled()) {
+            thread1(user, userLab);
+        } else if (password.getText().isEmpty() && !password.isDisabled()) {
+            thread1(password, passLab);
+        } else if (tipo.equals("Administrador")) {
+            DaoGenerico generico = new DaoGenerico();
+            Funcionario funcionario = new Administrador(name.getText(), apelido.getText(), user.getText(), password.getText(), Integer.parseInt(phone.getText()), email.getText(), tipo, sexo, LogInPageController.entidade);
+            generico.create(funcionario);
+            repository.getFuncionarios();
+            ((Node) event.getSource()).getScene().getWindow().hide();
+        } else if (tipo.equals("Usuario")) {
+            DaoGenerico generico = new DaoGenerico();
+            Funcionario funcionario = new Usuario(name.getText(), apelido.getText(), user.getText(), password.getText(), Integer.parseInt(phone.getText()), email.getText(), tipo, sexo, LogInPageController.entidade);
+            generico.create(funcionario);
+            repository.getFuncionarios();
+            ((Node) event.getSource()).getScene().getWindow().hide();
+        } else {
+            DaoGenerico generico = new DaoGenerico();
+            Funcionario funcionario = new Faxineiro(name.getText(), apelido.getText(), null, null, Integer.parseInt(phone.getText()), email.getText(), tipo, sexo, LogInPageController.entidade);
+            generico.create(funcionario);
+            repository.getFuncionarios();
+            ((Node) event.getSource()).getScene().getWindow().hide();
+        }
+
     }
-    
-    public  void thread(ComboBox box, Label label) {
+
+    public void thread(ComboBox box, Label label) {
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -173,8 +170,8 @@ public class SigUpFuncionarioControllerAloja implements Initializable {
         new Thread(task).start();
 
     }
-    
-        public  void thread1(TextField field, Label label) {
+
+    public void thread1(TextField field, Label label) {
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -203,5 +200,5 @@ public class SigUpFuncionarioControllerAloja implements Initializable {
         new Thread(task).start();
 
     }
-    
+
 }

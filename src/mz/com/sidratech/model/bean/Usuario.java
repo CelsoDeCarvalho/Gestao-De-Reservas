@@ -21,11 +21,6 @@ import lombok.Setter;
 @Table(name = "usuario")
 public class Usuario extends Funcionario implements Serializable {
 
-
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private List<Relatorio> relatorios;
-
     public Usuario(String nome, String apelido, String username, String password, int telefone, String email, String tipo, Character sexo, Entidade idEntidade) {
         super(nome, apelido, username, password, telefone, email, tipo, sexo, idEntidade);
     }

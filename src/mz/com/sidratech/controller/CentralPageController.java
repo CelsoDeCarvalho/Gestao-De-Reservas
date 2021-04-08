@@ -247,6 +247,11 @@ public class CentralPageController implements Initializable {
         };
         new Thread(task).start();
     }
+    
+        @FXML
+    void upAction(ActionEvent event) {
+
+    }
 }
 
 

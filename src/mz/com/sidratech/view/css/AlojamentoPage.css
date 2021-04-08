@@ -2,6 +2,26 @@
     -fx-background-color: #2685d7;
 }
 
+#cancelBtn{
+    -fx-background-color: #2685d7;
+}
+
+#cancelBtn:hover{
+    -fx-background-color: #1a5e96;
+}
+
+#upBtn{
+    -fx-background-color: #2685d7;
+}
+
+#upBtn:hover{
+    -fx-background-color: #1a5e96;
+}
+
+#delBtn{
+    -fx-background-color: #2685d7;
+}
+
 #vbox{
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
 }
@@ -95,6 +115,10 @@
 }
 
 #saveBtn:hover{
+    -fx-background-color: #1a5e96;
+}
+
+#delBtn:hover{
     -fx-background-color: #1a5e96;
 }
 

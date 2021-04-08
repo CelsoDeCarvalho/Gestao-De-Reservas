@@ -1,12 +1,13 @@
 package mz.com.sidratech.controller;
 
+import com.gluonhq.impl.charm.a.b.b.i;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,7 +30,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -37,6 +43,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -48,11 +55,13 @@ import mz.com.sidratech.controller.file.SalvarEstadoLogin;
 import mz.com.sidratech.model.bean.Alojamento;
 import mz.com.sidratech.model.bean.Cliente;
 import mz.com.sidratech.model.bean.EstadoLogin;
+import mz.com.sidratech.model.bean.Funcionario;
 import mz.com.sidratech.model.bean.Quarto;
+import mz.com.sidratech.model.bean.Relatorio;
+import mz.com.sidratech.model.bean.Usuario;
 import mz.com.sidratech.model.dao.DaoGenerico;
 import mz.com.sidratech.octodb.OctoDBApplication;
 import mz.com.sidratech.repository.Repository;
-import mz.com.sidratech.services.Help;
 import mz.com.sidratech.services.Path;
 
 /**
@@ -109,6 +118,10 @@ public class AlojamentoController implements Initializable {
     @FXML
     private TextField total;
     @FXML
+    private Button delBtn;
+    @FXML
+    private Button upBtn;
+    @FXML
     private TextField roomNuField;
     @FXML
     private Label bedNuLab;
@@ -116,6 +129,7 @@ public class AlojamentoController implements Initializable {
     private TextField bedNuField;
     @FXML
     private Button add;
+    @FXML
     private BarChart<String, Integer> barChart;
     @FXML
     private Label totalLabel;
@@ -148,19 +162,24 @@ public class AlojamentoController implements Initializable {
     private TableColumn<Cliente, LocalDate> columnLeft;
     @FXML
     private CategoryAxis xAxis;
+    @FXML
+    private NumberAxis yAxis;
     private ObservableList<String> monthNames = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        String[] months = DateFormatSymbols.getInstance(Locale.ENGLISH).getMonths();
+        monthNames.addAll(Arrays.asList(months));
+        xAxis.setCategories(monthNames);
+
+        updateChart();
+
         total.setText("0");
         Mascara mascara = new Mascara();
         mascara.apenasNumero(bedNuField);
         tableGuestPopulating();
         tableRoomPopulating();
         roomDetail();
-        String[] months = DateFormatSymbols.getInstance(Locale.ENGLISH).getMonths();
-        monthNames.addAll(Arrays.asList(months));
-        xAxis.setCategories(monthNames);
         haFuncionarios();
         mapearDados();
     }
@@ -390,14 +409,20 @@ public class AlojamentoController implements Initializable {
             thread(leftDa.getEditor(), leftLabel);
         } else {
             tabelaClientes.getItems().clear();
-            Cliente cliente = new Cliente(name.getText(), Integer.parseInt(total.getText()), enterDa.getValue(), leftDa.getValue(), (int) combo.getSelectionModel().getSelectedItem(), (Alojamento) LogInPageController.entidade);
             DaoGenerico daoGenerico = new DaoGenerico();
+            Cliente cliente = new Cliente(name.getText(), Double.parseDouble(total.getText()), enterDa.getValue(), leftDa.getValue(), (int) combo.getSelectionModel().getSelectedItem(), (Alojamento) LogInPageController.entidade);
+            Date date = new Date(System.currentTimeMillis());
+            Funcionario funcionario = new Usuario();
+            Relatorio relatorio = new Relatorio(name.getText(), Double.parseDouble(total.getText()), enterDa.getValue(), leftDa.getValue(), (int) combo.getSelectionModel().getSelectedItem(), date, (Alojamento) LogInPageController.entidade);
             name.setText("");
             combo.getSelectionModel().clearSelection();
             enterDa.getEditor().setText("");
             leftDa.getEditor().setText("");
             total.setText("0");
             daoGenerico.create(cliente);
+            
+            daoGenerico=new DaoGenerico();
+            daoGenerico.create(relatorio);
             for (int i = 0; i < Repository.quartos.size(); i++) {
                 if (Repository.quartos.get(i).getNumero() == numero) {
                     combo.getItems().clear();
@@ -412,6 +437,7 @@ public class AlojamentoController implements Initializable {
             roomDetail();
             repository.getClientes();
             tableGuestPopulating();
+            updateChart();
         }
     }
 
@@ -445,7 +471,7 @@ public class AlojamentoController implements Initializable {
     @FXML
     void leftDateActio(ActionEvent event) throws ParseException {
 
-        if (enterDa.getEditor().getText().isEmpty()) {
+        if (enterDa == null || enterDa.getValue().equals(null)) {
             thread(enterDa.getEditor(), enterLabel);
             leftDa.getEditor().setText("");
         } else if (leftDa.getValue().isBefore(enterDa.getValue()) || leftDa.getValue().isEqual(enterDa.getValue())) {
@@ -460,16 +486,13 @@ public class AlojamentoController implements Initializable {
 
     @FXML
     void enterAction(ActionEvent event) {
-        try {
-            Date date = new Date(System.currentTimeMillis());
-            LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            if (enterDa.getValue().isBefore(localDate)) {
-                enterDa.getEditor().setText("");
-                thread(enterDa.getEditor(), enterLabel);
-            }
-        } catch (NullPointerException e) {
-
+        Date date = new Date(System.currentTimeMillis());
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        if (enterDa.getValue().isBefore(localDate)) {
+            enterDa.getEditor().setText("");
+            thread(enterDa.getEditor(), enterLabel);
         }
+
     }
 
     public void thread(TextField field, Label label) {
@@ -534,8 +557,9 @@ public class AlojamentoController implements Initializable {
     private ObservableList<Cliente> clientesFiltrados = FXCollections.observableArrayList();
 
     @FXML
-    void accaoPesquisar(ActionEvent event) {
-        if (fieldPesquisar.getText().isEmpty()) {
+    void accaoPesquisar(KeyEvent even) {
+
+        if (fieldPesquisar.getText().isEmpty() || fieldPesquisar.getText().equals("")) {
             tabelaClientes.getItems().clear();
             tableGuestPopulating();
         } else {
@@ -556,8 +580,8 @@ public class AlojamentoController implements Initializable {
 
     void deadline() {
         Date data = new Date(System.currentTimeMillis());
-        LocalDate date=data.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        
+        LocalDate date = data.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
         columnLeft.setCellFactory(column -> {
             return new TableCell<Cliente, LocalDate>() {
                 @Override
@@ -569,7 +593,7 @@ public class AlojamentoController implements Initializable {
                         setStyle("");
                     } else {
                         setText(item.toString());
-                        if (item.isEqual(date)||item.isBefore(date)) {
+                        if (item.isEqual(date) || item.isBefore(date)) {
                             setStyle("-fx-background-color: red");
                         } else {
                             setStyle("");
@@ -579,4 +603,158 @@ public class AlojamentoController implements Initializable {
             };
         });
     }
+
+    @FXML
+    void delAction(ActionEvent event) throws Throwable {
+        Alert a = new Alert(Alert.AlertType.ERROR);
+
+        int row = tabelaClientes.getSelectionModel().getSelectedIndex();
+
+        System.out.println(row);
+
+        Cliente cliente = new Cliente();
+
+        if (row >= 0) {
+            cliente = tabelaClientes.getItems().get(row);
+            tabelaClientes.getItems().clear();
+            DaoGenerico daoGenerico = new DaoGenerico();
+
+            daoGenerico.delete(cliente.getIdCliente(), cliente);
+
+            Repository repository = new Repository();
+            repository.getClientes();
+            repository.getQuartos();
+
+            tableGuestPopulating();
+
+            for (int i = 0; i < Repository.quartos.size(); i++) {
+                if (Repository.quartos.get(i).getNumero() == cliente.getNumeroQuarto()) {
+                    combo.getItems().clear();
+                    tabelaQuartos.getItems().clear();
+                    Quarto quarto = new Quarto();
+                    quarto = Repository.quartos.get(i);
+                    quarto.setOcupado("Disponivel");
+                    daoGenerico.update(quarto);
+                    tableRoomPopulating();
+                }
+            }
+            roomDetail();
+            cancelAction(event);
+        } else {
+            a.setContentText("SELECIONE UM CLIENTE PARA APAGAR");
+            a.show();
+        }
+    }
+
+    private int row = -1;
+
+    @FXML
+    void tableAction(MouseEvent event) {
+        if (tabelaClientes.getItems().size() > 0 && tabelaClientes.getSelectionModel().getSelectedItem() != null) {
+            if (event.getClickCount() == 2) {
+                row = tabelaClientes.getSelectionModel().getSelectedIndex();
+                saveBtn.setDisable(true);
+                upBtn.setDisable(false);
+                delBtn.setDisable(false);
+                combo.setDisable(true);
+                name.setDisable(true);
+                enterDa.setDisable(true);
+                combo.getItems().clear();
+                Cliente cliente = new Cliente();
+                cliente = tabelaClientes.getSelectionModel().getSelectedItem();
+                name.setText(cliente.getNome());
+                combo.getItems().add(cliente.getNumeroQuarto());
+                combo.getSelectionModel().selectFirst();
+
+                enterDa.setValue(cliente.getDataEntrada());
+                leftDa.setValue(cliente.getDataSaida());
+
+                total.setText("" + cliente.getValorPagar());
+            }
+        }
+    }
+
+    @FXML
+    void upAction(ActionEvent event) throws Throwable {
+        Alert a = new Alert(Alert.AlertType.ERROR);
+
+        if (row >= 0) {
+
+            Cliente cliente = new Cliente();
+            cliente = tabelaClientes.getItems().get(row);
+
+            LocalDate antiga = cliente.getDataSaida();
+
+            if (leftDa.getValue().isAfter(antiga)) {
+                long totalDias = DAYS.between(enterDa.getValue(), antiga);
+                cliente.setDataSaida(leftDa.getValue());
+                long totalDiasActual = DAYS.between(antiga, leftDa.getValue());
+
+                cliente.setValorPagar((totalDias + totalDiasActual) * 3500);
+
+                DaoGenerico daoGenerico = new DaoGenerico();
+                daoGenerico.update(cliente);
+                Repository repository = new Repository();
+                repository.getClientes();
+
+                cancelAction(event);
+                tabelaClientes.getItems().clear();
+                tableGuestPopulating();
+            } else {
+                thread(leftDa.getEditor(), leftLabel);
+            }
+        } else {
+            a.setContentText("DE DOIS CLIQUES NUM CLIENTE PARA EDITAR");
+            a.show();
+        }
+    }
+
+    @FXML
+    void cancelAction(ActionEvent event) throws Throwable {
+        name.setText("");
+        combo.getSelectionModel().clearSelection();
+        enterDa.getEditor().setText("");
+        leftDa.getEditor().setText("");
+        total.setText("0");
+        saveBtn.setDisable(false);
+        upBtn.setDisable(false);
+        delBtn.setDisable(false);
+        combo.setDisable(false);
+        name.setDisable(false);
+        enterDa.setDisable(false);
+        combo.getItems().clear();
+        roomDetail();
+        row = -1;
+        tabelaClientes.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    void reportAction(ActionEvent event) {
+
+    }
+
+    void updateChart() {
+        barChart.getData().clear();
+        Repository repository = new Repository();
+        repository.getRelatorios();
+
+        int[] monthCounter = new int[12];
+
+        for (int i = 0; i < Repository.relatorios.size(); i++) {
+            if (Repository.relatorios.get(i).getIdEntidade().getIdEntidade() == LerEstadoLogin.lerLogin().getIdEntidade()) {
+                int month = Repository.relatorios.get(i).getDataEntrada().getMonthValue() - 1;
+                monthCounter[month]++;
+            }
+        }
+
+        XYChart.Series<String, Integer> series = new XYChart.Series<>();
+
+        for (int i = 0; i < monthCounter.length; i++) {
+            series.getData().add(new XYChart.Data<>(monthNames.get(i), monthCounter[i]));
+        }
+
+        barChart.getData().add(series);
+
+    }
+
 }

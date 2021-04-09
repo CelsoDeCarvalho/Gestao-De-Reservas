@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -30,6 +31,7 @@ import mz.com.sidratech.model.bean.Restauracao;
 import mz.com.sidratech.octodb.OctoDBApplication;
 import mz.com.sidratech.repository.Repository;
 import mz.com.sidratech.services.Path;
+
 /**
  * FXML Controller class
  *
@@ -37,7 +39,7 @@ import mz.com.sidratech.services.Path;
  */
 public class LogInPageController implements Initializable {
 
-@FXML
+    @FXML
     private AnchorPane loginPane;
 
     @FXML
@@ -45,7 +47,7 @@ public class LogInPageController implements Initializable {
 
     @FXML
     private HBox loginPainelUser;
-    
+
     @FXML
     private HBox loginPainelPass;
 
@@ -60,28 +62,29 @@ public class LogInPageController implements Initializable {
 
     @FXML
     private Button login;
-    
+
     @FXML
     private Label forgotPassword;
-    
+
     @FXML
     private Label welcome;
-    
+
     @FXML
     private Label signInTo;
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         username.setFocusTraversable(false);
         password.setFocusTraversable(false);
-        
-        if(PaginaPrincipalController.lingua.equals("EN")){
+
+        if (PaginaPrincipalController.lingua.equals("EN")) {
             userLabel.setText("Username");
             passLabel.setText("Password");
             login.setText("Login");
@@ -90,7 +93,7 @@ public class LogInPageController implements Initializable {
             signInTo.setText("Sign in to your account");
             username.setPromptText("entity username");
             password.setPromptText("Password");
-       }else{  
+        } else {
             userLabel.setText("Usuario");
             passLabel.setText("Senha");
             login.setText("Entrar");
@@ -101,58 +104,63 @@ public class LogInPageController implements Initializable {
             password.setPromptText("Senha");
         }
     }
-    
-        private void mostrarJanela(String caminho, String title, ActionEvent event) throws IOException {
-            ((Node) event.getSource()).getScene().getWindow().hide();
-            OctoDBApplication.getStage().close();
-            Parent root = FXMLLoader.load(getClass().getResource(caminho));
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setMaximized(true);
-            stage.setTitle(title);
-            stage.show();
+
+    private void mostrarJanela(String caminho, String title, ActionEvent event) throws IOException {
+        ((Node) event.getSource()).getScene().getWindow().hide();
+        OctoDBApplication.getStage().close();
+        Parent root = FXMLLoader.load(getClass().getResource(caminho));
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setMaximized(true);
+        stage.setTitle(title);
+        stage.show();
     }
 
-     static Entidade entidade;
+    static Entidade entidade;
 
-   //LOGIN================================================ 
+    //LOGIN================================================ 
     @FXML
     void loginEnter(ActionEvent event) throws IOException {
-        if(username.getText().isEmpty())
-            thread(loginPainelUser,userLabel);
-        else
-            if(password.getText().isEmpty())
-                thread(loginPainelPass,passLabel);
-        else
-                for(int i=0;i<Repository.entidades.size();i++){
-                    if(username.getText().equals(Repository.entidades.get(i).getUsername())&&
-                        password.getText().equals(Repository.entidades.get(i).getPassword())){
-                        
-                        EstadoLogin estadoLogin=new EstadoLogin();
-                        estadoLogin.setIdEntidade(Repository.entidades.get(i).getIdEntidade());
-                        SalvarEstadoLogin.guardarLogin(estadoLogin);
-                        
-                        if(Repository.entidades.get(i).getClass().equals(Central.class)){
-                            entidade=new Central();
-                            entidade=Repository.entidades.get(i);
-                            mostrarJanela(Path.PAGINA_CENTRAL,"", event);
-                        }else
-                            if(Repository.entidades.get(i).getClass().equals(Alojamento.class)){
-                                entidade=new Alojamento();
-                                entidade=Repository.entidades.get(i);
-                                mostrarJanela(Path.PAGINA_ALOJAMENTO,"", event);
-                            }else{
-                                entidade=new Restauracao();
-                                entidade=Repository.entidades.get(i);
-                                mostrarJanela(Path.PAGINA_RESTAURACAO,"", event);
-                            }
+        if (username.getText().isEmpty()) {
+            thread(loginPainelUser, userLabel);
+        } else if (password.getText().isEmpty()) {
+            thread(loginPainelPass, passLabel);
+        } else {
+            for (int i = 0; i < Repository.entidades.size(); i++) {
+                if (username.getText().equals(Repository.entidades.get(i).getUsername())
+                        && password.getText().equals(Repository.entidades.get(i).getPassword())) {
+
+                    EstadoLogin estadoLogin = new EstadoLogin();
+                    estadoLogin.setIdEntidade(Repository.entidades.get(i).getIdEntidade());
+                    SalvarEstadoLogin.guardarLogin(estadoLogin);
+
+                    if (Repository.entidades.get(i).getClass().equals(Central.class)) {
+                        entidade = new Central();
+                        entidade = Repository.entidades.get(i);
+                        mostrarJanela(Path.PAGINA_CENTRAL, "", event);
+                        return;
+                    } else if (Repository.entidades.get(i).getClass().equals(Alojamento.class)) {
+                        entidade = new Alojamento();
+                        entidade = Repository.entidades.get(i);
+                        mostrarJanela(Path.PAGINA_ALOJAMENTO, "", event);
+                        return;
+                    } else {
+                        entidade = new Restauracao();
+                        entidade = Repository.entidades.get(i);
+                        mostrarJanela(Path.PAGINA_RESTAURACAO, "", event);
+                        return;
                     }
                 }
+            }
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("DADOS INVALIDOS");
+            a.show();
+        }
+
     }
-    
-    
-    public  void thread(HBox box, Label label) {
+
+    public void thread(HBox box, Label label) {
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {

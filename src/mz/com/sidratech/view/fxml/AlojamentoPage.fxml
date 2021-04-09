@@ -86,7 +86,7 @@
                   <FontAwesomeIcon fill="WHITE" iconName="USER_PLUS" />
                </graphic>
             </Button>
-            <Button fx:id="button" layoutX="54.0" layoutY="254.0" maxWidth="130.0" mnemonicParsing="false" onAction="#allUser" prefHeight="30.0" text="All User" textFill="WHITE">
+            <Button fx:id="button" layoutX="54.0" layoutY="254.0" maxWidth="130.0" mnemonicParsing="false" onAction="#allUser" prefHeight="30.0" text="Employees" textFill="WHITE">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>

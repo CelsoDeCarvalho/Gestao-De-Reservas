@@ -2,6 +2,7 @@ package mz.com.sidratech.controller;
 
 import com.gluonhq.impl.charm.a.b.b.i;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormatSymbols;
@@ -61,8 +62,10 @@ import mz.com.sidratech.model.bean.Relatorio;
 import mz.com.sidratech.model.bean.Usuario;
 import mz.com.sidratech.model.dao.DaoGenerico;
 import mz.com.sidratech.octodb.OctoDBApplication;
+import mz.com.sidratech.relatorios.GerarRelatorio;
 import mz.com.sidratech.repository.Repository;
 import mz.com.sidratech.services.Path;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  * FXML Controller class
@@ -168,6 +171,8 @@ public class AlojamentoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        
         String[] months = DateFormatSymbols.getInstance(Locale.ENGLISH).getMonths();
         monthNames.addAll(Arrays.asList(months));
         xAxis.setCategories(monthNames);
@@ -182,6 +187,8 @@ public class AlojamentoController implements Initializable {
         roomDetail();
         haFuncionarios();
         mapearDados();
+        
+        
     }
 
     @FXML
@@ -413,7 +420,7 @@ public class AlojamentoController implements Initializable {
             Cliente cliente = new Cliente(name.getText(), Double.parseDouble(total.getText()), enterDa.getValue(), leftDa.getValue(), (int) combo.getSelectionModel().getSelectedItem(), (Alojamento) LogInPageController.entidade);
             Date date = new Date(System.currentTimeMillis());
             Funcionario funcionario = new Usuario();
-            Relatorio relatorio = new Relatorio(name.getText(), Double.parseDouble(total.getText()), enterDa.getValue(), leftDa.getValue(), (int) combo.getSelectionModel().getSelectedItem(), date, (Alojamento) LogInPageController.entidade);
+            Relatorio relatorio = new Relatorio(name.getText(), Double.parseDouble(total.getText()), java.sql.Date.valueOf(enterDa.getValue()),  java.sql.Date.valueOf(leftDa.getValue()), (int) combo.getSelectionModel().getSelectedItem(), (Alojamento) LogInPageController.entidade);
             name.setText("");
             combo.getSelectionModel().clearSelection();
             enterDa.getEditor().setText("");
@@ -729,8 +736,9 @@ public class AlojamentoController implements Initializable {
     }
 
     @FXML
-    void reportAction(ActionEvent event) {
-
+    void reportAction(ActionEvent event) throws JRException, FileNotFoundException  {
+        GerarRelatorio gerarRelatorio=new GerarRelatorio();
+        gerarRelatorio.getReport();
     }
 
     void updateChart() {
@@ -742,7 +750,7 @@ public class AlojamentoController implements Initializable {
 
         for (int i = 0; i < Repository.relatorios.size(); i++) {
             if (Repository.relatorios.get(i).getIdEntidade().getIdEntidade() == LerEstadoLogin.lerLogin().getIdEntidade()) {
-                int month = Repository.relatorios.get(i).getDataEntrada().getMonthValue() - 1;
+                int month = Repository.relatorios.get(i).getDataEntrada().getMonth();
                 monthCounter[month]++;
             }
         }

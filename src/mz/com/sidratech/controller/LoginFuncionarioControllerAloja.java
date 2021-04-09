@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -61,9 +62,13 @@ public class LoginFuncionarioControllerAloja implements Initializable {
                         estadoLogin.setIdUsuario(Repository.funcionarios.get(i).getIdFuncionario());
                         SalvarEstadoLogin.guardarLogin(estadoLogin);
                         mostrarJanela(Path.PAGINA_ALOJAMENTO, "", event);
+                        return;
                     }
                 }
             }
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("DADOS INVALIDOS");
+            a.show();
         }
     }
 

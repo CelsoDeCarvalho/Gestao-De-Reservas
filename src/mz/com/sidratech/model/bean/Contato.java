@@ -30,8 +30,16 @@ public class Contato implements Serializable {
     private String email;
     @JoinColumn(name = "idEntidade", referencedColumnName = "idEntidade")
     @OneToOne
-    private Entidade idEntidade;    
-
+    private Entidade idEntidade;  
+    
+    
+    /**
+     * 
+     * @param telefone 
+     * @param url
+     * @param email
+     * @param idEntidade 
+     */
     public Contato(int telefone, String url, String email, Entidade idEntidade) {
         this.telefone = telefone;
         this.url = url;

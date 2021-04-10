@@ -196,7 +196,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <TextField fx:id="name" maxWidth="250.0" prefHeight="30.0" prefWidth="300.0" promptText="guest name" VBox.vgrow="ALWAYS">
+                        <TextField fx:id="name" maxWidth="250.0" onKeyReleased="#autoComplete" prefHeight="30.0" prefWidth="300.0" promptText="guest name" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="10.0" left="40.0" right="40.0" />
                            </VBox.margin>

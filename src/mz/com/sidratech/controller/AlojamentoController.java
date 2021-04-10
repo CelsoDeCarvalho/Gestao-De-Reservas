@@ -1,7 +1,5 @@
 package mz.com.sidratech.controller;
 
-import com.gluonhq.impl.charm.a.b.b.i;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -22,7 +20,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,7 +32,6 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -66,6 +62,7 @@ import mz.com.sidratech.relatorios.GerarRelatorio;
 import mz.com.sidratech.repository.Repository;
 import mz.com.sidratech.services.Path;
 import net.sf.jasperreports.engine.JRException;
+import org.controlsfx.control.textfield.TextFields;
 
 /**
  * FXML Controller class
@@ -171,7 +168,7 @@ public class AlojamentoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         
         String[] months = DateFormatSymbols.getInstance(Locale.ENGLISH).getMonths();
         monthNames.addAll(Arrays.asList(months));
@@ -217,7 +214,8 @@ public class AlojamentoController implements Initializable {
     }
 
     @FXML
-    private void allUser(ActionEvent event) {
+    private void allUser(ActionEvent event) throws IOException {
+        mostrarJanela(Path.PAGINA_FUNCPAGE,"", false);
     }
 
     @FXML
@@ -279,6 +277,18 @@ public class AlojamentoController implements Initializable {
         new Thread(task).start();
     }
 
+    String ent;
+    String local;
+    String tipoEnt;
+    String emailEnt;
+    String clienteRec;
+    long tel;
+    int roomEnt;
+    double valor;
+    Date in;
+    Date out;
+
+    
     private void mapearDados() {
         Repository repository = new Repository();
         repository.getContactos();
@@ -287,6 +297,13 @@ public class AlojamentoController implements Initializable {
                 phone.setText("" + Repository.contatos.get(i).getTelefone());
                 email.setText(Repository.contatos.get(i).getEmail());
                 url.setText(Repository.contatos.get(i).getUrl());
+                
+                ent=Repository.entidades.get(i).getNome();
+                local=Repository.entidades.get(i).getEnderecoFisico();
+                tipoEnt=Repository.entidades.get(i).getTipo();
+                emailEnt=Repository.entidades.get(i).getContacto().getEmail();
+                tel=Repository.entidades.get(i).getContacto().getTelefone();
+                
                 if (LoginFuncionarioControllerAloja.funcionario != null) {
                     username.setText(LoginFuncionarioControllerAloja.funcionario.getUsername());
                 }
@@ -374,10 +391,7 @@ public class AlojamentoController implements Initializable {
 
     private ObservableList<Quarto> room = FXCollections.observableArrayList();
 
-    /**
-     *
-     * @param quartos
-     */
+
     public void tableRoomPopulating() {
         int total = 0, ocupados = 0, disponiveis = 0;
         Repository repository = new Repository();
@@ -403,7 +417,7 @@ public class AlojamentoController implements Initializable {
     }
 
     @FXML
-    void saveAction(ActionEvent event) {
+    void saveAction(ActionEvent event) throws JRException, FileNotFoundException {
         Repository repository = new Repository();
 
         if (name.getText().isEmpty()) {
@@ -420,6 +434,12 @@ public class AlojamentoController implements Initializable {
             Cliente cliente = new Cliente(name.getText(), Double.parseDouble(total.getText()), enterDa.getValue(), leftDa.getValue(), (int) combo.getSelectionModel().getSelectedItem(), (Alojamento) LogInPageController.entidade);
             Date date = new Date(System.currentTimeMillis());
             Funcionario funcionario = new Usuario();
+            
+            clienteRec=name.getText();
+            roomEnt=combo.getSelectionModel().getSelectedItem();
+            in=Date.from(enterDa.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+            out=Date.from(leftDa.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+            valor=Integer.parseInt(total.getText());
             Relatorio relatorio = new Relatorio(name.getText(), Double.parseDouble(total.getText()), java.sql.Date.valueOf(enterDa.getValue()),  java.sql.Date.valueOf(leftDa.getValue()), (int) combo.getSelectionModel().getSelectedItem(), (Alojamento) LogInPageController.entidade);
             name.setText("");
             combo.getSelectionModel().clearSelection();
@@ -445,6 +465,9 @@ public class AlojamentoController implements Initializable {
             repository.getClientes();
             tableGuestPopulating();
             updateChart();
+            
+            GerarRelatorio gerarRelatorio=new GerarRelatorio();
+            gerarRelatorio.getRecibo(username.getText(),ent,local,tipoEnt,emailEnt,clienteRec,clienteRec,tel,roomEnt,valor,valor,in,out);
         }
     }
 
@@ -687,7 +710,7 @@ public class AlojamentoController implements Initializable {
 
         if (row >= 0) {
 
-            Cliente cliente = new Cliente();
+            Cliente cliente = new Cliente();            
             cliente = tabelaClientes.getItems().get(row);
 
             LocalDate antiga = cliente.getDataSaida();
@@ -738,7 +761,7 @@ public class AlojamentoController implements Initializable {
     @FXML
     void reportAction(ActionEvent event) throws JRException, FileNotFoundException  {
         GerarRelatorio gerarRelatorio=new GerarRelatorio();
-        gerarRelatorio.getReport();
+        gerarRelatorio.getReport(username.getText());
     }
 
     void updateChart() {
@@ -763,6 +786,23 @@ public class AlojamentoController implements Initializable {
 
         barChart.getData().add(series);
 
+    }
+    
+        @FXML
+    void autoComplete(KeyEvent event) {
+        ArrayList<String> names=new ArrayList();
+        
+        Repository repository=new Repository();
+        repository.getRelatorios();
+        
+        for(int i=0;i<Repository.relatorios.size();i++){
+                if(names.contains(Repository.relatorios.get(i).getNome())){
+                    
+                }else
+            names.add(Repository.relatorios.get(i).getNome());
+        }
+        
+        TextFields.bindAutoCompletion(name,names);
     }
 
 }

@@ -45,7 +45,7 @@ public class GerarRelatorio {
         repository.getRelatorios();
 
         HashMap param = new HashMap();
-        param.put("usuario", "Celso");
+        param.put("usuario", usuario);
         param.put("nomeEntidade", nomeEnt);
         param.put("localizacao", local);
         param.put("email", email);
@@ -71,9 +71,7 @@ public class GerarRelatorio {
     }
 
     public void getFatura(String nome, Double total, String local) throws JRException, FileNotFoundException {
-        Repository repository = new Repository();
-        repository.getRelatorios();
-
+        
         HashMap param = new HashMap();
         param.put("nome", nome);
         param.put("local", local);
@@ -84,7 +82,6 @@ public class GerarRelatorio {
 
         JRDataSource dataSource = new JRBeanCollectionDataSource(PratoController.pratos);
 
-        //JasperReport report = JasperCompileManager.compileReport(new File("").getAbsolutePath() + "/src/mz/com/sidratech/relatorios/Relatorio.jrxml");
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, param, dataSource);
 
         new JasperViewerFX().viewReport("Fatura", jasperPrint);

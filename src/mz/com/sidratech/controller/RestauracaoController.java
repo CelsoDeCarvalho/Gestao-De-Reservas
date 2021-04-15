@@ -1,5 +1,6 @@
 package mz.com.sidratech.controller;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -84,6 +85,8 @@ public class RestauracaoController implements Initializable {
     private TextField mesas;
     @FXML
     private TextField cadeiras;
+    @FXML
+    private FontAwesomeIcon carrinho;
     List<Prato> novoPrato = new ArrayList<>();
 
     /**
@@ -317,6 +320,7 @@ public class RestauracaoController implements Initializable {
         }
 
         if (LerEstadoLogin.lerLogin().getIdUsuario() > 0) {
+            
             for (int i = 0; i < Repository.funcionarios.size(); i++) {
                 if (LerEstadoLogin.lerLogin().getIdUsuario() == Repository.funcionarios.get(i).getIdFuncionario()) {
                     username.setText(Repository.funcionarios.get(i).getUsername());
@@ -329,6 +333,9 @@ public class RestauracaoController implements Initializable {
                     }
                 }
             }
+        }else{
+            pratosGrid.setDisable(true);
+            
         }
     }
 

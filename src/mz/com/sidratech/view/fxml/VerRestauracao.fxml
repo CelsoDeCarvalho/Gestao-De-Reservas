@@ -1,11 +1,242 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.com.sidratech.controller.VerRestauracaoController">
-    
-</AnchorPane>
+<BorderPane prefHeight="500.0" prefWidth="850.0" stylesheets="@../css/VerAlojaStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.com.sidratech.controller.VerRestauracaoController">
+   <top>
+      <HBox alignment="CENTER" prefHeight="70.0" prefWidth="700.0" style="-fx-background-color: #f39b1e;" BorderPane.alignment="CENTER">
+         <children>
+            <FontAwesomeIcon fill="WHITE" iconName="CUTLERY" size="1.5em">
+               <HBox.margin>
+                  <Insets left="100.0" />
+               </HBox.margin>
+            </FontAwesomeIcon>
+            <Label fx:id="nomeEnt" text="Nome da entidade" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </HBox.margin>
+            </Label>
+            <FontAwesomeIcon fill="WHITE" iconName="CUTLERY" size="1.5em">
+               <HBox.margin>
+                  <Insets right="50.0" />
+               </HBox.margin>
+            </FontAwesomeIcon>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox alignment="BOTTOM_CENTER" prefHeight="430.0" prefWidth="505.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;">
+                     <children>
+                        <Label text="Menu">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="422.0" prefWidth="485.0">
+                     <content>
+                        <TableView fx:id="tabela" prefHeight="546.0" prefWidth="493.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;">
+                          <columns>
+                            <TableColumn fx:id="camas" prefWidth="289.0" text="NOME REFEICAO" />
+                            <TableColumn fx:id="descricao" prefWidth="192.0" text="PRECO" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <center>
+      <VBox prefHeight="430.0" prefWidth="298.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+         <children>
+            <HBox alignment="CENTER" prefHeight="31.0" prefWidth="275.0" style="-fx-background-radius: 5; -fx-border-radius: 5;">
+               <children>
+                  <Label text="DADOS DA ENTIDADE">
+                     <font>
+                        <Font name="System Bold Italic" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Label alignment="CENTER" text="Designacao" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="7.0" left="20.0" top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="nomeEnt1" text="Label">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="30.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Localizacao">
+               <VBox.margin>
+                  <Insets bottom="7.0" left="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="local" text="Label">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="30.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Contato">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="7.0" left="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="telefone" text="Label">
+               <VBox.margin>
+                  <Insets bottom="3.0" left="30.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="email" layoutX="10.0" layoutY="182.0" text="Label">
+               <VBox.margin>
+                  <Insets bottom="3.0" left="30.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="url" layoutX="10.0" layoutY="198.0" text="Label">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="30.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Funcionarios">
+               <VBox.margin>
+                  <Insets bottom="7.0" left="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+            </Label>
+            <HBox>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="30.0" right="30.0" />
+               </VBox.margin>
+               <children>
+                  <Label text="Homens" />
+                  <HBox nodeOrientation="RIGHT_TO_LEFT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label fx:id="tMulheres" text="Label" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="30.0" right="30.0" />
+               </VBox.margin>
+               <children>
+                  <Label text="Mulheres">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <HBox nodeOrientation="RIGHT_TO_LEFT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label fx:id="tHomens" text="Label" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox>
+               <VBox.margin>
+                  <Insets left="30.0" right="30.0" />
+               </VBox.margin>
+               <children>
+                  <Label text="Total">
+                     <HBox.margin>
+                        <Insets bottom="10.0" />
+                     </HBox.margin></Label>
+                  <HBox nodeOrientation="RIGHT_TO_LEFT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label fx:id="total" text="Label" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox>
+               <VBox.margin>
+                  <Insets left="20.0" right="30.0" />
+               </VBox.margin>
+               <children>
+                  <Label text="Mesas e Cadeiras">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="7.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT">
+               <children>
+                  <HBox HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Mesas">
+                           <HBox.margin>
+                              <Insets bottom="5.0" />
+                           </HBox.margin></Label>
+                     </children>
+                  </HBox>
+                  <Label fx:id="totalMesas" nodeOrientation="RIGHT_TO_LEFT" text="Label" />
+               </children>
+               <VBox.margin>
+                  <Insets left="30.0" right="30.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox>
+               <VBox.margin>
+                  <Insets left="30.0" right="30.0" />
+               </VBox.margin>
+               <children>
+                  <Label text="Cadeiras" />
+                  <HBox nodeOrientation="RIGHT_TO_LEFT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label fx:id="totalCadeiras" nodeOrientation="RIGHT_TO_LEFT" text="Label" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

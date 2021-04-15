@@ -27,15 +27,17 @@ public class Quarto implements Serializable {
     private int idQuarto;
     private int numero;
     private int quantidadeCamas;
+    private String descricao;
     private String ocupado;
     @JoinColumn(name = "idAlojamento", referencedColumnName = "idEntidade")
     @ManyToOne
     private Alojamento idAlojamento;
 
-    public Quarto(int numero, int quantidadeCamas, Alojamento idAlojamento) {
+    public Quarto(int numero, int quantidadeCamas, Alojamento idAlojamento,String descricao) {
         this.numero = numero;
         this.quantidadeCamas = quantidadeCamas;
         this.idAlojamento = idAlojamento;
+        this.descricao=descricao;
         ocupado="Disponivel";
     }
     

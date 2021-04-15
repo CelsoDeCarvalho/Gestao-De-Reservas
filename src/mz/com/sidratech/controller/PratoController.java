@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -43,6 +45,8 @@ public class PratoController implements Initializable {
     private VBox vBox;
     @FXML
     private Button addCart;
+    
+    public static List<Prato>  pratos=new ArrayList<>();
 
     /**
      * Initializes the controller class.
@@ -100,9 +104,14 @@ public class PratoController implements Initializable {
         }
     }
     
+    static double total=0;
         @FXML
     void addCartAction(ActionEvent event) {
-
-    }
+            Prato prato=new Prato();
+            prato.setNome(nome.getText());
+            prato.setPreco(Double.parseDouble(preco.getText()));
+            total=total+prato.getPreco();
+            pratos.add(prato);
+       }
 
 }

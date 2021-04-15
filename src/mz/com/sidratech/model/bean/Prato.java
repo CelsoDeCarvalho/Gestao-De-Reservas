@@ -1,14 +1,18 @@
 package mz.com.sidratech.model.bean;
 
+import java.util.List;
+import javafx.scene.control.Button;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import mz.com.sidratech.repository.Repository;
 
 /**
  *
@@ -30,6 +34,8 @@ public class Prato {
     @JoinColumn(name = "idRestauracao", referencedColumnName = "idEntidade")
     @ManyToOne
     private Restauracao idRestauracao;
+    @Transient
+    private Button button;
 
     public Prato(String nome, String caminhoFoto, double preco, String tipo) {
         this.nome = nome;
@@ -37,4 +43,10 @@ public class Prato {
         this.preco = preco;
         this.tipo = tipo;
     }
+
+    @Override
+    public String toString() {
+        return "Prato{" + "idPrato=" + idPrato + ", nome=" + nome + ", caminhoFoto=" + caminhoFoto + ", preco=" + preco + ", tipo=" + tipo + ", idRestauracao=" + idRestauracao + '}';
+    }
+    
 }

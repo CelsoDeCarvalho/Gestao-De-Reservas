@@ -38,6 +38,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
@@ -166,6 +167,8 @@ public class AlojamentoController implements Initializable {
     @FXML
     private NumberAxis yAxis;
     private ObservableList<String> monthNames = FXCollections.observableArrayList();
+    @FXML
+    private TextArea descricao;
     /**
      * 
      * @param url
@@ -371,9 +374,10 @@ public class AlojamentoController implements Initializable {
         } else {
             combo.getItems().clear();
             tabelaQuartos.getItems().clear();
-            Quarto quarto = new Quarto(Integer.parseInt(roomNuField.getText()), Integer.parseInt(bedNuField.getText()), (Alojamento) LogInPageController.entidade);
+            Quarto quarto = new Quarto(Integer.parseInt(roomNuField.getText()), Integer.parseInt(bedNuField.getText()), (Alojamento) LogInPageController.entidade,descricao.getText());
             roomNuField.setText("");
             bedNuField.setText("");
+            descricao.setText("");
             DaoGenerico daoGenerico = new DaoGenerico();
             daoGenerico.create(quarto);
             tableRoomPopulating();

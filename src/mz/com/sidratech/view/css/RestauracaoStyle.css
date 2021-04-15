@@ -41,3 +41,7 @@
 #addEmployee{
     -fx-background-color:  #ffffff;
 }
+
+#carrinho:hover{
+    -fx-cursor: hand;
+}

@@ -92,6 +92,14 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Label>
+                        <HBox alignment="CENTER_LEFT" nodeOrientation="RIGHT_TO_LEFT" HBox.hgrow="ALWAYS">
+                           <children>
+                              <FontAwesomeIcon fx:id="carrinho" iconName="SHOPPING_CART" onMouseClicked="#verCarrinho" size="1.3em" />
+                           </children>
+                           <padding>
+                              <Insets left="9.0" />
+                           </padding>
+                        </HBox>
                      </children>
                      <padding>
                         <Insets left="20.0" />

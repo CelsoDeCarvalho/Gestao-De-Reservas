@@ -14,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -36,7 +35,6 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import mz.com.sidratech.controller.file.LerEstadoLogin;
 import mz.com.sidratech.controller.file.SalvarEstadoLogin;
-import mz.com.sidratech.model.bean.Central;
 import mz.com.sidratech.model.bean.EstadoLogin;
 import mz.com.sidratech.model.bean.Prato;
 import mz.com.sidratech.model.bean.Restauracao;
@@ -52,6 +50,7 @@ import mz.com.sidratech.services.Path;
  */
 public class RestauracaoController implements Initializable {
 
+    
     @FXML
     private Label username;
     @FXML
@@ -379,6 +378,11 @@ public class RestauracaoController implements Initializable {
 
     public void setPratosGrid(GridPane pratosGrid) {
         this.pratosGrid = pratosGrid;
+    }
+    
+        @FXML
+    void verCarrinho(MouseEvent event) throws IOException {
+            mostrarJanela(Path.PAGINA_CARRINHO, "", false);
     }
 
 }

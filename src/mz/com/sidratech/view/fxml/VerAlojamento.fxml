@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane prefHeight="500.0" prefWidth="850.0" stylesheets="@../css/VerAlojaStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.com.sidratech.controller.VerAlojamentoController">
    <top>
       <HBox alignment="CENTER" prefHeight="70.0" prefWidth="700.0" style="-fx-background-color: #3b59ac;" BorderPane.alignment="CENTER">
@@ -169,13 +168,44 @@
                   <Insets left="30.0" right="30.0" />
                </VBox.margin>
                <children>
-                  <Label text="Total" />
+                  <Label text="Total">
+                     <HBox.margin>
+                        <Insets bottom="10.0" />
+                     </HBox.margin></Label>
                   <HBox nodeOrientation="RIGHT_TO_LEFT" HBox.hgrow="ALWAYS">
                      <children>
                         <Label fx:id="total" text="Label" />
                      </children>
                   </HBox>
                </children>
+            </HBox>
+            <HBox>
+               <VBox.margin>
+                  <Insets left="20.0" right="30.0" />
+               </VBox.margin>
+               <children>
+                  <Label text="Quartos">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="7.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT">
+               <children>
+                  <HBox HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Total" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="totalCamas" nodeOrientation="RIGHT_TO_LEFT" text="Label" />
+               </children>
+               <VBox.margin>
+                  <Insets left="30.0" right="30.0" />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>

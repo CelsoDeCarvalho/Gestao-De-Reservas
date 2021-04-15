@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import mz.com.sidratech.controller.file.LerEstadoLogin;
 import mz.com.sidratech.model.bean.Entidade;
 import mz.com.sidratech.model.bean.Quarto;
 import mz.com.sidratech.repository.Repository;
@@ -57,6 +56,8 @@ public class VerAlojamentoController implements Initializable {
     @FXML
     private Label total;
     private static Entidade entidade;
+    @FXML
+    private Label totalCamas;
 
     /**
      * Initializes the controller class.
@@ -82,7 +83,7 @@ public class VerAlojamentoController implements Initializable {
         int subTotalM = 0;
 
         for (int i = 0; i < Repository.funcionarios.size(); i++) {
-            if (Repository.funcionarios.get(i).getIdEntidade().getIdEntidade()== entidade.getIdEntidade()) {
+            if (Repository.funcionarios.get(i).getIdEntidade().getIdEntidade() == entidade.getIdEntidade()) {
                 subTotal++;
                 if (Repository.funcionarios.get(i).getSexo() == 'M') {
                     subTotalM++;
@@ -95,17 +96,23 @@ public class VerAlojamentoController implements Initializable {
         total.setText("" + subTotal);
         tHomens.setText("" + subTotalH);
         tMulheres.setText("" + subTotalM);
-
+        
+        int quartos = 0;
         ObservableList<Quarto> rooms = FXCollections.observableArrayList();
 
-
-            for (int i = 0; i < Repository.quartos.size(); i++) {
-                if (Repository.quartos.get(i).getIdAlojamento().getIdEntidade() == entidade.getIdEntidade()) {
+        for (int i = 0; i < Repository.quartos.size(); i++) {
+            if (Repository.quartos.get(i).getIdAlojamento().getIdEntidade() == entidade.getIdEntidade()) {
+                quartos++;
+                if (Repository.quartos.get(i).getOcupado().endsWith("Disponivel")) {
                     rooms.add(Repository.quartos.get(i));
                 }
             }
+        }
+        
+        totalCamas.setText(""+quartos);
 
         camas.setCellValueFactory(new PropertyValueFactory<>("quantidadeCamas"));
+        descricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
 
         tabela.setItems(rooms);
     }

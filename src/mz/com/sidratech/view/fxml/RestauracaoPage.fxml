@@ -228,11 +228,6 @@
                         <FontAwesomeIcon iconName="USER_PLUS" />
                      </graphic>
                   </Button>
-                  <Button fx:id="report" contentDisplay="TOP" mnemonicParsing="false" onAction="#reportActio" prefHeight="80.0" prefWidth="120.0" style="-fx-background-radius: 5; -fx-border-radius: 5;" text="Report">
-                     <graphic>
-                        <FontAwesomeIcon iconName="PRINT" />
-                     </graphic>
-                  </Button>
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

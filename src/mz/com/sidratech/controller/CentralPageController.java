@@ -111,7 +111,7 @@ public class CentralPageController implements Initializable {
         table.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("accoes"));
         table.setItems(list);
     }
-    
+
     public List<Entidade> addAction(List<Entidade> entidades) {
 
         entidades.forEach((entidade) -> {
@@ -165,20 +165,20 @@ public class CentralPageController implements Initializable {
                     }
                 }
             });
-            
+
             ver.setOnAction((event) -> {
-                if(entidade.getClass()==Alojamento.class){
+                if (entidade.getClass() == Alojamento.class) {
                     VerAlojamentoController.setEntidade(entidade);
                     try {
-                        mostrarJanela(Path.PAGINA_VERALOJA, "",true);
+                        mostrarJanela(Path.PAGINA_VERALOJA, "", true);
                     } catch (IOException ex) {
-                        Logger.getLogger(CentralPageController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }else{
+                } else 
+                if(entidade.getClass() == Restauracao.class){
+                    VerRestauracaoController.setEntidade(entidade);
                     try {
-                        mostrarJanela(Path.PAGINA_VERRES,"", true);
+                        mostrarJanela(Path.PAGINA_VERRES, "", true);
                     } catch (IOException ex) {
-                        Logger.getLogger(CentralPageController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             });
@@ -209,7 +209,7 @@ public class CentralPageController implements Initializable {
         mostrarJanela(Path.PAGINA_REGFUNC, "", true);
     }
 
-        private void mostrarJanela1(String caminho, String title, boolean resizable) throws IOException {
+    private void mostrarJanela1(String caminho, String title, boolean resizable) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(caminho));
         Parent parent = loader.load();
         Stage stage = new Stage();
@@ -222,7 +222,7 @@ public class CentralPageController implements Initializable {
         stage.setResizable(resizable);
         stage.show();
     }
-    
+
     private void mostrarJanela(String caminho, String title, boolean resizable) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(caminho));
         Parent parent = loader.load();
@@ -252,7 +252,6 @@ public class CentralPageController implements Initializable {
     void exitAction(ActionEvent event) throws IOException {
         mostrarJanela1(Path.PAGINA_INICIAL, "", event);
     }
-
 
     private void mapearDados() {
         Central c = new Central();
@@ -351,11 +350,11 @@ public class CentralPageController implements Initializable {
                 entidades = daoGenerico.searchEntity(search.getText());
 
                 for (int i = 0; i < entidades.size(); i++) {
-                    entidadesFiltradas.add(addAction(entidades).get(i));
+                        entidadesFiltradas.add(addAction(entidades).get(i));
                 }
 
                 table.setItems(entidadesFiltradas);
-            }else{
+            } else {
                 //PESQUISA POR CLIENTE
                 listar();
             }

@@ -147,6 +147,7 @@ public class RestauracaoController implements Initializable {
                         username.setText("USERNAME");
                         logout.setDisable(true);
                         login.setDisable(false);
+                        pratosGrid.setDisable((true));
                     });
                 }
             }

@@ -8,7 +8,6 @@ import mz.com.sidratech.connection.ConnectionFactory;
 import mz.com.sidratech.controller.file.LerEstadoLogin;
 import mz.com.sidratech.model.bean.Administrador;
 import mz.com.sidratech.model.bean.Alojamento;
-import mz.com.sidratech.model.bean.Central;
 import mz.com.sidratech.model.bean.Cliente;
 import mz.com.sidratech.model.bean.Entidade;
 import mz.com.sidratech.model.bean.Faxineiro;
@@ -24,11 +23,10 @@ import mz.com.sidratech.services.CrudRules;
 public class DaoGenerico implements CrudRules {
 
     //METODO PARA GRAVAR NO BANCO DE DADOS======================================
-
     /**
      *
-     * @param object
-     * recebe o ojecto a ser gravado no banco de dados e o persiste
+     * @param object recebe o ojecto a ser gravado no banco de dados e o
+     * persiste
      */
     @Override
     public void create(Object object) {
@@ -46,13 +44,11 @@ public class DaoGenerico implements CrudRules {
 
     //METODO PARA LER TODOS SO DADOS DO BANCO===================================
     /**
-     * 
+     *
      * @param tipoObjeto
-     * @return 
-     * Recebe uma string com o nome do tipo de objecto EX: 
-     * readAll("Aluno")
-     * faz a procura no banco de dados um objeto do tipo a Aluno e retorna a lista 
-     * correspondente
+     * @return Recebe uma string com o nome do tipo de objecto EX:
+     * readAll("Aluno") faz a procura no banco de dados um objeto do tipo a
+     * Aluno e retorna a lista correspondente
      */
     @Override
     public List<Object> readAll(String tipoObjeto) {
@@ -71,10 +67,10 @@ public class DaoGenerico implements CrudRules {
 
     //METODO PARA PROCURAR DADO POR ID==========================================
     /**
-     * 
+     *
      * @param id recebe o id do objeto a ser procurado
      * @param object recebe o tipo de objeto a ser procurado
-     * @return  objecto procurado com o id e o tipo de objeto acima passados
+     * @return objecto procurado com o id e o tipo de objeto acima passados
      */
     @Override
     public Object readById(int id, Object object) {
@@ -94,7 +90,7 @@ public class DaoGenerico implements CrudRules {
 
     //METODO PARA ACTUALIZAR DADOS NO BANCO=====================================
     /**
-     * 
+     *
      * @param object O objeto a ser actualizado
      */
     @Override
@@ -114,10 +110,9 @@ public class DaoGenerico implements CrudRules {
     }
 
     //METODO PARA APAGAR DADOS DO BANCO=========================================
-
     /**
      *
-     * @param id rececebe o id do objeto a ser apagado 
+     * @param id rececebe o id do objeto a ser apagado
      * @param object o objeto a ser apagado
      */
     @Override
@@ -139,9 +134,10 @@ public class DaoGenerico implements CrudRules {
     }
 
     /**
-     * 
-     * @param nome faz procura dinamica no banco do objeto cliente atraves do atributo nome
-     * @return  retona a lista encontrada dos objetos que contem esse nome
+     *
+     * @param nome faz procura dinamica no banco do objeto cliente atraves do
+     * atributo nome
+     * @return retona a lista encontrada dos objetos que contem esse nome
      */
     public List<Cliente> searchGuest(String nome) {
         DaoGenerico daoGenerico = new DaoGenerico();
@@ -149,7 +145,7 @@ public class DaoGenerico implements CrudRules {
         List<Object[]> objects = new ArrayList();
         List<Cliente> clientes = new ArrayList();
 
-        objects = entityManager.createNativeQuery("SELECT * FROM cliente WHERE nome LIKE '%" + nome + "%'").getResultList();
+        objects = entityManager.createNativeQuery("SELECT * FROM cliente WHERE (nome LIKE '%" + nome + "%')OR (dataSaida LIKE '%" + nome + "%') OR (dataEntrada LIKE '%" + nome + "%') OR (numeroQuarto LIKE '%" + nome + "%')").getResultList();
         Cliente cliente;
         Alojamento alojamento;
         Date date;
@@ -171,10 +167,11 @@ public class DaoGenerico implements CrudRules {
         return clientes;
     }
 
-        /**
-     * 
-     * @param nome faz procura dinamica no banco do objeto Employee atraves do atributo nome
-     * @return  retona a lista encontrada dos objetos que contem esse nome
+    /**
+     *
+     * @param nome faz procura dinamica no banco do objeto Employee atraves do
+     * atributo nome
+     * @return retona a lista encontrada dos objetos que contem esse nome
      */
     public List<Funcionario> searchEmployee(String nome) {
         DaoGenerico daoGenerico = new DaoGenerico();
@@ -211,10 +208,11 @@ public class DaoGenerico implements CrudRules {
         return funcionarios;
     }
 
-        /**
-     * 
-     * @param nome faz procura dinamica no banco do objeto Entidade atraves do atributo nome
-     * @return  retona a lista encontrada dos objetos que contem esse nome
+    /**
+     *
+     * @param nome faz procura dinamica no banco do objeto Entidade atraves do
+     * atributo nome
+     * @return retona a lista encontrada dos objetos que contem esse nome
      */
     public List<Entidade> searchEntity(String nome) {
         EntityManager entityManager = ConnectionFactory.getConnection();
@@ -222,27 +220,39 @@ public class DaoGenerico implements CrudRules {
         List<Entidade> entidades = new ArrayList();
 
         objects = entityManager.createNativeQuery("SELECT * FROM entidade WHERE (nome LIKE '%" + nome + "%') OR (idEntidade LIKE '%" + nome + "%')OR (enderecoFisico LIKE '%" + nome + "%')OR (tipo LIKE '%" + nome + "%')OR (classificacao LIKE '%" + nome + "%')").getResultList();
-        Entidade entidade;
+        Entidade entidade = null;
 
         for (int i = 0; i < objects.size(); i++) {
-            if (objects.get(i)[5].equals("Alojamento")) {
-                entidade = new Alojamento();
-            } else if (objects.get(i)[5].equals("Restauracao")) {
-                entidade = new Restauracao();
+            String tipo = (String) objects.get(i)[5];
+            String classi=(String) objects.get(i)[1];
+
+            if (tipo.equals("") || tipo.isEmpty() || tipo == null) {
             } else {
-               entidade = new Central();
+                if (classi==null||classi.equals("")|classi.isEmpty()) {
+                    entidade = new Restauracao();
+
+                    entidade.setIdEntidade((int) objects.get(i)[0]);
+                    entidade.setClassificacao((String) objects.get(i)[1]);
+                    entidade.setEnderecoFisico((String) objects.get(i)[2]);
+                    entidade.setNome((String) objects.get(i)[3]);
+                    entidade.setTipo((String) objects.get(i)[5]);
+                    entidade.setPassword((String) objects.get(i)[4]);
+                    entidade.setUsername((String) objects.get(i)[6]);
+                    entidades.add(entidade);
+                } else {
+                    entidade = new Alojamento();
+                    entidade.setIdEntidade((int) objects.get(i)[0]);
+                    entidade.setClassificacao((String) objects.get(i)[1]);
+                    entidade.setEnderecoFisico((String) objects.get(i)[2]);
+                    entidade.setNome((String) objects.get(i)[3]);
+                    entidade.setTipo((String) objects.get(i)[5]);
+                    entidade.setPassword((String) objects.get(i)[4]);
+                    entidade.setUsername((String) objects.get(i)[6]);
+                    entidades.add(entidade);
+                }
+
             }
-            
-            entidade.setIdEntidade((int) objects.get(i)[0]);
-            entidade.setClassificacao((String) objects.get(i)[1]);
-            entidade.setEnderecoFisico((String) objects.get(i)[2]);
-            entidade.setNome((String) objects.get(i)[3]);
-            entidade.setTipo((String) objects.get(i)[5]);
-            entidade.setPassword((String) objects.get(i)[4]);
-            entidade.setUsername((String) objects.get(i)[6]);
-            
-            if(!objects.get(i)[5].equals("")||objects.get(i)[5]==null)
-            entidades.add(entidade);
+
         }
         return entidades;
     }

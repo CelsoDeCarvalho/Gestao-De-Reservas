@@ -166,6 +166,7 @@ public class AlojamentoController implements Initializable {
     private CategoryAxis xAxis;
     @FXML
     private NumberAxis yAxis;
+    //ARRAY QUE VAI PEGAR OS NOMES DOS MESES
     private ObservableList<String> monthNames = FXCollections.observableArrayList();
     @FXML
     private TextArea descricao;
@@ -180,8 +181,10 @@ public class AlojamentoController implements Initializable {
         
         String[] months = DateFormatSymbols.getInstance(Locale.ENGLISH).getMonths();
         monthNames.addAll(Arrays.asList(months));
+        //PASSANDO OS MESES PARA O EIXO X
         xAxis.setCategories(monthNames);
-
+        
+        //METODO QUE FAZ ALTERCAO SEMPRE QUE HA UM CLIENTE NOVO
         updateChart();
 
         total.setText("0");
@@ -760,6 +763,7 @@ public class AlojamentoController implements Initializable {
                 cancelAction(event);
                 tabelaClientes.getItems().clear();
                 tableGuestPopulating();
+                deadline();
             } else {
                 thread(leftDa.getEditor(), leftLabel);
             }
@@ -795,10 +799,12 @@ public class AlojamentoController implements Initializable {
     }
 
     void updateChart() {
+        //DOU UM CLEAR ANTES DE FAZER O UPDATE, POIS ELE DUBLICA OS DADOS
         barChart.getData().clear();
         Repository repository = new Repository();
         repository.getRelatorios();
 
+        
         int[] monthCounter = new int[12];
 
         for (int i = 0; i < Repository.relatorios.size(); i++) {

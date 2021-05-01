@@ -1,0 +1,17 @@
+#vBox{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
+#remove{
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #c24b3a;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5px;
+}
+
+#remove:hover{
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #ab4133;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5px;
+}

@@ -39,19 +39,23 @@ public abstract class Entidade implements Serializable{
     private String enderecoFisico;
     private String username;
     private String password;
-    @OneToOne(mappedBy = "idEntidade", cascade = CascadeType.PERSIST)
+    private String classificacao;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "idEntidade")
     private Contato contacto;
-    @OneToMany(mappedBy = "idEntidade")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEntidade")
     private List<Funcionario> funcionarios;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEntidade")
+    private List<Relatorio> relatorios;
     @Transient
     private ButtonBar accoes;
 
-    public Entidade(String nome, String enderecoFisico, String username, String password,String tipo) {
+    public Entidade(String nome, String enderecoFisico, String username, String password,String tipo,String classificacao) {
         this.nome = nome;
         this.enderecoFisico = enderecoFisico;
         this.username = username;
         this.password = password;
         this.tipo=tipo;
+        this.classificacao=classificacao;
     }
 
     public Entidade(ButtonBar accoes) {

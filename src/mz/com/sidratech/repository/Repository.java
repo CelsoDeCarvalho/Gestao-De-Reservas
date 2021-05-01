@@ -6,6 +6,7 @@ import mz.com.sidratech.model.bean.Cliente;
 import mz.com.sidratech.model.bean.Contato;
 import mz.com.sidratech.model.bean.Entidade;
 import mz.com.sidratech.model.bean.Funcionario;
+import mz.com.sidratech.model.bean.Prato;
 import mz.com.sidratech.model.bean.Quarto;
 import mz.com.sidratech.model.bean.Relatorio;
 import mz.com.sidratech.model.dao.DaoGenerico;
@@ -22,6 +23,7 @@ public class Repository {
     public static ArrayList<Quarto> quartos = null;
     public static ArrayList<Cliente> clientes = null;
     public static ArrayList<Relatorio> relatorios = null;
+    public static ArrayList<Prato> pratos = null;
 
     DaoGenerico daoGenerico;
 
@@ -54,11 +56,17 @@ public class Repository {
         List<Object> objects = daoGenerico.readAll("Cliente");
         clientes = (ArrayList<Cliente>) (Object) objects;
     }
-    
-        public void getRelatorios() {
+
+    public void getRelatorios() {
         daoGenerico = new DaoGenerico();
         List<Object> objects = daoGenerico.readAll("Relatorio");
         relatorios = (ArrayList<Relatorio>) (Object) objects;
+    }
+
+    public void getPratos(){
+        daoGenerico = new DaoGenerico();
+        List<Object> objects = daoGenerico.readAll("Prato");
+        pratos = (ArrayList<Prato>) (Object) objects;
     }
 
 }

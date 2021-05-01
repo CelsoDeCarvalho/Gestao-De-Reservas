@@ -63,6 +63,7 @@ public class LoginFuncionarioController implements Initializable {
                         estadoLogin.setIdUsuario(Repository.funcionarios.get(i).getIdFuncionario());
                         SalvarEstadoLogin.guardarLogin(estadoLogin);
                         mostrarJanela(Path.PAGINA_CENTRAL, "", event);
+                        return;
                     }
                 }
             }

@@ -42,12 +42,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="280.0" style="-fx-background-color: white; -fx-border-color: #d9d9d9; -fx-background-radius: 30; -fx-border-radius: 30;" VBox.vgrow="ALWAYS">
                      <children>
-                        <TextField fx:id="search" alignment="CENTER" promptText="Search" style="-fx-background-color: white; -fx-background-radius: 30; -fx-border-radius: 30;" HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 30; -fx-border-radius: 30;" textFill="WHITE" HBox.hgrow="ALWAYS">
-                           <graphic>
-                              <FontAwesomeIcon fill="#d9d9d9" iconName="SEARCH" />
-                           </graphic>
-                        </Button>
+                        <TextField fx:id="search" alignment="CENTER" onKeyReleased="#searchAction" promptText="Search" style="-fx-background-color: white; -fx-background-radius: 30; -fx-border-radius: 30;" HBox.hgrow="ALWAYS" />
                      </children>
                      <opaqueInsets>
                         <Insets />
@@ -56,13 +51,13 @@
                         <Insets bottom="9.0" />
                      </VBox.margin>
                   </HBox>
-                  <ToggleButtonGroup nodeOrientation="RIGHT_TO_LEFT">
+                  <ToggleButtonGroup fx:id="radioButton" nodeOrientation="RIGHT_TO_LEFT">
                      <toggles>
-                        <RadioButton mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" text="Guest">
+                        <RadioButton fx:id="findGuest" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" text="Guest">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font></RadioButton>
-                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" text="Entity">
+                        <RadioButton fx:id="findEnt" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" text="Entity">
                            <font>
                               <Font name="System Bold Italic" size="13.0" />
                            </font></RadioButton>
@@ -72,7 +67,7 @@
             </VBox>
             <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
                <content>
-                  <TableView fx:id="table" prefHeight="436.0" prefWidth="740.0" style="-fx-border-radius: 30;">
+                  <TableView fx:id="table" prefHeight="361.0" prefWidth="707.0" style="-fx-border-radius: 30;">
                     <columns>
                       <TableColumn fx:id="tipoColumn" prefWidth="75.0" text="CATEGORY" />
                       <TableColumn fx:id="nomeColumn" prefWidth="107.0" text="DESIGNATION" />
@@ -141,12 +136,12 @@
                   <FontAwesomeIcon fill="WHITE" iconName="USER_PLUS" size="1.5em" />
                </graphic>
             </Button>
-            <Button fx:id="button" alignment="CENTER" layoutX="69.0" layoutY="202.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="DashBoard" textFill="WHITE">
+            <Button fx:id="button" alignment="CENTER" layoutX="69.0" layoutY="202.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Report" textFill="WHITE">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" iconName="DASHBOARD" size="1.5em" />
                </graphic>
             </Button>
-            <Button fx:id="button" alignment="CENTER" layoutX="27.0" layoutY="352.0" mnemonicParsing="false" onAction="#closeSessionAction" prefHeight="30.0" prefWidth="180.0" text="All Users" textFill="WHITE">
+            <Button fx:id="button" alignment="CENTER" layoutX="27.0" layoutY="352.0" mnemonicParsing="false" onAction="#allUserAction" prefHeight="30.0" prefWidth="180.0" text="All Users" textFill="WHITE">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" iconName="USERS" size="1.5em" />
                </graphic>

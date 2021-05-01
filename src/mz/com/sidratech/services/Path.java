@@ -20,4 +20,5 @@ public interface Path {
     public final String PAGINA_REGFUNCALOJA= "/mz/com/sidratech/view/fxml/SigUpFuncionarioPageAloja.fxml";
     public final String PAGINA_CENTRALCREATOR= "/mz/com/sidratech/view/fxml/CentralCreator.fxml";
     public final String PAGINA_FUNCPAGE= "/mz/com/sidratech/view/fxml/FuncionariosPage.fxml";
+    public final String PAGINA_PRATOS= "/mz/com/sidratech/view/fxml/PratoPage.fxml";
 }

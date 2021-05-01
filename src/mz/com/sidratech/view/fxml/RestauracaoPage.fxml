@@ -1,11 +1,168 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import io.github.gleidson28.GNAvatarView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
-   <children>
-      <Button layoutX="260.0" layoutY="174.0" mnemonicParsing="false" text="Restauracao Logout" />
-   </children>
-</AnchorPane>
+<BorderPane fx:id="pane" prefHeight="500.0" prefWidth="800.0" stylesheets="@../css/RestauracaoStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.com.sidratech.controller.RestauracaoController">
+   <center>
+      <StackPane style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxHeight="100.0" minHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="800.0" style="-fx-background-color: #f39b1e;" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets bottom="400.0" />
+               </StackPane.margin>
+               <children>
+                  <MenuButton fx:id="menuBar" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #f39b1e;" textFill="WHITE">
+                    <items>
+                      <MenuItem fx:id="login" mnemonicParsing="false" onAction="#loginAction" text="Log In">
+                           <graphic>
+                              <FontAwesomeIcon iconName="SIGN_IN" />
+                           </graphic>
+                        </MenuItem>
+                      <MenuItem fx:id="logout" disable="true" mnemonicParsing="false" onAction="#logoutAction" text="Log Out">
+                           <graphic>
+                              <FontAwesomeIcon iconName="SIGN_OUT" />
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exitAction" text="Exit">
+                           <graphic>
+                              <FontAwesomeIcon iconName="CLOSE" />
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="close" mnemonicParsing="false" onAction="#closeAction" text="Close Session">
+                           <graphic>
+                              <FontAwesomeIcon iconName="POWER_OFF" />
+                           </graphic>
+                        </MenuItem>
+                    </items>
+                     <HBox.margin>
+                        <Insets bottom="30.0" />
+                     </HBox.margin>
+                  </MenuButton>
+                  <Label text="USERNAME" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="30.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <GNAvatarView prefHeight="58.0" prefWidth="35.0" strokeWidth="0.0" type="CIRCLE">
+                     <image>
+                        <Image url="@../../image/2.-Lily-May-Mac-1.jpg" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="30.0" left="5.0" />
+                     </HBox.margin>
+                  </GNAvatarView>
+               </children>
+               <padding>
+                  <Insets left="120.0" />
+               </padding>
+            </HBox>
+            <VBox prefHeight="440.0" prefWidth="500.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets left="120.0" right="120.0" top="60.0" />
+               </StackPane.margin>
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="500.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;">
+                     <children>
+                        <Label text="Menu">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+                     <content>
+                        <GridPane fx:id="pratosGrid" alignment="TOP_CENTER" hgap="10.0" style="-fx-background-color: white;" vgap="5.0">
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </center>
+   <left>
+      <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="250.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="142.0" fitWidth="221.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../image/logo1.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" prefHeight="25.0" prefWidth="240.0" text="Nome Entidade" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Label>
+            <ImageView fx:id="image" fitHeight="98.0" fitWidth="150.0" onMouseClicked="#escolherFoto" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="20.0" />
+               </VBox.margin>
+               <image>
+                  <Image url="@../../image/istockphoto-1222357475-612x612.jpg" />
+               </image>
+            </ImageView>
+            <TextField fx:id="name" prefHeight="30.0" promptText="nome" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="50.0" right="50.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="price" layoutX="10.0" layoutY="305.0" prefHeight="30.0" promptText="preco" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="50.0" right="50.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="type" layoutX="10.0" layoutY="331.0" prefHeight="30.0" promptText="tipo" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="50.0" right="50.0" />
+               </VBox.margin>
+            </TextField>
+            <HBox alignment="CENTER">
+               <children>
+                  <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addAction" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-border-radius: 50;">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" iconName="PLUS" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Label text="ADD PRATO" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+</BorderPane>

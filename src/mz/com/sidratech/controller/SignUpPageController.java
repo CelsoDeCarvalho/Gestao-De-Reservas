@@ -195,7 +195,7 @@ public class SignUpPageController implements Initializable {
                 daoGenerico.create(alojamento);
                 ((Node) event.getSource()).getScene().getWindow().hide();
             } else if (escolha.equals("Restauracao")) {
-                Restauracao restauracao = new Restauracao(typeField.getText(), nameField.getText(), localField.getText(), userField.getText(), passField.getText());
+                Restauracao restauracao = new Restauracao(typeField.getText(), nameField.getText(), localField.getText(), userField.getText(), passField.getText(),classificacao);
                 Contato contato = new Contato(Integer.parseInt(phoneField.getText()), urlField.getText(), emailField.getText(), restauracao);
                 restauracao.setContacto(contato);
                 daoGenerico.create(restauracao);
@@ -203,7 +203,7 @@ public class SignUpPageController implements Initializable {
             } else {
                 mostrarJanela(Path.PAGINA_CENTRALCREATOR, "", false);
                 if (CentralCreatorController.senha.equals("celso1999")) {
-                    Central central = new Central(nameField.getText(), localField.getText(), userField.getText(), passField.getText(), typeField.getText());
+                    Central central = new Central(nameField.getText(), localField.getText(), userField.getText(), passField.getText(), typeField.getText(),classificacao);
                     Contato contato = new Contato(Integer.parseInt(phoneField.getText()), urlField.getText(), emailField.getText(), central);
                     central.setContacto(contato);
                     daoGenerico.create(central);

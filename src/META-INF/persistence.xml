@@ -17,6 +17,7 @@
     <class>mz.com.sidratech.model.bean.Relatorio</class>
     <class>mz.com.sidratech.model.bean.Restauracao</class>
     <class>mz.com.sidratech.model.bean.Usuario</class>
+    <class>mz.com.sidratech.model.bean.Prato</class>
     <properties>
       <!-- Propriedades JDBC -->
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>

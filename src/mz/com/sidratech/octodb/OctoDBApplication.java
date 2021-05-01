@@ -1,6 +1,5 @@
 package mz.com.sidratech.octodb;
 
-import java.io.FileNotFoundException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import mz.com.sidratech.repository.Repository;
 import mz.com.sidratech.services.Path;
-import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -20,7 +18,7 @@ public class OctoDBApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource(Path.PAGINA_FUNCPAGE));
+        Parent root = FXMLLoader.load(getClass().getResource(Path.PAGINA_RESTAURACAO));
         Scene scene = new Scene(root);
         stage.setMaximized(true);
         stage.setTitle("");
@@ -30,8 +28,8 @@ public class OctoDBApplication extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) throws JRException, FileNotFoundException {
-
+    public static void main(String[] args){
+        
         Repository repository = new Repository();
         repository.getEntidades();
         repository.getFuncionarios();
@@ -39,6 +37,7 @@ public class OctoDBApplication extends Application {
         repository.getQuartos();
         repository.getClientes();
         repository.getRelatorios();
+        repository.getPratos();
                 
         launch(args);
     }

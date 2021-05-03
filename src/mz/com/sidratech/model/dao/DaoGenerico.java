@@ -24,6 +24,13 @@ import mz.com.sidratech.services.CrudRules;
 public class DaoGenerico implements CrudRules {
 
     //METODO PARA GRAVAR NO BANCO DE DADOS======================================
+
+    /**
+     *
+     * @param object
+     * recebe o ojecto a ser gravado no banco de dados e o persiste
+     */
+    @Override
     public void create(Object object) {
         EntityManager entityManager = ConnectionFactory.getConnection();
         try {
@@ -38,6 +45,15 @@ public class DaoGenerico implements CrudRules {
     }
 
     //METODO PARA LER TODOS SO DADOS DO BANCO===================================
+    /**
+     * 
+     * @param tipoObjeto
+     * @return 
+     * Recebe uma string com o nome do tipo de objecto EX: 
+     * readAll("Aluno")
+     * faz a procura no banco de dados um objeto do tipo a Aluno e retorna a lista 
+     * correspondente
+     */
     @Override
     public List<Object> readAll(String tipoObjeto) {
         EntityManager entityManager = ConnectionFactory.getConnection();
@@ -54,6 +70,12 @@ public class DaoGenerico implements CrudRules {
     }
 
     //METODO PARA PROCURAR DADO POR ID==========================================
+    /**
+     * 
+     * @param id recebe o id do objeto a ser procurado
+     * @param object recebe o tipo de objeto a ser procurado
+     * @return  objecto procurado com o id e o tipo de objeto acima passados
+     */
     @Override
     public Object readById(int id, Object object) {
 
@@ -71,6 +93,10 @@ public class DaoGenerico implements CrudRules {
     }
 
     //METODO PARA ACTUALIZAR DADOS NO BANCO=====================================
+    /**
+     * 
+     * @param object O objeto a ser actualizado
+     */
     @Override
     public void update(Object object) {
 
@@ -88,6 +114,12 @@ public class DaoGenerico implements CrudRules {
     }
 
     //METODO PARA APAGAR DADOS DO BANCO=========================================
+
+    /**
+     *
+     * @param id rececebe o id do objeto a ser apagado 
+     * @param object o objeto a ser apagado
+     */
     @Override
     public void delete(int id, Object object) {
 
@@ -106,6 +138,11 @@ public class DaoGenerico implements CrudRules {
         }
     }
 
+    /**
+     * 
+     * @param nome faz procura dinamica no banco do objeto cliente atraves do atributo nome
+     * @return  retona a lista encontrada dos objetos que contem esse nome
+     */
     public List<Cliente> searchGuest(String nome) {
         DaoGenerico daoGenerico = new DaoGenerico();
         EntityManager entityManager = ConnectionFactory.getConnection();
@@ -134,6 +171,11 @@ public class DaoGenerico implements CrudRules {
         return clientes;
     }
 
+        /**
+     * 
+     * @param nome faz procura dinamica no banco do objeto Employee atraves do atributo nome
+     * @return  retona a lista encontrada dos objetos que contem esse nome
+     */
     public List<Funcionario> searchEmployee(String nome) {
         DaoGenerico daoGenerico = new DaoGenerico();
         EntityManager entityManager = ConnectionFactory.getConnection();
@@ -169,6 +211,11 @@ public class DaoGenerico implements CrudRules {
         return funcionarios;
     }
 
+        /**
+     * 
+     * @param nome faz procura dinamica no banco do objeto Entidade atraves do atributo nome
+     * @return  retona a lista encontrada dos objetos que contem esse nome
+     */
     public List<Entidade> searchEntity(String nome) {
         EntityManager entityManager = ConnectionFactory.getConnection();
         List<Object[]> objects = new ArrayList();

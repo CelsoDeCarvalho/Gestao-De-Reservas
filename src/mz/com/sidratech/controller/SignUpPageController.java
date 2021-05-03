@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -94,7 +95,7 @@ public class SignUpPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Mascara mascara =new Mascara();
+        Mascara mascara = new Mascara();
         mascara.apenasNumero(phoneField);
         comboBox.setItems(FXCollections.observableArrayList("Central", "Alojamento", "Restauracao"));
         classificationField.setItems(FXCollections.observableArrayList("Unica", "2 Estrelas"
@@ -175,6 +176,15 @@ public class SignUpPageController implements Initializable {
             } else if (!typeField.isDisabled() && typeField.getText().isEmpty()) {
                 thread(typeField, typeLabel);
             } else {
+                for (int i = 0; i < Repository.entidades.size(); i++) {
+                    if (userField.getText().equals(Repository.entidades.get(i).getUsername())) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setContentText("USERNAME " + userField.getText() + " JA EXISTE");
+                        alert.show();
+                        return;
+                    }
+                }
+
                 tab1.setDisable(true);
                 tab2.setDisable(false);
                 tabPane.getSelectionModel().select(tab2);
@@ -189,21 +199,48 @@ public class SignUpPageController implements Initializable {
             } else if (emailField.getText().isEmpty()) {
                 thread(emailField, emailLabel);
             } else if (escolha.equals("Alojamento")) {
+
+                for (int i = 0; i < Repository.contatos.size(); i++) {
+                    if (emailField.getText().equals(Repository.contatos.get(i).getEmail())) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setContentText("EMAIL " + emailField.getText() + " JA EXISTE");
+                        alert.show();
+                        return;
+                    }
+                }
                 Alojamento alojamento = new Alojamento(classificacao, typeField.getText(), nameField.getText(), localField.getText(), userField.getText(), passField.getText());
                 Contato contato = new Contato(Integer.parseInt(phoneField.getText()), urlField.getText(), emailField.getText(), alojamento);
                 alojamento.setContacto(contato);
                 daoGenerico.create(alojamento);
                 ((Node) event.getSource()).getScene().getWindow().hide();
             } else if (escolha.equals("Restauracao")) {
-                Restauracao restauracao = new Restauracao(typeField.getText(), nameField.getText(), localField.getText(), userField.getText(), passField.getText(),classificacao);
+
+                for (int i = 0; i < Repository.contatos.size(); i++) {
+                    if (emailField.getText().equals(Repository.contatos.get(i).getEmail())) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setContentText("EMAIL " + emailField.getText() + " JA EXISTE");
+                        alert.show();
+                        return;
+                    }
+                }
+                Restauracao restauracao = new Restauracao(typeField.getText(), nameField.getText(), localField.getText(), userField.getText(), passField.getText(), classificacao);
                 Contato contato = new Contato(Integer.parseInt(phoneField.getText()), urlField.getText(), emailField.getText(), restauracao);
                 restauracao.setContacto(contato);
                 daoGenerico.create(restauracao);
                 ((Node) event.getSource()).getScene().getWindow().hide();
             } else {
+
+                for (int i = 0; i < Repository.contatos.size(); i++) {
+                    if (emailField.getText().equals(Repository.contatos.get(i).getEmail())) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setContentText("EMAIL " + emailField.getText() + " JA EXISTE");
+                        alert.show();
+                        return;
+                    }
+                }
                 mostrarJanela(Path.PAGINA_CENTRALCREATOR, "", false);
                 if (CentralCreatorController.senha.equals("celso1999")) {
-                    Central central = new Central(nameField.getText(), localField.getText(), userField.getText(), passField.getText(), typeField.getText(),classificacao);
+                    Central central = new Central(nameField.getText(), localField.getText(), userField.getText(), passField.getText(), typeField.getText(), classificacao);
                     Contato contato = new Contato(Integer.parseInt(phoneField.getText()), urlField.getText(), emailField.getText(), central);
                     central.setContacto(contato);
                     daoGenerico.create(central);
@@ -213,6 +250,7 @@ public class SignUpPageController implements Initializable {
         }
         Repository repository = new Repository();
         repository.getEntidades();
+        repository.getContactos();
     }
 
     public void thread(TextField field, Label label) {

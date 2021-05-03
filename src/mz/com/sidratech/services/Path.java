@@ -21,4 +21,8 @@ public interface Path {
     public final String PAGINA_CENTRALCREATOR= "/mz/com/sidratech/view/fxml/CentralCreator.fxml";
     public final String PAGINA_FUNCPAGE= "/mz/com/sidratech/view/fxml/FuncionariosPage.fxml";
     public final String PAGINA_PRATOS= "/mz/com/sidratech/view/fxml/PratoPage.fxml";
+    public final String PAGINA_LOGFUNCREST= "/mz/com/sidratech/view/fxml/LoginFuncionarioPageRest.fxml";
+    public final String PAGINA_REGFUNCREST= "/mz/com/sidratech/view/fxml/SigUpFuncionarioPageRest.fxml";
+    public final String PAGINA_VERALOJA= "/mz/com/sidratech/view/fxml/VerAlojamento.fxml";
+    public final String PAGINA_VERRES= "/mz/com/sidratech/view/fxml/VerRestauracao.fxml";
 }

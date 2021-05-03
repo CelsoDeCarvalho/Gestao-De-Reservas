@@ -32,9 +32,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import mz.com.sidratech.controller.file.LerEstadoLogin;
 import mz.com.sidratech.controller.file.SalvarEstadoLogin;
+import mz.com.sidratech.model.bean.Central;
+import mz.com.sidratech.model.bean.EstadoLogin;
 import mz.com.sidratech.model.bean.Prato;
+import mz.com.sidratech.model.bean.Restauracao;
 import mz.com.sidratech.model.dao.DaoGenerico;
 import mz.com.sidratech.octodb.OctoDBApplication;
 import mz.com.sidratech.repository.Repository;
@@ -47,6 +52,8 @@ import mz.com.sidratech.services.Path;
  */
 public class RestauracaoController implements Initializable {
 
+    @FXML
+    private Label username;
     @FXML
     private MenuButton menuBar;
     @FXML
@@ -72,6 +79,12 @@ public class RestauracaoController implements Initializable {
     private List<Prato> pratos;
     @FXML
     private ImageView image;
+    @FXML
+    private Label nameEnt;
+    @FXML
+    private TextField mesas;
+    @FXML
+    private TextField cadeiras;
     List<Prato> novoPrato = new ArrayList<>();
 
     /**
@@ -82,18 +95,61 @@ public class RestauracaoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Mascara mascara=new Mascara();
+        mapearDados();
+        Mascara mascara = new Mascara();
         mascara.apenasNumero(price);
-        novoPrato = Repository.pratos;
+        for (int i = 0; i < Repository.pratos.size(); i++) {
+            if (Repository.pratos.get(i).getIdRestauracao().getIdEntidade() == LerEstadoLogin.lerLogin().getIdEntidade()) {
+                novoPrato = Repository.pratos;
+            }
+        }
         update();
     }
 
+    private void mostrarJanela1(String caminho, String title, boolean resizable) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(caminho));
+        Parent parent = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        stage.setTitle(title);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(pane.getScene().getWindow());
+        stage.setResizable(resizable);
+        stage.show();
+    }
+
     @FXML
-    private void loginAction(ActionEvent event) {
+    private void loginAction(ActionEvent event) throws IOException {
+        menuBar.getScene().getWindow().hide();
+        mostrarJanela1(Path.PAGINA_LOGFUNCREST, "", false);
     }
 
     @FXML
     private void logoutAction(ActionEvent event) {
+        EstadoLogin estadoLogin = new EstadoLogin();
+        estadoLogin = LerEstadoLogin.lerLogin();
+        estadoLogin.setIdUsuario(0);
+        SalvarEstadoLogin.guardarLogin(estadoLogin);
+        threadLogout();
+    }
+
+    public void threadLogout() {
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                while (true) {
+                    Thread.sleep(30);
+                    Platform.runLater(() -> {
+                        username.setText("USERNAME");
+                        logout.setDisable(true);
+                        login.setDisable(false);
+                    });
+                }
+            }
+        };
+        new Thread(task).start();
     }
 
     @FXML
@@ -171,6 +227,8 @@ public class RestauracaoController implements Initializable {
             prato.setNome(name.getText());
             prato.setPreco(Double.parseDouble(price.getText()));
             prato.setTipo(type.getText());
+            Restauracao restauracao = new Restauracao();
+            prato.setIdRestauracao((Restauracao) new DaoGenerico().readById(LerEstadoLogin.lerLogin().getIdEntidade(), restauracao));
             novoPrato.add(prato);
             update();
             DaoGenerico daoGenerico = new DaoGenerico();
@@ -186,7 +244,9 @@ public class RestauracaoController implements Initializable {
         }
     }
 
-    private void update() {
+    public void update() {
+        Repository repository = new Repository();
+        repository.getPratos();
         pratos = new ArrayList<>(novoPrato);
 
         int columns = 0;
@@ -240,6 +300,85 @@ public class RestauracaoController implements Initializable {
         };
         new Thread(task).start();
 
+    }
+
+    private void mapearDados() {
+        Restauracao r = new Restauracao();
+        Repository repository = new Repository();
+        repository.getContactos();
+
+        DaoGenerico daoGenerico = new DaoGenerico();
+
+        r = (Restauracao) daoGenerico.readById((int) LerEstadoLogin.lerLogin().getIdEntidade(), r);
+        nameEnt.setText(r.getNome());
+
+        for (int i = 0; i < Repository.contatos.size(); i++) {
+            if (Repository.contatos.get(i).getIdEntidade().getIdEntidade() == LerEstadoLogin.lerLogin().getIdEntidade()) {
+            }
+        }
+
+        if (LerEstadoLogin.lerLogin().getIdUsuario() > 0) {
+            for (int i = 0; i < Repository.funcionarios.size(); i++) {
+                if (LerEstadoLogin.lerLogin().getIdUsuario() == Repository.funcionarios.get(i).getIdFuncionario()) {
+                    username.setText(Repository.funcionarios.get(i).getUsername());
+                    if (Repository.funcionarios.get(i).getTipo().equals("Administrador")) {
+                        logout.setDisable(false);
+                        login.setDisable(true);
+                    } else if (Repository.funcionarios.get(i).getTipo().equals("Usuario")) {
+                        logout.setDisable(false);
+                        login.setDisable(true);
+                    }
+                }
+            }
+        }
+    }
+
+    @FXML
+    void employeeAction(ActionEvent event) throws IOException {
+        mostrarJanela(Path.PAGINA_FUNCPAGE, "", false);
+    }
+
+    @FXML
+    void hireAction(ActionEvent event) throws IOException {
+        mostrarJanela(Path.PAGINA_REGFUNCREST, "", true);
+    }
+
+    @FXML
+    void reportActio(ActionEvent event) {
+
+    }
+
+    @FXML
+    void addLugarAction(ActionEvent event) {
+        if (mesas.getText().isEmpty()) {
+            thread(mesas);
+        } else if (cadeiras.getText().isEmpty()) {
+            thread(cadeiras);
+        } else {
+            Restauracao restauracao = new Restauracao();
+            restauracao = (Restauracao) new DaoGenerico().readById(LerEstadoLogin.lerLogin().getIdEntidade(), restauracao);
+            restauracao.setTotalMesas(restauracao.getTotalMesas() + Integer.parseInt(mesas.getText()));
+            restauracao.setTotalCadeiras(restauracao.getTotalCadeiras() + Integer.parseInt(cadeiras.getText()));
+            new DaoGenerico().update(restauracao);
+            mesas.setText("");
+            cadeiras.setText("");
+        }
+    }
+
+    public Label getNameEnt() {
+        return nameEnt;
+    }
+
+    public void setNameEnt(Label nameEnt) {
+        this.nameEnt = nameEnt;
+    }
+
+    public GridPane getPratosGrid() {
+        return pratosGrid;
+    }
+
+    public void setPratosGrid(GridPane pratosGrid) {
+        this.pratosGrid = pratosGrid;
     }
 
 }

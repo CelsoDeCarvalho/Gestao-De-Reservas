@@ -22,7 +22,7 @@ public class Prato {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idPrato;
+    private int idPrato;
     private String nome;
     private String caminhoFoto;
     private double preco;

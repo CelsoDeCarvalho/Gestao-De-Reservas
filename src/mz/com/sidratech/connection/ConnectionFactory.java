@@ -11,6 +11,10 @@ public class ConnectionFactory{
     
     private static final EntityManagerFactory emf=Persistence.createEntityManagerFactory("OctoBDPU");
     
+    /**
+     * 
+     * @return conexao com banco de dados
+     */
     public static EntityManager getConnection(){
         return emf.createEntityManager();
     }

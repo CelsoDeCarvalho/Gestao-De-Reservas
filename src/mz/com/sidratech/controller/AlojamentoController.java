@@ -46,6 +46,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import mz.com.sidratech.controller.file.LerEstadoLogin;
 import mz.com.sidratech.controller.file.SalvarEstadoLogin;
@@ -165,7 +166,11 @@ public class AlojamentoController implements Initializable {
     @FXML
     private NumberAxis yAxis;
     private ObservableList<String> monthNames = FXCollections.observableArrayList();
-
+    /**
+     * 
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -187,11 +192,25 @@ public class AlojamentoController implements Initializable {
         
         
     }
+    
+      private void mostrarJanela1(String caminho, String title, boolean resizable) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(caminho));
+        Parent parent = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        stage.setTitle(title);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(pane.getScene().getWindow());
+        stage.setResizable(resizable);
+        stage.show();
+    }
 
     @FXML
     private void loginAction(ActionEvent event) throws IOException {
         ((Node) event.getSource()).getScene().getWindow().hide();
-        mostrarJanela(Path.PAGINA_LOGFUNCALOJA, "", false);
+        mostrarJanela1(Path.PAGINA_LOGFUNCALOJA, "", false);
     }
 
     @FXML
@@ -238,6 +257,13 @@ public class AlojamentoController implements Initializable {
         }
     }
 
+    /**
+     * 
+     * @param caminho abre uma nova tela atraves do caminho passado
+     * @param title da um titulo
+     * @param resizable diz se a tela tem que ser redimensionavel ou nao
+     * @throws IOException 
+     */
     private void mostrarJanela(String caminho, String title, boolean resizable) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(caminho));
         Parent parent = loader.load();

@@ -12,6 +12,12 @@ import mz.com.sidratech.model.bean.EstadoLogin;
  */
 public class SalvarEstadoLogin {
     
+    /**
+     * 
+     * @param login 
+     * recebe o estado do login de uma entidade ou usuario no ambito do seu login e gravado 
+     * 1 para representar entidade ou usuario logado
+     */
     public static void guardarLogin(EstadoLogin login){
         File arquivo=new File("login.dat");
         try{

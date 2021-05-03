@@ -8,6 +8,11 @@ import javafx.scene.control.TextField;
  * @author celso
  */
 public class Mascara {
+    
+    /**
+     * 
+     * @param textField  recebe um objecto do tipo textfield e o obriga a aceitar so numeros
+     */
 
     public void apenasNumero(TextField textField) {
 

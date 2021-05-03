@@ -1,6 +1,5 @@
 package mz.com.sidratech.controller;
 
-import com.gluonhq.charm.glisten.control.ToggleButtonGroup;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.IOException;
 import java.net.URL;
@@ -8,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,11 +34,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import mz.com.sidratech.controller.file.LerEstadoLogin;
 import mz.com.sidratech.controller.file.SalvarEstadoLogin;
 import mz.com.sidratech.model.bean.Alojamento;
 import mz.com.sidratech.model.bean.Central;
-import mz.com.sidratech.model.bean.Cliente;
 import mz.com.sidratech.model.bean.Entidade;
 import mz.com.sidratech.model.bean.EstadoLogin;
 import mz.com.sidratech.model.bean.Restauracao;
@@ -110,7 +111,7 @@ public class CentralPageController implements Initializable {
         table.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("accoes"));
         table.setItems(list);
     }
-
+    
     public List<Entidade> addAction(List<Entidade> entidades) {
 
         entidades.forEach((entidade) -> {
@@ -164,6 +165,23 @@ public class CentralPageController implements Initializable {
                     }
                 }
             });
+            
+            ver.setOnAction((event) -> {
+                if(entidade.getClass()==Alojamento.class){
+                    VerAlojamentoController.setEntidade(entidade);
+                    try {
+                        mostrarJanela(Path.PAGINA_VERALOJA, "",true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(CentralPageController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    try {
+                        mostrarJanela(Path.PAGINA_VERRES,"", true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(CentralPageController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
 
             acao.getButtons().addAll(ver, excluir);
             entidade.setAccoes(acao);
@@ -191,6 +209,20 @@ public class CentralPageController implements Initializable {
         mostrarJanela(Path.PAGINA_REGFUNC, "", true);
     }
 
+        private void mostrarJanela1(String caminho, String title, boolean resizable) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(caminho));
+        Parent parent = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        stage.setTitle(title);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(centralPane.getScene().getWindow());
+        stage.setResizable(resizable);
+        stage.show();
+    }
+    
     private void mostrarJanela(String caminho, String title, boolean resizable) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(caminho));
         Parent parent = loader.load();
@@ -221,9 +253,9 @@ public class CentralPageController implements Initializable {
         mostrarJanela1(Path.PAGINA_INICIAL, "", event);
     }
 
-    Central c = new Central();
 
     private void mapearDados() {
+        Central c = new Central();
         Repository repository = new Repository();
         repository.getContactos();
 
@@ -263,7 +295,7 @@ public class CentralPageController implements Initializable {
     @FXML
     void loginAction(ActionEvent event) throws IOException {
         ((Node) event.getSource()).getScene().getWindow().hide();
-        mostrarJanela(Path.PAGINA_LOGFUNC, "", false);
+        mostrarJanela1(Path.PAGINA_LOGFUNC, "", false);
     }
 
     @FXML

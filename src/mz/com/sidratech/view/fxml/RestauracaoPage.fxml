@@ -8,6 +8,7 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -55,7 +56,7 @@
                         <Insets bottom="30.0" />
                      </HBox.margin>
                   </MenuButton>
-                  <Label text="USERNAME" textFill="WHITE">
+                  <Label fx:id="username" text="USERNAME" textFill="WHITE">
                      <HBox.margin>
                         <Insets bottom="30.0" />
                      </HBox.margin>
@@ -73,12 +74,12 @@
                   </GNAvatarView>
                </children>
                <padding>
-                  <Insets left="120.0" />
+                  <Insets left="20.0" />
                </padding>
             </HBox>
             <VBox prefHeight="440.0" prefWidth="500.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
-                  <Insets left="120.0" right="120.0" top="60.0" />
+                  <Insets left="20.0" right="20.0" top="60.0" />
                </StackPane.margin>
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="500.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;">
@@ -118,12 +119,12 @@
                   <Image url="@../../image/logo1.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" prefHeight="25.0" prefWidth="240.0" text="Nome Entidade" textAlignment="CENTER">
+            <Label fx:id="nameEnt" alignment="CENTER" prefHeight="25.0" prefWidth="240.0" text="Nome Entidade" textAlignment="CENTER">
                <font>
                   <Font name="System Bold Italic" size="20.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="10.0" />
+                  <Insets bottom="30.0" />
                </VBox.margin>
             </Label>
             <ImageView fx:id="image" fitHeight="98.0" fitWidth="150.0" onMouseClicked="#escolherFoto" pickOnBounds="true" preserveRatio="true">
@@ -161,8 +162,75 @@
                   </Button>
                   <Label text="ADD PRATO" />
                </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </HBox>
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </VBox.margin>
+            </Separator>
+            <TextField fx:id="mesas" prefHeight="30.0" promptText="Numero de Mesas" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="50.0" right="50.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="cadeiras" layoutX="10.0" layoutY="462.0" prefHeight="30.0" promptText="Numero de Cadeiras" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="50.0" right="50.0" />
+               </VBox.margin>
+            </TextField>
+            <HBox alignment="CENTER">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+               <children>
+                  <Button fx:id="addLugar" mnemonicParsing="false" onAction="#addLugarAction" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-border-radius: 50;">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" iconName="PLUS" />
+                     </graphic>
+                  </Button>
+                  <Label text="ADD MESAS" />
+               </children>
             </HBox>
          </children>
       </VBox>
    </left>
+   <right>
+      <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="185.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #f39b1e;">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <VBox fx:id="vBox" alignment="CENTER" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button fx:id="addEmployee" contentDisplay="TOP" mnemonicParsing="false" onAction="#employeeAction" prefHeight="80.0" prefWidth="120.0" style="-fx-background-radius: 5; -fx-border-radius: 5;" text="Employees">
+                     <graphic>
+                        <FontAwesomeIcon iconName="USERS" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="hire" contentDisplay="TOP" mnemonicParsing="false" onAction="#hireAction" prefHeight="80.0" prefWidth="120.0" style="-fx-background-radius: 5; -fx-border-radius: 5;" text="Hire">
+                     <graphic>
+                        <FontAwesomeIcon iconName="USER_PLUS" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="report" contentDisplay="TOP" mnemonicParsing="false" onAction="#reportActio" prefHeight="80.0" prefWidth="120.0" style="-fx-background-radius: 5; -fx-border-radius: 5;" text="Report">
+                     <graphic>
+                        <FontAwesomeIcon iconName="PRINT" />
+                     </graphic>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+      </VBox>
+   </right>
 </BorderPane>

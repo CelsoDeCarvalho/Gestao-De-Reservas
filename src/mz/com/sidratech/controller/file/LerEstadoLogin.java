@@ -14,6 +14,13 @@ public class LerEstadoLogin {
     
     static File file=new File("login.dat");
     
+    
+    /**
+     * 
+     * @return  O objeto lido no ficheiro, nesse caso, o objecto estado do login da entidade e usuario
+     * retona 0 se a entidade ou usuario nao estiver logado
+     * retona 1 se a entidade ou usuario estiverem logados
+     */
     public static EstadoLogin lerLogin(){
         EstadoLogin login=new EstadoLogin();
         try{

@@ -5,3 +5,39 @@
 #addBtn:hover{
     -fx-background-color:  #be7917;
 }
+
+#addLugar{
+    -fx-background-color:  #f39b1e;
+}
+
+#addLugar:hover{
+    -fx-background-color:  #be7917;
+}
+
+#vBox{
+    fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
+#hire:hover{
+    -fx-background-color:  #e7e7e7;
+}
+
+#hire{
+    -fx-background-color:  #ffffff;
+}
+
+#report:hover{
+    -fx-background-color:  #e7e7e7;
+}
+
+#report{
+    -fx-background-color:  #ffffff;
+}
+
+#addEmployee:hover{
+    -fx-background-color:  #e7e7e7;
+}
+
+#addEmployee{
+    -fx-background-color:  #ffffff;
+}

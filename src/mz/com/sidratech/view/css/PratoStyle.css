@@ -15,3 +15,17 @@
     -fx-border-radius: 5;
     -fx-background-radius: 5px;
 }
+
+#addCart{
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #e5b025;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5px;
+}
+
+#addCart:hover{
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #c2941f;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5px;
+}

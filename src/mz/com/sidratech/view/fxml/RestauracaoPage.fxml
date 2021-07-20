@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import io.github.gleidson28.GNAvatarView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="pane" prefHeight="500.0" prefWidth="800.0" stylesheets="@../css/RestauracaoStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.com.sidratech.controller.RestauracaoController">
+   <center>
+      <StackPane style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxHeight="100.0" minHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="800.0" style="-fx-background-color: #f39b1e;" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets bottom="400.0" />
+               </StackPane.margin>
+               <children>
+                  <MenuButton fx:id="menuBar" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #f39b1e;" textFill="WHITE">
+                    <items>
+                      <MenuItem fx:id="login" mnemonicParsing="false" onAction="#loginAction" text="Log In">
+                           <graphic>
+                              <FontAwesomeIcon iconName="SIGN_IN" />
+                           </graphic>
+                        </MenuItem>
+                      <MenuItem fx:id="logout" disable="true" mnemonicParsing="false" onAction="#logoutAction" text="Log Out">
+                           <graphic>
+                              <FontAwesomeIcon iconName="SIGN_OUT" />
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exitAction" text="Exit">
+                           <graphic>
+                              <FontAwesomeIcon iconName="CLOSE" />
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="close" mnemonicParsing="false" onAction="#closeAction" text="Close Session">
+                           <graphic>
+                              <FontAwesomeIcon iconName="POWER_OFF" />
+                           </graphic>
+                        </MenuItem>
+                    </items>
+                     <HBox.margin>
+                        <Insets bottom="30.0" />
+                     </HBox.margin>
+                  </MenuButton>
+                  <Label fx:id="username" text="USERNAME" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="30.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <GNAvatarView prefHeight="58.0" prefWidth="35.0" strokeWidth="0.0" type="CIRCLE">
+                     <image>
+                        <Image url="@../../image/2.-Lily-May-Mac-1.jpg" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="30.0" left="5.0" />
+                     </HBox.margin>
+                  </GNAvatarView>
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </HBox>
+            <VBox prefHeight="440.0" prefWidth="500.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets left="20.0" right="20.0" top="60.0" />
+               </StackPane.margin>
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="500.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;">
+                     <children>
+                        <Label text="Menu">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" nodeOrientation="RIGHT_TO_LEFT" HBox.hgrow="ALWAYS">
+                           <children>
+                              <FontAwesomeIcon fx:id="carrinho" iconName="SHOPPING_CART" onMouseClicked="#verCarrinho" size="1.3em" />
+                           </children>
+                           <padding>
+                              <Insets left="9.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+                     <content>
+                        <GridPane fx:id="pratosGrid" alignment="TOP_CENTER" hgap="10.0" style="-fx-background-color: white;" vgap="5.0">
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </center>
+   <left>
+      <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="250.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="142.0" fitWidth="221.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../image/logo1.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="nameEnt" alignment="CENTER" prefHeight="25.0" prefWidth="240.0" text="Nome Entidade" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </Label>
+            <ImageView fx:id="image" fitHeight="98.0" fitWidth="150.0" onMouseClicked="#escolherFoto" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="20.0" />
+               </VBox.margin>
+               <image>
+                  <Image url="@../../image/istockphoto-1222357475-612x612.jpg" />
+               </image>
+            </ImageView>
+            <TextField fx:id="name" prefHeight="30.0" promptText="nome" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="50.0" right="50.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="price" layoutX="10.0" layoutY="305.0" prefHeight="30.0" promptText="preco" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="50.0" right="50.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="type" layoutX="10.0" layoutY="331.0" prefHeight="30.0" promptText="tipo" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="50.0" right="50.0" />
+               </VBox.margin>
+            </TextField>
+            <HBox alignment="CENTER">
+               <children>
+                  <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addAction" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-border-radius: 50;">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" iconName="PLUS" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Label text="ADD PRATO" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </HBox>
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </VBox.margin>
+            </Separator>
+            <TextField fx:id="mesas" prefHeight="30.0" promptText="Numero de Mesas" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="50.0" right="50.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="cadeiras" layoutX="10.0" layoutY="462.0" prefHeight="30.0" promptText="Numero de Cadeiras" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="50.0" right="50.0" />
+               </VBox.margin>
+            </TextField>
+            <HBox alignment="CENTER">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+               <children>
+                  <Button fx:id="addLugar" mnemonicParsing="false" onAction="#addLugarAction" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50; -fx-border-radius: 50;">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" iconName="PLUS" />
+                     </graphic>
+                  </Button>
+                  <Label text="ADD MESAS" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+   <right>
+      <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="185.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #f39b1e;">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <VBox fx:id="vBox" alignment="CENTER" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button fx:id="addEmployee" contentDisplay="TOP" mnemonicParsing="false" onAction="#employeeAction" prefHeight="80.0" prefWidth="120.0" style="-fx-background-radius: 5; -fx-border-radius: 5;" text="Employees">
+                     <graphic>
+                        <FontAwesomeIcon iconName="USERS" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="hire" contentDisplay="TOP" mnemonicParsing="false" onAction="#hireAction" prefHeight="80.0" prefWidth="120.0" style="-fx-background-radius: 5; -fx-border-radius: 5;" text="Hire">
+                     <graphic>
+                        <FontAwesomeIcon iconName="USER_PLUS" />
+                     </graphic>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>

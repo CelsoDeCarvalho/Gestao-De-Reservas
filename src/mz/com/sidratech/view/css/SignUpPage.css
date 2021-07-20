@@ -1,0 +1,154 @@
+#regPane{
+    -fx-background-color: #ffffff;
+}
+
+#dataPane{
+    -fx-background-color: #ffffff; 
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
+#contactsPane{
+    -fx-background-color: #ffffff; 
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
+#back{
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #c24b3a;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5px;
+}
+
+#next{
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #4373e5;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5px;
+}
+
+#back:hover{
+    -fx-font-size: 12pt
+}
+
+#next:hover{
+    -fx-font-size: 12pt
+}
+
+#nameField{
+    
+    -fx-background-color: transparent;
+    -fx-border-color:  #4373e5;
+    -fx-border-width: 0 0 2 0;
+      -fx-text-fill: #000000;
+      -fx-font-family: "Times New Roman";
+      -fx-font-size: 14;
+      -fx-font-weight: 700;
+}
+
+#emailField{
+    
+    -fx-background-color: transparent;
+    -fx-border-color:  #4373e5;
+    -fx-border-width: 0 0 2 0;
+   
+    -fx-text-fill: #000000;
+      -fx-font-family: "Times New Roman";
+      -fx-font-size: 14;
+      -fx-font-weight: 700;
+}
+
+#userField{
+    
+    -fx-background-color: transparent;
+    -fx-border-color:  #4373e5;
+    -fx-border-width: 0 0 2 0;
+   
+      -fx-text-fill: #000000;
+      -fx-font-family: "Times New Roman";
+      -fx-font-size: 14;
+      -fx-font-weight: 700;
+}
+
+#passField{
+    
+    -fx-background-color: transparent;
+    -fx-border-color:  #4373e5;
+    -fx-border-width: 0 0 2 0;
+   
+      -fx-text-fill: #000000;
+      -fx-font-family: "Times New Roman";
+      -fx-font-size: 14;
+      -fx-font-weight: 700;
+}
+
+#classificationField{
+    
+    -fx-background-color: transparent;
+    -fx-border-color:  #4373e5;
+    -fx-border-width: 0 0 2 0;
+   
+      -fx-text-fill: #000000;
+      -fx-font-family: "Times New Roman";
+      -fx-font-size: 14;
+      -fx-font-weight: 700;
+}
+
+#localField{
+    
+    -fx-background-color: transparent;
+    -fx-border-color:  #4373e5;
+    -fx-border-width: 0 0 2 0;
+   
+      -fx-text-fill: #000000;
+      -fx-font-family: "Times New Roman";
+      -fx-font-size: 14;
+      -fx-font-weight: 700;
+}
+
+
+#phoneField{
+    
+    -fx-background-color: transparent;
+    -fx-border-color:  #4373e5;
+    -fx-border-width: 0 0 2 0;
+   
+      -fx-text-fill: #000000;
+      -fx-font-family: "Times New Roman";
+      -fx-font-size: 14;
+      -fx-font-weight: 700;
+}
+
+#urlField{
+    
+    -fx-background-color: transparent;
+    -fx-border-color:  #4373e5;
+    -fx-border-width: 0 0 2 0;
+   
+      -fx-text-fill: #000000;
+      -fx-font-family: "Times New Roman";
+      -fx-font-size: 14;
+      -fx-font-weight: 700;
+}
+
+#typeField{
+    
+    -fx-background-color: transparent;
+    -fx-border-color:  #4373e5;
+    -fx-border-width: 0 0 2 0;
+   
+      -fx-text-fill: #000000;
+      -fx-font-family: "Times New Roman";
+      -fx-font-size: 14;
+      -fx-font-weight: 700;
+}
+
+.label{
+       -fx-font-family:  "Modern No. 20";
+       -fx-font-size: 14px;
+      
+}
+
+#eye:hover{
+    -fx-cursor: hand;
+}
+

@@ -1,0 +1,37 @@
+#loginPainelUser{
+    -fx-background-color:  #0061d2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5px;
+}
+
+#loginPainelPass{
+    -fx-background-color:  #0061d2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5px;
+}
+
+#username{
+    -fx-background-color:  #0061d2;
+    -fx-text-fill: #ffffff;
+}
+
+#password{
+    -fx-background-color:  #0061d2;
+    -fx-text-fill: #ffffff;
+}
+
+#login{
+    -fx-background-color:  #72c54e;
+    -fx-border-radius: 50;
+    -fx-background-radius: 50px;
+    -fx-text-fill: #ffffff;
+}
+
+#login:hover{
+    -fx-background-color:#6eac59;
+}
+
+#forgotPassword:hover{
+    -fx-cursor: hand;
+    -fx-underline:true;
+}

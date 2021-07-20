@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.web.WebView?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" stylesheets="@../css/aboutMePage.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.com.sidratech.controller.ContactMePageController">
+   <top>
+      <HBox alignment="CENTER" prefHeight="90.0" prefWidth="700.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="youtubeBtn" contentDisplay="TOP" mnemonicParsing="false" onAction="#youtubeBtn" prefWidth="150.0" text="My Youtube" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <FontAwesomeIcon fill="#c31515" iconName="YOUTUBE" size="2em" />
+               </graphic>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="githubBtn" contentDisplay="TOP" mnemonicParsing="false" onAction="#githubBtn" prefWidth="150.0" text="My Github" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <FontAwesomeIcon iconName="GITHUB" size="2em" />
+               </graphic>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="facebookBtn" contentDisplay="TOP" mnemonicParsing="false" onAction="#faceBtn" prefWidth="150.0" text="My Facebook" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <FontAwesomeIcon fill="#0d2bb5" iconName="FACEBOOK" size="2em" />
+               </graphic>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <WebView fx:id="web" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

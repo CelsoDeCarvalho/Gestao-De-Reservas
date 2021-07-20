@@ -1,0 +1,82 @@
+#loginBtn{
+    -fx-border-color: #1e2ed1;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 50;
+    -fx-background-radius: 50px;
+    -fx-background-color: #ffffff; 
+    -fx-text-fill: #1e2ed1;
+}
+
+#signupBtn{
+    -fx-border-color: #1e2ed1;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 50;
+    -fx-background-radius: 50px;
+    -fx-background-color: #ffffff; 
+    -fx-text-fill: #1e2ed1;
+}
+
+#loginBtn:hover{
+    -fx-background-color: #1e2ed1; 
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12pt
+}
+
+#signupBtn:hover{
+    -fx-background-color: #1e2ed1; 
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12pt
+}
+
+#contactBtn{
+    -fx-background-color: #ffffff; 
+    -fx-text-fill: #1e2ed1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
+}
+
+#contactBtn:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#homeBtn{
+    -fx-background-color: #ffffff; 
+    -fx-text-fill: #1e2ed1;
+    -fx-underline: true;
+}
+
+#aboutMeBtn{
+    -fx-background-color: #ffffff; 
+    -fx-text-fill: #1e2ed1;
+}
+
+#aboutMeBtn:hover{
+    -fx-underline: true;
+}
+
+#licenseBtn{
+    -fx-background-color: #ffffff; 
+    -fx-text-fill: #1e2ed1;
+}
+
+#licenseBtn:hover{
+    -fx-underline: true;
+}
+
+#aboutUsBtn{
+    -fx-border-width: 1.5;
+    -fx-border-color: #f37d45;
+    -fx-background-color: #ffffff; 
+    -fx-border-radius: 50;
+    -fx-background-radius: 50px;
+}
+
+#aboutUsBtn:hover{
+    -fx-background-color: #f37d45; 
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12pt
+}
+
+#sidatechLabel:hover{
+    -fx-cursor: hand;
+    -fx-underline:true;
+}
